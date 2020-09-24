@@ -1,3 +1,6 @@
+## Test task to learn typescript, redux and other usefull stuff
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
