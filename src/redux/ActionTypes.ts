@@ -1,0 +1,9 @@
+export const CHARACTERS_LOADING: string = 'CHARACTERS_LOADING';
+export const CHARACTERS_FAILED: string = 'CHARACTERS_FAILED';
+export const ADD_CHARACTERS: string = 'ADD_CHARACTERS';
+export const LOCATIONS_LOADING: string = 'LOCATIONS_LOADING';
+export const LOCATIONS_FAILED: string = 'LOCATIONS_FAILED';
+export const ADD_LOCATIONS: string = 'ADD_LOCATIONS';
+export const EPISODES_LOADING: string = 'EPISODES_LOADING';
+export const EPISODES_FAILED: string = 'EPISODES_FAILED';
+export const ADD_EPISODES: string = 'ADD_EPISODES';
