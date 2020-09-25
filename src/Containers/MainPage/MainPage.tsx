@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { RootState } from 'src/store/configureStore';
-import {  fetchCharacters, fetchEpisodes, fetchLocations } from 'store/actions';
+
+import { fetchCharacters, fetchEpisodes, fetchLocations } from 'store/actions';
+import { RootState } from 'store/configureStore';
 
 const mapStateToProps = (state: RootState) => {
   return {

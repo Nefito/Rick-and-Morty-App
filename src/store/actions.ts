@@ -16,7 +16,7 @@ export interface IStateSlice {
   [propName: string]: any;
 }
 
-type DispatchAction = (arg: IAction) => (IAction);
+export type DispatchAction = (arg: IAction) => (IAction);
 
 // character action creators
 export const charactersLoading = (): IAction => ({
@@ -33,7 +33,7 @@ export const addCharacters = (characters: object): IAction => ({
   payload: characters
 });
 
-export const fetchCharacters = (dispatch: DispatchAction) => {
+export const fetchCharacters = () => (dispatch: DispatchAction) => {
   dispatch(charactersLoading());
 
   return fetch(`${baseUrl}character/`)
@@ -69,7 +69,7 @@ export const addLocations = (locations: object): IAction => ({
   payload: locations
 });
 
-export const fetchLocations = (dispatch: DispatchAction) => {
+export const fetchLocations = () => (dispatch: DispatchAction) => {
   dispatch(locationsLoading());
 
   return fetch(`${baseUrl}location/`)
@@ -86,26 +86,26 @@ export const fetchLocations = (dispatch: DispatchAction) => {
       throw errMess;
     })
     .then(response => response.json())
-    .then(locations => dispatch(addCharacters(locations)))
-    .catch(error => dispatch(charactersFailed(error.message)));
+    .then(locations => dispatch(addLocations(locations)))
+    .catch(error => dispatch(locationsFailed(error.message)));
 };
 
 // episode action creators
 export const episodesLoading = (): IAction => ({
-  type: ActionTypes.LOCATIONS_LOADING
+  type: ActionTypes.EPISODES_LOADING
 });
 
 export const episodesFailed = (errMess: string): IAction => ({
-  type: ActionTypes.LOCATIONS_FAILED,
+  type: ActionTypes.EPISODES_FAILED,
   payload: errMess
 });
 
 export const addEpisodes = (episodes: object): IAction => ({
-  type: ActionTypes.ADD_LOCATIONS,
+  type: ActionTypes.ADD_EPISODES,
   payload: episodes
 });
 
-export const fetchEpisodes = (dispatch: DispatchAction) => {
+export const fetchEpisodes = () => (dispatch: DispatchAction) => {
   dispatch(episodesLoading());
 
   return fetch(`${baseUrl}episode/`)
@@ -122,6 +122,6 @@ export const fetchEpisodes = (dispatch: DispatchAction) => {
       throw errMess;
     })
     .then(response => response.json())
-    .then(episodes => dispatch(addCharacters(episodes)))
-    .catch(error => dispatch(charactersFailed(error.message)));
+    .then(episodes => dispatch(addEpisodes(episodes)))
+    .catch(error => dispatch(episodesFailed(error.message)));
 };
