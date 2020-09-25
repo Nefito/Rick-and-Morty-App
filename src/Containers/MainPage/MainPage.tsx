@@ -1,5 +1,5 @@
 import React from 'react';
-import { fetchCharacters, fetchEpisodes, fetchLocations,  } from 'redux/actions';
+import { fetchCharacters, fetchEpisodes, fetchLocations,  } from 'store/actions';
 
 const Main = () => {
   return (
