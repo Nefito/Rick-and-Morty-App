@@ -1,15 +1,15 @@
-import { createStore, combineReducers } from 'redux';
+import { combineReducers, createStore } from 'redux';
 import { Characters } from './characters';
-import { Locations } from './locations';
 import { Episodes } from './episodes';
+import { Locations } from './locations';
 
 export const ConfigureStore = () => {
-    const store = createStore(
-        combineReducers({
-            characters: Characters,
-            locations: Locations,
-            episodes: Episodes
-        })
-    );
-    return store;
-}
+  const store = createStore(
+    combineReducers({
+      characters: Characters,
+      locations: Locations,
+      episodes: Episodes
+    })
+  );
+  return store;
+};
