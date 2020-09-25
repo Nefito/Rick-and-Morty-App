@@ -1,18 +1,15 @@
-import { combineReducers, createStore } from 'redux';
+import { applyMiddleware, combineReducers, createStore } from 'redux';
+import thunk from 'redux-thunk';
 import { Characters } from './characters';
 import { Episodes } from './episodes';
 import { Locations } from './locations';
 
-interface IStore  {
-  characters: object;
-  locations: object;
-  episodes: object;
-}
+const rootReducer = combineReducers({
+  characters: Characters,
+  locations: Locations,
+  episodes: Episodes
+});
 
-export const store: IStore = createStore(
-  combineReducers({
-    characters: Characters,
-    locations: Locations,
-    episodes: Episodes
-  })
-);
+export const store = createStore(rootReducer, applyMiddleware(thunk));
+
+export type RootState = ReturnType<typeof rootReducer>;
