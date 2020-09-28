@@ -5,7 +5,7 @@ import  { CharacterActionTypeKeys, IGetCharactersActionType } from './actionType
 import * as api from './api';
 
 export const charactersFailed = (errMess: string): IAction => ({
-  type: CharacterActionTypeKeys.CHARACTERS_FAILED,
+  type: CharacterActionTypeKeys.GET_CHARACTERS_REJECTED,
   payload: errMess
 });
 

@@ -1,4 +1,3 @@
-import { IAction, IStateSlice } from '../../types';
 import  { CharacterActionTypeKeys, CharactersActionTypes } from './actionTypes';
 
 const charactersInitialState = {
