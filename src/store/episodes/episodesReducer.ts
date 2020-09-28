@@ -1,7 +1,7 @@
-import {  IAction, IStateSlice } from './actions';
+import {  IAction, IStateSlice } from '..';
 import { ActionTypes } from './actionTypes';
 
-export const Episodes = (
+const Episodes = (
     state: IStateSlice = { isLoading: true, errMess: null, episodes: [] }, action: IAction) => {
   switch (action.type) {
     case ActionTypes.ADD_EPISODES:
@@ -17,3 +17,5 @@ export const Episodes = (
       return state;
   }
 };
+
+export default Episodes;

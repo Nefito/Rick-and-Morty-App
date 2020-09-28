@@ -20,6 +20,7 @@ type Method = <T = any>(path: string, params?: IApiParams, options?: IApiOptions
 type MethodType = 'get' | 'post' | 'put' | 'delete';
 
 export default class ApiClient {
+
   methods: MethodType[] = ['get', 'post', 'put', 'delete'];
   defaults: { [key: string]: string | null } = {};
   apiHost: string;
@@ -27,6 +28,7 @@ export default class ApiClient {
   post!: Method;
   put!: Method;
   delete!: Method;
+
   constructor(apiHost: string) {
     this.apiHost = apiHost;
     this.methods.forEach(this._createMethod);
@@ -78,6 +80,7 @@ export default class ApiClient {
     })
 
   private _adjustPath = (path: string): string => (path[0] !== '/' ? `/${path}` : path);
+
   private _formatUrl = (path: string): string => {
     const adjustedPath = this._adjustPath(path);
     return this.apiHost + adjustedPath;

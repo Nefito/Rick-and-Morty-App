@@ -1,8 +1,6 @@
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import thunk from 'redux-thunk';
-import { Characters } from './characters';
-import { Episodes } from './episodes';
-import { Locations } from './locations';
+import { Characters, Episodes, Locations } from 'store';
 
 const rootReducer = combineReducers({
   characters: Characters,

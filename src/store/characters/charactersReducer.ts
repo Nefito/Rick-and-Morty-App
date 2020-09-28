@@ -1,7 +1,7 @@
-import { IAction, IStateSlice } from './actions';
+import { IAction, IStateSlice } from '../index';
 import  { ActionTypes } from './actionTypes';
 
-export const Characters = (
+const Characters = (
     state: IStateSlice = { isLoading: true, errMess: null, characters: [] }, action: IAction) => {
 
   switch (action.type) {
@@ -18,3 +18,5 @@ export const Characters = (
       return state;
   }
 };
+
+export default Characters;

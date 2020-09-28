@@ -1,7 +1,7 @@
-import {  IAction, IStateSlice } from './actions';
+import {  IAction, IStateSlice } from '../index';
 import { ActionTypes } from './actionTypes';
 
-export const Locations = (
+const Locations = (
     state: IStateSlice = { isLoading: true, errMess: null, locations: [] }, action: IAction) => {
   switch (action.type) {
     case ActionTypes.ADD_LOCATIONS:
@@ -17,3 +17,5 @@ export const Locations = (
       return state;
   }
 };
+
+export default Locations;
