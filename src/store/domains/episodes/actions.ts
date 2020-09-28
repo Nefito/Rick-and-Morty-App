@@ -1,31 +1,27 @@
-import { apiClientService } from 'services'; 
+import  { EpisodesActionTypeKeys, IGetEpisodesActionType } from './actionTypes';
+import * as api from './api';
 
-import { DispatchAction, IAction } from '../../types';
-import EpisodesActionTypeKeys from './actionTypes';
+// export const episodesFailed = (errMess: string): IAction => ({
+//   type: EpisodesActionTypeKeys.EPISODES_FAILED,
+//   payload: errMess
+// });
 
-export const episodesLoading = (): IAction => ({
-  type: EpisodesActionTypeKeys.EPISODES_LOADING
-});
+type GetEpisodesAction = () =>  IGetEpisodesActionType;
 
-export const episodesFailed = (errMess: string): IAction => ({
-  type: EpisodesActionTypeKeys.EPISODES_FAILED,
-  payload: errMess
-});
-
-export const addEpisodes = (episodes: object): IAction => ({
+export const getEpisodesAction: GetEpisodesAction = () => ({
   type: EpisodesActionTypeKeys.GET_EPISODES,
-  payload: episodes
+  payload: api.getEpisodes()
 });
 
-export const fetchEpisodes = () => (dispatch: DispatchAction) => {
-  dispatch(episodesLoading());
+// export const fetchEpisodes = () => (dispatch: DispatchAction) => {
+//   dispatch(episodesLoading());
 
-  return apiClientService.get('episode')
-    .then(response =>  response,
-    error => {
-      const errMess = new Error(error.message);
-      throw errMess;
-    })
-    .then(episodes => dispatch(addEpisodes(episodes)))
-    .catch(error => dispatch(episodesFailed(error.message)));
-};
+//   return apiClientService.get('episode')
+//     .then(response =>  response,
+//     error => {
+//       const errMess = new Error(error.message);
+//       throw errMess;
+//     })
+//     .then(episodes => dispatch(addEpisodes(episodes)))
+//     .catch(error => dispatch(episodesFailed(error.message)));
+// };
