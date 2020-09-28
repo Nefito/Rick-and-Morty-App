@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchCharacters, fetchEpisodes, fetchLocations } from 'store';
+import { fetchCharacters, fetchEpisodes, fetchLocations, IStoreState } from 'store';
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: IStoreState) => {
   return {
     characters: state.characters,
     locations: state.locations,
@@ -12,9 +12,9 @@ const mapStateToProps = (state: any) => {
 };
 
 const mapDispatchToProps = (dispatch: any) => ({
-  fetchCharacters: () =>  { dispatch(fetchCharacters()); },
-  fetchLocations: () =>  { dispatch(fetchLocations()); },
-  fetchEpisodes: () =>  { dispatch(fetchEpisodes()); }
+  fetchCharacters: () =>  dispatch(fetchCharacters()),
+  fetchLocations: () =>  dispatch(fetchLocations()),
+  fetchEpisodes: () =>  dispatch(fetchEpisodes())
 });
 
 const Main = (props: any) => {
