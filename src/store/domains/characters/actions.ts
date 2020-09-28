@@ -1,19 +1,18 @@
 import { IThunk } from 'types';
 
-import { IAction } from '../../types';
 import  { CharacterActionTypeKeys, IGetCharactersActionType } from './actionTypes';
 import * as api from './api';
 
-export const charactersFailed = (errMess: string): IAction => ({
-  type: CharacterActionTypeKeys.GET_CHARACTERS_REJECTED,
-  payload: errMess
-});
+// export const charactersFailed = (errMess: string): IAction => ({
+//   type: CharacterActionTypeKeys.GET_CHARACTERS_REJECTED,
+//   payload: errMess
+// });
 
 type GetCharactersAction = () => IGetCharactersActionType;
 
-export const getCharactersAction: GetCharactersAction = () => ({ // example
+export const getCharactersAction: GetCharactersAction = () => ({
   type: CharacterActionTypeKeys.GET_CHARACTERS,
-  payload: api.getCharacter()
+  payload: api.getCharacters()
 });
 
 // export const fetchCharacters = () => (dispatch: DispatchAction) => {
