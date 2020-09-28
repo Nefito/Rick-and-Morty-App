@@ -13,8 +13,8 @@ const episodesReducer = (state = episodesInitialState, action: EpisodesActionTyp
     case EpisodesActionTypeKeys.GET_EPISODES_FULFILLED:
       return { ...state, isLoading: false, errMess: null, episodes: action.payload };
 
-    // case EpisodesActionTypeKeys.EPISODES_FAILED:
-    //   return { ...state, isLoading: false, errMess: action.payload, episodes: [] };
+    case EpisodesActionTypeKeys.GET_EPISODES_REJECTED:
+      return { ...state, isLoading: false, errMess: action.payload, episodes: [] };
 
     // case EpisodesActionTypeKeys.EPISODES_LOADING:
     //   return { ...state, isLoading: true, errMess: null, episodes: [] };
