@@ -14,7 +14,7 @@ export type DispatchAction = (arg: IAction) => (IAction);
 
 export { default as Characters } from './characters/charactersReducer';
 export { default as Locations } from './locations/locationsReducer';
-export { default as Episodes } from './locations/locationsReducer';
+export { default as Episodes } from './episodes/episodesReducer';
 
 export { fetchCharacters, addCharacters, charactersFailed, charactersLoading } from './characters/actions';
 export { fetchEpisodes, addEpisodes, episodesFailed, episodesLoading } from './episodes/actions';
