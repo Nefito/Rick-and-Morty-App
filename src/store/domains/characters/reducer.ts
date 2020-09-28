@@ -1,18 +1,23 @@
 import { IAction, IStateSlice } from '../../types';
-import  CharacterActionTypeKeys from './actionTypes';
+import  { CharacterActionTypeKeys, CharactersActionTypes } from './actionTypes';
 
-const charactersReducer = (
-    state: IStateSlice = { isLoading: true, errMess: null, characters: [] }, action: IAction) => {
+const charactersInitialState = {
+  isLoading: true, 
+  errMess: null, 
+  characters: []
+};
+
+const charactersReducer = (state = charactersInitialState, action: CharactersActionTypes) => {
 
   switch (action.type) {
-    case CharacterActionTypeKeys.GET_CHARACTERS:
+    case CharacterActionTypeKeys.GET_CHARACTERS_FULFILLED:
       return { ...state, isLoading: false, errMess: null, characters: action.payload };
 
-    case CharacterActionTypeKeys.CHARACTERS_FAILED:
-      return { ...state, isLoading: false, errMess: action.payload, characters: [] };
+    // case CharacterActionTypeKeys.CHARACTERS_FAILED:
+    //   return { ...state, isLoading: false, errMess: action.payload, characters: [] };
 
-    case CharacterActionTypeKeys.CHARACTERS_LOADING:
-      return { ...state, isLoading: true, errMess: null, characters: [] };
+    // case CharacterActionTypeKeys.CHARACTERS_LOADING:
+    //   return { ...state, isLoading: true, errMess: null, characters: [] };
 
     default:
       return state;

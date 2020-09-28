@@ -1,31 +1,36 @@
-import { apiClientService } from 'services'; 
+import { IThunk } from 'types';
 
-import { DispatchAction, IAction } from '../../types';
-import  CharacterActionTypeKeys from './actionTypes';
-
-export const charactersLoading = (): IAction => ({
-  type: CharacterActionTypeKeys.CHARACTERS_LOADING
-});
+import { IAction } from '../../types';
+import  { CharacterActionTypeKeys, IGetCharactersActionType } from './actionTypes';
+import * as api from './api';
 
 export const charactersFailed = (errMess: string): IAction => ({
   type: CharacterActionTypeKeys.CHARACTERS_FAILED,
   payload: errMess
 });
 
-export const addCharacters = (characters: object): IAction => ({
+type GetCharactersAction = () => IGetCharactersActionType;
+
+export const getCharactersAction: GetCharactersAction = () => ({ // example
   type: CharacterActionTypeKeys.GET_CHARACTERS,
-  payload: characters
+  payload: api.getCharacter()
 });
 
-export const fetchCharacters = () => (dispatch: DispatchAction) => {
-  dispatch(charactersLoading());
+// export const fetchCharacters = () => (dispatch: DispatchAction) => {
+//   dispatch(charactersLoading());
 
-  return apiClientService.get('character/')
-    .then(response => response,
-    error => {
-      const errMess = new Error(error.message);
-      throw errMess;
-    })
-    .then(characters => dispatch(addCharacters(characters)))
-    .catch(error => dispatch(charactersFailed(error.message)));
+//   return apiClientService.get('character/')
+//     .then(response => response,
+//     error => {
+//       const errMess = new Error(error.message);
+//       throw errMess;
+//     })
+//     .then(characters => dispatch(addCharacters(characters)))
+//     .catch(error => dispatch(charactersFailed(error.message)));
+// };
+
+type HandleGetCharactersAction = () => IThunk<void>;
+
+export const handleGetCharactersAction: HandleGetCharactersAction = () => (dispatch, getState) => {
+  dispatch(getCharactersAction());
 };
