@@ -1,17 +1,23 @@
-import {  IAction, IStateSlice } from '../../types';
-import LocationsActionTypeKeys from './actionTypes';
+import { IStateSlice } from '../../types';
+import { LocationsActionTypeKeys, LocationsActionTypes } from './actionTypes';
 
-const locationsReducer = (
-    state: IStateSlice = { isLoading: true, errMess: null, locations: [] }, action: IAction) => {
+const episodesInitialState: IStateSlice = {
+  isLoading: true, 
+  errMess: null, 
+  locations: []
+};
+
+const locationsReducer = (state = episodesInitialState, action: LocationsActionTypes) => {
+
   switch (action.type) {
-    case LocationsActionTypeKeys.GET_LOCATIONS:
+    case LocationsActionTypeKeys.GET_LOCATIONS_FULFILLED:
       return { ...state, isLoading: false, errMess: null, locations: action.payload };
-
-    case LocationsActionTypeKeys.LOCATIONS_FAILED:
+    
+    case LocationsActionTypeKeys.GET_LOCATIONS_REJECTED:
       return { ...state, isLoading: false, errMess: action.payload, locations: [] };
 
-    case LocationsActionTypeKeys.LOCATIONS_LOADING:
-      return { ...state, isLoading: true, errMess: null, locations: [] };
+    // case LocationsActionTypeKeys.LOCATIONS_LOADING:
+    //   return { ...state, isLoading: true, errMess: null, locations: [] };
 
     default:
       return state;
