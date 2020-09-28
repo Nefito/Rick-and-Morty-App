@@ -1,19 +1,19 @@
 import { apiClientService } from 'services'; 
 
-import { DispatchAction, IAction } from '../index';
-import { ActionTypes } from './actionTypes';
+import { DispatchAction, IAction } from '../../types';
+import  CharacterActionTypeKeys from './actionTypes';
 
 export const charactersLoading = (): IAction => ({
-  type: ActionTypes.CHARACTERS_LOADING
+  type: CharacterActionTypeKeys.CHARACTERS_LOADING
 });
 
 export const charactersFailed = (errMess: string): IAction => ({
-  type: ActionTypes.CHARACTERS_FAILED,
+  type: CharacterActionTypeKeys.CHARACTERS_FAILED,
   payload: errMess
 });
 
 export const addCharacters = (characters: object): IAction => ({
-  type: ActionTypes.ADD_CHARACTERS,
+  type: CharacterActionTypeKeys.GET_CHARACTERS,
   payload: characters
 });
 

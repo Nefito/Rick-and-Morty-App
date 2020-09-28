@@ -2,9 +2,8 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { fetchCharacters, fetchEpisodes, fetchLocations } from 'store';
-import { RootState } from 'store/configureStore';
 
-const mapStateToProps = (state: RootState) => {
+const mapStateToProps = (state: any) => {
   return {
     characters: state.characters,
     locations: state.locations,

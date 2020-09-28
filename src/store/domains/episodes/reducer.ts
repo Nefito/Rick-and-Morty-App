@@ -1,16 +1,16 @@
-import {  IAction, IStateSlice } from '..';
-import { ActionTypes } from './actionTypes';
+import { IAction, IStateSlice } from '../../types';
+import EpisodesActionTypeKeys from './actionTypes';
 
-const Episodes = (
+const episodesReducer = (
     state: IStateSlice = { isLoading: true, errMess: null, episodes: [] }, action: IAction) => {
   switch (action.type) {
-    case ActionTypes.ADD_EPISODES:
+    case EpisodesActionTypeKeys.GET_EPISODES:
       return { ...state, isLoading: false, errMess: null, episodes: action.payload };
 
-    case ActionTypes.EPISODES_FAILED:
+    case EpisodesActionTypeKeys.EPISODES_FAILED:
       return { ...state, isLoading: false, errMess: action.payload, episodes: [] };
 
-    case ActionTypes.EPISODES_LOADING:
+    case EpisodesActionTypeKeys.EPISODES_LOADING:
       return { ...state, isLoading: true, errMess: null, episodes: [] };
 
     default:
@@ -18,4 +18,4 @@ const Episodes = (
   }
 };
 
-export default Episodes;
+export default episodesReducer;

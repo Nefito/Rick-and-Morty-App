@@ -1,19 +1,19 @@
 import { apiClientService } from 'services'; 
 
-import { DispatchAction, IAction } from '../index';
-import { ActionTypes } from './actionTypes';
+import { DispatchAction, IAction } from '../../types';
+import EpisodesActionTypeKeys from './actionTypes';
 
 export const episodesLoading = (): IAction => ({
-  type: ActionTypes.EPISODES_LOADING
+  type: EpisodesActionTypeKeys.EPISODES_LOADING
 });
 
 export const episodesFailed = (errMess: string): IAction => ({
-  type: ActionTypes.EPISODES_FAILED,
+  type: EpisodesActionTypeKeys.EPISODES_FAILED,
   payload: errMess
 });
 
 export const addEpisodes = (episodes: object): IAction => ({
-  type: ActionTypes.ADD_EPISODES,
+  type: EpisodesActionTypeKeys.GET_EPISODES,
   payload: episodes
 });
 

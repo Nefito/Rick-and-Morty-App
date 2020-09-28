@@ -1,21 +1,20 @@
+import { createBrowserHistory } from 'history';
+import { applyMiddleware, compose, createStore } from 'redux';
 
-export interface IAction {
-  type: string;
-  payload?: any;
-}
+import middleware from './middleware';
+import rootReducer from './rootReducer';
 
-export interface IStateSlice {
-  isLoading: boolean;
-  errMess: string | null;
-  [propName: string]: any;
-}
+export const history = createBrowserHistory();
 
-export type DispatchAction = (arg: IAction) => (IAction);
+const middlewares = middleware(history);
 
-export { default as Characters } from './characters/charactersReducer';
-export { default as Locations } from './locations/locationsReducer';
-export { default as Episodes } from './episodes/episodesReducer';
+const rootReducers = rootReducer(history);
 
-export { fetchCharacters, addCharacters, charactersFailed, charactersLoading } from './characters/actions';
-export { fetchEpisodes, addEpisodes, episodesFailed, episodesLoading } from './episodes/actions';
-export { fetchLocations, addLocations, locationsFailed, locationsLoading } from './locations/actions';
+const composeEnhancers =
+  (process.env.NODE_ENV === 'development' && window && (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
+
+const store = createStore(rootReducers, composeEnhancers(applyMiddleware(...middlewares)));
+
+export default store; // connect later
+export * from './domains';
+export * from './types';

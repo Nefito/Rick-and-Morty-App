@@ -1,19 +1,19 @@
 import { apiClientService } from 'services'; 
 
-import { DispatchAction, IAction } from '../index';
-import { ActionTypes } from './actionTypes';
+import { DispatchAction, IAction } from '../../types';
+import LocationsActionTypeKeys from './actionTypes';
 
 export const locationsLoading = (): IAction => ({
-  type: ActionTypes.LOCATIONS_LOADING
+  type: LocationsActionTypeKeys.LOCATIONS_LOADING
 });
 
 export const locationsFailed = (errMess: string): IAction => ({
-  type: ActionTypes.LOCATIONS_FAILED,
+  type: LocationsActionTypeKeys.LOCATIONS_FAILED,
   payload: errMess
 });
 
 export const addLocations = (locations: object): IAction => ({
-  type: ActionTypes.ADD_LOCATIONS,
+  type: LocationsActionTypeKeys.GET_LOCATIONS,
   payload: locations
 });
 
