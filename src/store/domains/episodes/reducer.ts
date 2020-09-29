@@ -4,10 +4,13 @@ import { IEpisodesInitialState } from './types';
 const episodesInitialState: IEpisodesInitialState = {
   isLoading: true, 
   errMess: null, 
-  episodes: []
+  episodes: {
+    info: null,
+    results: []
+  }
 };
 
-const episodesReducer = (state = episodesInitialState, action: EpisodesActionTypes) => {
+const episodesReducer = (state = episodesInitialState, action: EpisodesActionTypes): IEpisodesInitialState => {
 
   switch (action.type) {
     case EpisodesActionTypeKeys.GET_EPISODES_FULFILLED:

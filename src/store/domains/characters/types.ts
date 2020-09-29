@@ -21,14 +21,18 @@ export interface ICharacter {
   created: string;
 }
 
-export interface IGetCharactersResponse extends IPaginationResponse {
+export interface IGetCharactersResponse {
+  info: IPaginationResponse;
   results: ICharacter[];
 }
 
 export interface ICharactersInitialState {
   isLoading: boolean;
   errMess: string | null;
-  characters: ICharacter[];
+  characters: {
+    info: IPaginationResponse | null;
+    results: ICharacter[];
+  } | never[];
 }
 
 export interface ICharacterState extends ICharactersInitialState {}

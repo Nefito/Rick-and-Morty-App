@@ -10,14 +10,18 @@ export interface ILocation {
   created: string;
 }
 
-export interface IGetLocationsResponse extends IPaginationResponse {
+export interface IGetLocationsResponse {
+  info: IPaginationResponse;
   results: ILocation[];
 }
 
 export interface ILocationsInitialState {
   isLoading: boolean;
   errMess: string | null;
-  locations: ILocation[];
+  locations: {
+    info: IPaginationResponse | null;
+    results: ILocation[];
+  } | never[];
 }
 
 export interface ILocationsState extends ILocationsInitialState {}

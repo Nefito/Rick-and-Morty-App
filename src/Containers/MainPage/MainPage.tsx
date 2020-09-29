@@ -6,11 +6,11 @@ const Main = (props: any) => {
     props.handleGetCharactersAction()
   }, []);
 
-  const test = props.characters.characters.results;
+  const test = props.characters.characters.results[0];
 
   return (
     <div>
-      <h1>{test ? test[0].name : null }</h1>
+      <h1>{test ? test.name : null }</h1>
     </div>
   );
 };

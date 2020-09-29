@@ -4,10 +4,13 @@ import { ICharactersInitialState } from './types';
 const charactersInitialState: ICharactersInitialState = {
   isLoading: true, 
   errMess: null, 
-  characters: []
+  characters: {
+    info: null,
+    results: []
+  }
 };
 
-const charactersReducer = (state = charactersInitialState, action: CharactersActionTypes) => {
+const charactersReducer = (state = charactersInitialState, action: CharactersActionTypes): ICharactersInitialState => {
 
   switch (action.type) {
     case CharacterActionTypeKeys.GET_CHARACTERS_FULFILLED:

@@ -10,14 +10,18 @@ export interface IEpisode {
   created: string;
 }
 
-export interface IGetEpisodesResponse extends IPaginationResponse {
+export interface IGetEpisodesResponse {
+  info: IPaginationResponse;
   results: IEpisode[];
 }
 
 export interface IEpisodesInitialState {
   isLoading: boolean;
   errMess: string | null;
-  episodes: IEpisode[];
+  episodes: {
+    info: IPaginationResponse | null;
+    results: IEpisode[];
+  } | never[];
 }
 
 export interface IEpisodesState extends IEpisodesInitialState {}

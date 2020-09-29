@@ -4,10 +4,13 @@ import { ILocationsInitialState } from './types';
 const locationsInitialState: ILocationsInitialState = {
   isLoading: true, 
   errMess: null, 
-  locations: []
+  locations: {
+    info: null,
+    results: []
+  }
 };
 
-const locationsReducer = (state = locationsInitialState, action: LocationsActionTypes) => {
+const locationsReducer = (state = locationsInitialState, action: LocationsActionTypes): ILocationsInitialState => {
 
   switch (action.type) {
     case LocationsActionTypeKeys.GET_LOCATIONS_FULFILLED:
