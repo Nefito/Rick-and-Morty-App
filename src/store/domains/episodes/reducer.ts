@@ -1,7 +1,7 @@
-import { IStateSlice } from '../../types';
 import { EpisodesActionTypeKeys, EpisodesActionTypes } from './actionTypes';
+import { IEpisodesInitialState } from './types';
 
-const episodesInitialState: IStateSlice = {
+const episodesInitialState: IEpisodesInitialState = {
   isLoading: true, 
   errMess: null, 
   episodes: []

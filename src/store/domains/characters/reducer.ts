@@ -1,7 +1,7 @@
-import { IStateSlice } from '../../types';
 import { CharacterActionTypeKeys, CharactersActionTypes } from './actionTypes';
+import { ICharactersInitialState } from './types';
 
-const charactersInitialState: IStateSlice = {
+const charactersInitialState: ICharactersInitialState = {
   isLoading: true, 
   errMess: null, 
   characters: []

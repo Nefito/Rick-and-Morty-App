@@ -1,6 +1,7 @@
 import { IPromiseAction } from 'types';
 
-import { EpisodesPromiseType, IEpisodesFulfilled, IEpisodesRejected } from './types';
+import { IErrorResponse } from '../types';
+import { IGetEpisodesResponse } from './types';
 
 export enum EpisodesActionTypeKeys { 
   GET_EPISODES = 'episodes/ADD_EPISODES',
@@ -9,12 +10,12 @@ export enum EpisodesActionTypeKeys {
 }
 
 export interface IGetEpisodesActionType extends 
-  IPromiseAction<EpisodesActionTypeKeys.GET_EPISODES, Promise<EpisodesPromiseType>> {}
+  IPromiseAction<EpisodesActionTypeKeys.GET_EPISODES, Promise<IGetEpisodesResponse>> {}
 
 export interface IGetEpisodesFulfilledActionType extends 
-  IPromiseAction<EpisodesActionTypeKeys.GET_EPISODES_FULFILLED, IEpisodesFulfilled> {}
+  IPromiseAction<EpisodesActionTypeKeys.GET_EPISODES_FULFILLED, IGetEpisodesResponse> {}
 
 export interface IGetEpisodesRejectedActionType extends 
-  IPromiseAction<EpisodesActionTypeKeys.GET_EPISODES_REJECTED, IEpisodesRejected> {} 
+  IPromiseAction<EpisodesActionTypeKeys.GET_EPISODES_REJECTED, IErrorResponse> {} 
 
 export type EpisodesActionTypes = IGetEpisodesFulfilledActionType | IGetEpisodesRejectedActionType;

@@ -1,6 +1,6 @@
-import { IPromiseFulfilled, IPromiseRejected } from '../../types';
+import { IPaginationResponse } from '../types';
 
-export interface ISingleEpisode {
+export interface IEpisode {
   id: number;
   name: string;
   air_date: string;
@@ -10,10 +10,14 @@ export interface ISingleEpisode {
   created: string;
 }
 
-export interface IEpisodesFulfilled extends IPromiseFulfilled {
-  results: ISingleEpisode[];
+export interface IGetEpisodesResponse extends IPaginationResponse {
+  results: IEpisode[];
 }
 
-export interface IEpisodesRejected extends IPromiseRejected {}
+export interface IEpisodesInitialState {
+  isLoading: boolean;
+  errMess: string | null;
+  episodes: IEpisode[];
+}
 
-export type EpisodesPromiseType = IEpisodesFulfilled | IEpisodesRejected;
+export interface IEpisodesState extends IEpisodesInitialState {}

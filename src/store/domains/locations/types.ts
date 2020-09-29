@@ -1,6 +1,6 @@
-import { IPromiseFulfilled, IPromiseRejected } from '../../types';
+import { IPaginationResponse } from '../types';
 
-export interface ISingleLocation {
+export interface ILocation {
   id: number;
   name: string;
   type: string;
@@ -10,10 +10,14 @@ export interface ISingleLocation {
   created: string;
 }
 
-export interface ILocationsFulfilled extends IPromiseFulfilled {
-  results: ISingleLocation[];
+export interface IGetLocationsResponse extends IPaginationResponse {
+  results: ILocation[];
 }
 
-export interface ILocationsRejected extends IPromiseRejected {}
+export interface ILocationsInitialState {
+  isLoading: boolean;
+  errMess: string | null;
+  locations: ILocation[];
+}
 
-export type LocationsPromiseType = ILocationsFulfilled | ILocationsRejected;
+export interface ILocationsState extends ILocationsInitialState {}

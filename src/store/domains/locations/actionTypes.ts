@@ -1,6 +1,7 @@
 import { IPromiseAction } from 'types';
 
-import { ILocationsFulfilled, ILocationsRejected, LocationsPromiseType } from './types';
+import { IErrorResponse } from '../types';
+import { IGetLocationsResponse } from './types';
 
 export enum LocationsActionTypeKeys {
   GET_LOCATIONS = 'locations/ADD_LOCATIONS',
@@ -9,12 +10,12 @@ export enum LocationsActionTypeKeys {
 }
 
 export interface IGetLocationsActionType extends 
-  IPromiseAction<LocationsActionTypeKeys.GET_LOCATIONS, Promise<LocationsPromiseType>> {}
+  IPromiseAction<LocationsActionTypeKeys.GET_LOCATIONS, Promise<IGetLocationsResponse>> {}
 
 export interface IGetLocationsFulfilledActionType extends 
-  IPromiseAction<LocationsActionTypeKeys.GET_LOCATIONS_FULFILLED, ILocationsFulfilled> {}
+  IPromiseAction<LocationsActionTypeKeys.GET_LOCATIONS_FULFILLED, IGetLocationsResponse> {}
 
 export interface IGetLocationsRejectedActionType extends 
-  IPromiseAction<LocationsActionTypeKeys.GET_LOCATIONS_REJECTED, ILocationsRejected> {} 
+  IPromiseAction<LocationsActionTypeKeys.GET_LOCATIONS_REJECTED, IErrorResponse> {} 
 
 export type LocationsActionTypes = IGetLocationsFulfilledActionType | IGetLocationsRejectedActionType;

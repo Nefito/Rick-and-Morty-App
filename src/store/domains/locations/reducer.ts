@@ -1,13 +1,13 @@
-import { IStateSlice } from '../../types';
 import { LocationsActionTypeKeys, LocationsActionTypes } from './actionTypes';
+import { ILocationsInitialState } from './types';
 
-const episodesInitialState: IStateSlice = {
+const locationsInitialState: ILocationsInitialState = {
   isLoading: true, 
   errMess: null, 
   locations: []
 };
 
-const locationsReducer = (state = episodesInitialState, action: LocationsActionTypes) => {
+const locationsReducer = (state = locationsInitialState, action: LocationsActionTypes) => {
 
   switch (action.type) {
     case LocationsActionTypeKeys.GET_LOCATIONS_FULFILLED:

@@ -1,6 +1,6 @@
-import { IPromiseFulfilled, IPromiseRejected } from '../../types';
+import { IPaginationResponse } from '../types';
 
-interface ISingleCharacter {
+export interface ICharacter {
   id: number;
   name: string;
   status: 'Alive' | 'Dead' | 'unknown';
@@ -21,10 +21,14 @@ interface ISingleCharacter {
   created: string;
 }
 
-export interface ICharactersFulFilled extends IPromiseFulfilled {
-  results: ISingleCharacter[];
+export interface IGetCharactersResponse extends IPaginationResponse {
+  results: ICharacter[];
 }
 
-export interface ICharactersRejected extends IPromiseRejected {}
+export interface ICharactersInitialState {
+  isLoading: boolean;
+  errMess: string | null;
+  characters: ICharacter[];
+}
 
-export type CharactersPromiseType = ICharactersRejected | ICharactersFulFilled;
+export interface ICharacterState extends ICharactersInitialState {}
