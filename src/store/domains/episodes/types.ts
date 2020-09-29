@@ -1,6 +1,5 @@
 import { IPromiseFulfilled, IPromiseRejected } from '../../types';
 
-
 export interface ISingleEpisode {
   id: number;
   name: string;
