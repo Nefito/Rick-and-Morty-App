@@ -19,7 +19,7 @@ interface ISingleCharacter {
   created: string;
 }
 
-interface ICharactersFulFilled {
+export interface ICharactersFulFilled {
   info: {
     count: number;
     pages: number;
@@ -29,7 +29,7 @@ interface ICharactersFulFilled {
   results: ISingleCharacter[];
 }
 
-interface ICharactersRejected {
+export interface ICharactersRejected {
   req: {
     method: 'GET' | 'POST' | 'PUT' | 'DELETE';
     url: string;
@@ -75,4 +75,4 @@ interface ICharactersRejected {
   };
 }
 
-export type CharactersType = ICharactersFulFilled | ICharactersRejected;
+export type CharactersPromiseType = ICharactersRejected | ICharactersFulFilled;

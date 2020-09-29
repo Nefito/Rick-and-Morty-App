@@ -1,6 +1,6 @@
 import { IPromiseAction } from 'types';
 
-import { CharactersType } from './types';
+import { CharactersPromiseType, ICharactersFulFilled, ICharactersRejected } from './types';
 
 export enum CharacterActionTypeKeys {
   GET_CHARACTERS = 'characters/GET_CHARACTERS',
@@ -9,12 +9,12 @@ export enum CharacterActionTypeKeys {
 }
 
 export interface IGetCharactersActionType extends 
-  IPromiseAction<CharacterActionTypeKeys.GET_CHARACTERS, Promise<CharactersType>> {}
+  IPromiseAction<CharacterActionTypeKeys.GET_CHARACTERS, Promise<CharactersPromiseType>> {}
 
 export interface IGetCharactersFulfilledActionType extends 
-  IPromiseAction<CharacterActionTypeKeys.GET_CHARACTERS_FULFILLED, CharactersType> {}
+  IPromiseAction<CharacterActionTypeKeys.GET_CHARACTERS_FULFILLED, ICharactersFulFilled> {}
 
 export interface IGetCharactersRejectedActionType extends
-  IPromiseAction<CharacterActionTypeKeys.GET_CHARACTERS_REJECTED, CharactersType> {}
+  IPromiseAction<CharacterActionTypeKeys.GET_CHARACTERS_REJECTED, ICharactersRejected> {}
 
 export type CharactersActionTypes = IGetCharactersFulfilledActionType | IGetCharactersRejectedActionType;
