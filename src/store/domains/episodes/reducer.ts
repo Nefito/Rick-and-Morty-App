@@ -14,7 +14,8 @@ const episodesReducer = (state = episodesInitialState, action: EpisodesActionTyp
       return { ...state, isLoading: false, errMess: null, episodes: action.payload };
 
     case EpisodesActionTypeKeys.GET_EPISODES_REJECTED:
-      return { ...state, isLoading: false, errMess: action.payload, episodes: [] };
+      // tslint:disable-next-line: max-line-length
+      return { ...state, isLoading: false, errMess: `Error:${action.payload.statusCode} ${action.payload.text}`, episodes: [] };
 
     // case EpisodesActionTypeKeys.EPISODES_LOADING:
     //   return { ...state, isLoading: true, errMess: null, episodes: [] };

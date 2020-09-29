@@ -14,7 +14,8 @@ const charactersReducer = (state = charactersInitialState, action: CharactersAct
       return { ...state, isLoading: false, errMess: null, characters: action.payload };
 
     case CharacterActionTypeKeys.GET_CHARACTERS_REJECTED:
-      return { ...state, isLoading: false, errMess: action.payload, characters: [] };
+      // tslint:disable-next-line: max-line-length
+      return { ...state, isLoading: false, errMess: `Error:${action.payload.statusCode} ${action.payload.text}`, characters: [] };
 
     // case CharacterActionTypeKeys.CHARACTERS_LOADING:
     //   return { ...state, isLoading: true, errMess: null, characters: [] };
