@@ -1,28 +1,9 @@
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-
-import { fetchCharacters, fetchEpisodes, fetchLocations, IStoreState } from 'store';
-
-const mapStateToProps = (state: IStoreState) => {
-  return {
-    characters: state.characters,
-    locations: state.locations,
-    episodes: state.episodes
-  };
-};
-
-const mapDispatchToProps = (dispatch: any) => ({
-  fetchCharacters: () =>  dispatch(fetchCharacters()),
-  fetchLocations: () =>  dispatch(fetchLocations()),
-  fetchEpisodes: () =>  dispatch(fetchEpisodes())
-});
 
 const Main = (props: any) => {
 
   useEffect(() => {
-    props.fetchCharacters();
-    props.fetchLocations();
-    props.fetchEpisodes();
+    props.handleGetCharactersAction()
   }, []);
 
   const test = props.characters.characters.results;
@@ -33,4 +14,5 @@ const Main = (props: any) => {
     </div>
   );
 };
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+
+export default Main;
