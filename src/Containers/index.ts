@@ -1,1 +1,1 @@
-export { default as ConnectedMain } from './MainPage/index';
+export { default as ConnectedMain } from './MainPage';
