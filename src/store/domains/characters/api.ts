@@ -1,3 +1,3 @@
 import { apiClientService } from 'services';
 
-export const getCharacters = () => apiClientService.get('charcter/');
+export const getCharacters = () => apiClientService.get('character/');
