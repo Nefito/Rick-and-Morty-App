@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
-import { ConnectedMain } from 'Containers';
+import { ConnectedMain } from 'containers';
 
 import './services';
 

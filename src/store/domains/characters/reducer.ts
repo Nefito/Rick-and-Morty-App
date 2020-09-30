@@ -19,6 +19,7 @@ const charactersReducer = (state = charactersInitialState, action: CharactersAct
     case CharacterActionTypeKeys.GET_CHARACTERS_REJECTED:
       // tslint:disable-next-line: max-line-length
       return { ...state, isLoading: false, errMess: `Error:${action.payload.statusCode} ${action.payload.text}`, characters: { info: null, results: [] } };
+      
     default:
       return state;
   }

@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 
 import { handleGetCharactersAction, IStoreState } from 'store';
 
-import Main from './mainPage';
+import Main from './MainPage';
 
 export const mapStateToProps = (state: IStoreState) => {
   return {

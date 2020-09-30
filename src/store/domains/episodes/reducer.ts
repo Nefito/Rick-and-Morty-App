@@ -20,9 +20,6 @@ const episodesReducer = (state = episodesInitialState, action: EpisodesActionTyp
       // tslint:disable-next-line: max-line-length
       return { ...state, isLoading: false, errMess: `Error:${action.payload.statusCode} ${action.payload.text}`, episodes: { info: null, results: [] } };
 
-    // case EpisodesActionTypeKeys.EPISODES_LOADING:
-    //   return { ...state, isLoading: true, errMess: null, episodes: [] };
-
     default:
       return state;
   }

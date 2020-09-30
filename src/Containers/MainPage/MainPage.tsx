@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 
+import { CharacterCard } from 'components';
+
 const Main = (props: any) => {
 
   useEffect(() => {
@@ -10,7 +12,7 @@ const Main = (props: any) => {
 
   return (
     <div>
-      <h1>{test ? test.name : null }</h1>
+      {test? <CharacterCard character={test} /> : null}
     </div>
   );
 };
