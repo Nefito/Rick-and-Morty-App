@@ -21,7 +21,7 @@ export interface ILocationsInitialState {
   locations: {
     info: IPaginationResponse | null;
     results: ILocation[];
-  } | never[];
+  };
 }
 
 export interface ILocationsState extends ILocationsInitialState {}

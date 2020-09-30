@@ -21,7 +21,7 @@ export interface IEpisodesInitialState {
   episodes: {
     info: IPaginationResponse | null;
     results: IEpisode[];
-  } | never[];
+  };
 }
 
 export interface IEpisodesState extends IEpisodesInitialState {}

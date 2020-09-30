@@ -1,12 +1,25 @@
 import { IPaginationResponse } from '../types';
 
+enum Status {
+  Alive = 'Alive',
+  Dead = 'Dead',
+  Unknown = 'unknown'
+}
+
+enum Gender {
+  Male = 'Male',
+  Female = 'Female',
+  Genderless = 'Genderless',
+  Unknown = 'unknown'
+}
+
 export interface ICharacter {
   id: number;
   name: string;
-  status: 'Alive' | 'Dead' | 'unknown';
+  status: Status;
   species: string;
   type: string;
-  gender: 'Female' | 'Male' | 'Genderless' | 'unknown';
+  gender: Gender;
   origin: {
     name: string;
     url: string;
@@ -32,7 +45,7 @@ export interface ICharactersInitialState {
   characters: {
     info: IPaginationResponse | null;
     results: ICharacter[];
-  } | never[];
+  };
 }
 
 export interface ICharacterState extends ICharactersInitialState {}
