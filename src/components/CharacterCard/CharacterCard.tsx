@@ -1,41 +1,119 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const CharacterCard = (props: any) => {
+import { ICharacter } from 'store';
 
-  const Card = styled.section`
-    background: gray;
-    display: block;
-    border-radius: 8px;
-  `;
+const Card = styled.article`
+  background: #2e2e2e;
+  display: flex;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 12px;
+  width: 740px;
+  color: white;
 
-  const CardImg = styled.img`
-    border-radius: 8px;
-  `;
+  .card-image {
+    width: 100%;
+  }
+`;
 
-  const Name = styled.h1`
+const CardBody = styled.div`
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  .card-text__name {
+    font-weight: bold;
+    font-size: 32px;
+    text-align: center;
+    margin: 0;
+  }
+
+  .card-text__species-status {
+    font-size: 24px;
+    margin: 0 0 18px 8px;
+  }
+
+  .link-no-style {
+    text-decoration: none;
     color: white;
-    display: inline;
-    margin: 1rem;
-  `;
-  const Status = styled(Name)``;
-  const Container = styled.div`
-      display: block;
-      padding: 6px;
-      margin: 2px;
-    `;
+
+    :hover {
+      color: orange;
+    }
+  }
+`;
+
+const getStatusColor = (status: string) => {
+  switch (status) {
+    case ('Alive'):
+      return '#03fc49';
+
+    case ('Dead'):
+      return '#fc0303';
+
+    default:
+      return '#D3D3D3';
+  }
+};
+
+const CardStatus = styled.span<{ status: string }>` 
+  color: ${props => getStatusColor(props.status)};
+`;
+
+const CardBodyElement = styled.div<{ margin: string }>`
+  display: flex;
+  flex-direction: column;
+  margin: ${props => props.margin};
+  font-size: 20px;
+
+.card-text__gray {
+  font-size: 16px;
+  color: #D3D3D3;
+}
+`;
+
+interface ICharacterCard {
+  character: ICharacter;
+}
+
+interface ICardBodyText {
+  url: string;
+  name: string;
+  margin: string;
+}
+
+const CardBodyText: React.FC<ICardBodyText> = (props) => { 
+
+  const { url, name, margin } = props;
+
+  return (
+    <CardBodyElement margin={margin}>
+      <span className="card-text__gray">Last known location: </span>
+      <a href={url} className="link-no-style">{name}</a>
+    </CardBodyElement>
+  );
+};
+
+const CharacterCard: React.FC<ICharacterCard> = (props) => {
+
+  const { character } = props;
 
   return (
     <Card>
-      <CardImg src={props.character.image} alt={props.character.name} />
-      <Container>
-        <Name>{props.character.name}</Name>
-        <Status as="h3">{props.character.status}-{props.character.species}</Status>
-        <Status as="h3">Last known location: </Status>
-        <Status as="h3">{props.character.location.name}</Status>
-        <Status as="h3">First seen in: </Status>
-        <Status as="h3">{props.character.episode[0]}</Status>
-      </Container>
+      <img className="card-img" src={character.image} alt={character.name} />
+      <CardBody>
+        <div>
+          <a href={character.url} className="card-text__name link-no-style">{character.name}</a>
+          <div className="card-text__species-status">
+            <CardStatus status={character.status}> {character.status}</CardStatus>
+            <span className="card-text__species"> - {character.species}</span>
+          </div>
+        </div>
+        <CardBodyText url={character.location.url} name={character.location.name} margin="16px 0 16px 0" />
+        <CardBodyText url={character.episode[0]} name={character.episode[0]} margin="32px 0 10px 0" />
+      </CardBody>
     </Card>
   );
 };
