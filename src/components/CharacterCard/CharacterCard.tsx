@@ -1,17 +1,16 @@
 import React from 'react';
-import styled from 'styled-components';
 
-import { ICharacter } from 'store';
-import { Theme } from 'theme';
+import { ICharacter, LifeStatusConst } from 'store';
+import { styled, theme as mainTheme } from 'theme';
 
 const Card = styled.article`
-  background: ${props => props.theme.colors.main};
+  background: ${({ theme }) => theme.colors.main};
   display: flex;
   border-radius: 8px;
   overflow: hidden;
   margin: 12px;
   width: 740px;
-  color: ${props => props.theme.colors.text};
+  color: ${({ theme }) => theme.colors.text};
 
   .card-image {
     width: 100%;
@@ -38,41 +37,41 @@ const CardBody = styled.div`
 
   .link-no-style {
     text-decoration: none;
-    color: ${props => props.theme.colors.text};
+    color: ${({ theme }) => theme.colors.text};
 
     :hover {
-      color: ${props => props.theme.colors.secondary};
+      color: ${({ theme }) => theme.colors.secondary};
     }
   }
 `;
 
 const getStatusColor = (status: string) => {
   switch (status) {
-    case ('Alive'):
-      return Theme.colors.alive;
+    case (LifeStatusConst.Alive):
+      return mainTheme.colors.alive;
 
-    case ('Dead'):
-      return Theme.colors.dead;
+    case (LifeStatusConst.Dead):
+      return mainTheme.colors.dead;
 
     default:
-      return Theme.colors.textSecondary;
+      return mainTheme.colors.textSecondary;
   }
 };
 
 const CardStatus = styled.span<{ status: string }>` 
-  color: ${props => getStatusColor(props.status)};
+  color: ${({ status }) => getStatusColor(status)};
 `;
 
 const CardBodyElement = styled.div<{ margin: string }>`
   display: flex;
   flex-direction: column;
-  margin: ${props => props.margin};
+  margin: ${({ margin }) => margin};
   font-size: 20px;
 
-.card-text__gray {
-  font-size: 16px;
-  color: ${props => props.theme.colors.textSecondary};
-}
+  .card-text__gray {
+    font-size: 16px;
+    color: ${({ theme }) => theme.colors.textSecondary};
+  }
 `;
 
 interface ICharacterCard {

@@ -15,10 +15,6 @@ const Main = (props: any) => {
     <div>
       {test ? <CharacterCard character={test} /> : null}
       {test2 ? <CharacterCard character={test2} /> : null}
-      <Button btnText="I am a button !"/>
-      <div style={{ margin: '2rem' }}>
-        <Input placeholder="I am an input!" />
-      </div>
     </div>
   );
 };
