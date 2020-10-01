@@ -1,6 +1,15 @@
-import { DefaultTheme } from 'styled-components';
+export interface ITheme {
+  colors: {
+    main: string;
+    secondary: string;
+    text: string;
+    textSecondary: string;
+    alive: string;
+    dead: string;
+  };
+}
 
-export const Theme: DefaultTheme = {
+export const theme: ITheme = {
   colors: {
     main: '#2e2e2e',
     secondary: '#ff9100',
