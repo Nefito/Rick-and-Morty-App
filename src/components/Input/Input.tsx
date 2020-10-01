@@ -3,16 +3,16 @@ import styled from 'styled-components';
 
 const StyledInput = styled.input`
   display: block;
-  color: orange;
+  color: ${props => props.theme.colors.secondary};
   border: none;
-  border-bottom: 3px solid gray;
-  background: #2e2e2e;
+  border-bottom: 3px solid ${props => props.theme.colors.textSecondary};
+  background: ${props => props.theme.colors.main};
   border-radius: 4px;
   padding: 6px 4px 0 4px;
 
   &:focus {
     outline: none;
-    border-bottom-color: orange;
+    border-bottom-color: ${props => props.theme.colors.secondary};
   }
 `;
 

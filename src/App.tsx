@@ -1,16 +1,19 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
 
 import { ConnectedMain } from 'containers';
+import { Theme } from 'theme';
 
 import './services';
+
 
 const App = () => {
   return (
      <BrowserRouter>
-        <div className="App">
-            <ConnectedMain />
-        </div>
+        <ThemeProvider theme={Theme}>
+              <ConnectedMain />
+        </ThemeProvider>
     </BrowserRouter>
   );
 };

@@ -2,15 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { ICharacter } from 'store';
+import { Theme } from 'theme';
 
 const Card = styled.article`
-  background: #2e2e2e;
+  background: ${props => props.theme.colors.main};
   display: flex;
   border-radius: 8px;
   overflow: hidden;
   margin: 12px;
   width: 740px;
-  color: white;
+  color: ${props => props.theme.colors.text};
 
   .card-image {
     width: 100%;
@@ -37,10 +38,10 @@ const CardBody = styled.div`
 
   .link-no-style {
     text-decoration: none;
-    color: white;
+    color: ${props => props.theme.colors.text};
 
     :hover {
-      color: orange;
+      color: ${props => props.theme.colors.secondary};
     }
   }
 `;
@@ -48,13 +49,13 @@ const CardBody = styled.div`
 const getStatusColor = (status: string) => {
   switch (status) {
     case ('Alive'):
-      return '#03fc49';
+      return Theme.colors.alive;
 
     case ('Dead'):
-      return '#fc0303';
+      return Theme.colors.dead;
 
     default:
-      return '#D3D3D3';
+      return Theme.colors.textSecondary;
   }
 };
 
@@ -70,7 +71,7 @@ const CardBodyElement = styled.div<{ margin: string }>`
 
 .card-text__gray {
   font-size: 16px;
-  color: #D3D3D3;
+  color: ${props => props.theme.colors.textSecondary};
 }
 `;
 
