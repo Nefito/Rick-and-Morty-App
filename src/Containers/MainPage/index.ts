@@ -1,15 +1,15 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { handleGetCharactersAction, IStoreState } from 'store';
+import { charactersSelector, episodesSelector, handleGetCharactersAction, IStoreState, locationsSelector } from 'store';
 
 import Main from './MainPage';
 
 export const mapStateToProps = (state: IStoreState) => {
   return {
-    characters: state.characters,
-    locations: state.locations,
-    episodes: state.episodes
+    characters: charactersSelector(state),
+    locations: locationsSelector(state),
+    episodes: episodesSelector(state)
   };
 };
 
