@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { ICharacter, LifeStatusConst } from 'store';
-import { styled, theme as mainTheme } from 'theme';
+import { media, styled, theme as mainTheme } from 'theme';
 
 const Card = styled.article`
   background: ${({ theme }) => theme.colors.main};
@@ -15,6 +15,17 @@ const Card = styled.article`
   .card-image {
     width: 100%;
   }
+
+  ${media.tablet`
+    width: 100%;
+    word-break: break-all;
+  `};
+
+  ${media.tabletS`
+    display: block;
+    width: 300px;
+    word-break: break-word;
+  `};
 `;
 
 const CardBody = styled.div`
