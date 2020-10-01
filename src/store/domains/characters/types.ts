@@ -1,12 +1,12 @@
 import { IPaginationResponse } from '../types';
 
-enum Status {
+export enum LifeStatusConst {
   Alive = 'Alive',
   Dead = 'Dead',
   Unknown = 'unknown'
 }
 
-enum Gender {
+export enum GenderConst {
   Male = 'Male',
   Female = 'Female',
   Genderless = 'Genderless',
@@ -16,10 +16,10 @@ enum Gender {
 export interface ICharacter {
   id: number;
   name: string;
-  status: Status;
+  status: LifeStatusConst;
   species: string;
   type: string;
-  gender: Gender;
+  gender: GenderConst;
   origin: {
     name: string;
     url: string;
