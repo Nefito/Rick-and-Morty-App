@@ -1,8 +1,16 @@
 import React, { useEffect } from 'react';
 
-import { Button, CharacterCard, CharacterCardList, Input } from 'components';
+import { CharacterCardList } from 'components';
+import { HandleGetCharactersAction, ICharactersInitialState, IEpisodesInitialState, ILocationsInitialState } from 'store';
 
-const Main = (props: any) => {
+interface IMain {
+  characters: ICharactersInitialState;
+  episodes: IEpisodesInitialState;
+  locations: ILocationsInitialState;
+  handleGetCharactersAction: HandleGetCharactersAction;
+}
+
+const Main: React.FC<IMain> = (props) => {
 
   useEffect(() => {
     props.handleGetCharactersAction();

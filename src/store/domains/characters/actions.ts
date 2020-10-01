@@ -28,7 +28,7 @@ export const getCharactersAction: GetCharactersAction = () => ({
 //     .catch(error => dispatch(charactersFailed(error.message)));
 // };
 
-type HandleGetCharactersAction = () => IThunk<void>;
+export type HandleGetCharactersAction = () => IThunk<void>;
 
 export const handleGetCharactersAction: HandleGetCharactersAction = () => (dispatch, getState) => {
   dispatch(getCharactersAction());
