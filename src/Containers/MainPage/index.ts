@@ -1,7 +1,14 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { charactersSelector, episodesSelector, handleGetCharactersAction, IStoreState, locationsSelector } from 'store';
+import { 
+         charactersSelector, 
+         episodesSelector, 
+         handleGetCharactersAction, 
+         handleGetLocationsAction, 
+         IStoreState, 
+         locationsSelector
+         } from 'store';
 
 import Main from './MainPage';
 
@@ -13,7 +20,10 @@ export const mapStateToProps = (state: IStoreState) => {
   };
 };
 
-export const mapDispatchToProps = (dispatch: any) => bindActionCreators({ handleGetCharactersAction }, dispatch);
+export const mapDispatchToProps = (dispatch: any) => bindActionCreators({ 
+  handleGetCharactersAction, 
+  handleGetLocationsAction 
+}, dispatch);
 
 const ConnectedMain = connect(mapStateToProps, mapDispatchToProps)(Main);
 

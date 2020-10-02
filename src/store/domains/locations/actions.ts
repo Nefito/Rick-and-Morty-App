@@ -1,3 +1,5 @@
+import { IThunk } from 'types';
+
 import { IGetLocationsActionType, LocationsActionTypeKeys } from './actionTypes';
 import * as api from './api';
 
@@ -25,3 +27,9 @@ export const getLocationsAction: GetLocationsAction = () => ({
 //     .then(locations => dispatch(addLocations(locations)))
 //     .catch(error => dispatch(locationsFailed(error.message)));
 // };
+
+export type HandleGetLocationsAction = () => IThunk<void>;
+
+export const handleGetLocationsAction: HandleGetLocationsAction = () => (dispatch, getState) => {
+  dispatch(getLocationsAction());
+};

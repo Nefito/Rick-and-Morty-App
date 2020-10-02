@@ -4,7 +4,7 @@ import { IErrorResponse } from '../types';
 import { IGetLocationsResponse } from './types';
 
 export enum LocationsActionTypeKeys {
-  GET_LOCATIONS = 'locations/ADD_LOCATIONS',
+  GET_LOCATIONS = 'locations/GET_LOCATIONS',
   GET_LOCATIONS_FULFILLED = 'locations/GET_LOCATIONS_FULFILLED',
   GET_LOCATIONS_REJECTED = 'locations/GET_LOCATIONS_REJECTED'
 }

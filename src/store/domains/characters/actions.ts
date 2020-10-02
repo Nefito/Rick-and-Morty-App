@@ -1,6 +1,6 @@
 import { IThunk } from 'types';
 
-import  { CharacterActionTypeKeys, IGetCharactersActionType } from './actionTypes';
+import  { CharactersActionTypeKeys, IGetCharactersActionType } from './actionTypes';
 import * as api from './api';
 
 // export const charactersFailed = (errMess: string): IAction => ({
@@ -11,7 +11,7 @@ import * as api from './api';
 type GetCharactersAction = () => IGetCharactersActionType;
 
 export const getCharactersAction: GetCharactersAction = () => ({
-  type: CharacterActionTypeKeys.GET_CHARACTERS,
+  type: CharactersActionTypeKeys.GET_CHARACTERS,
   payload: api.getCharacters()
 });
 
