@@ -13,7 +13,7 @@ export const Card = styled.div`
   }
 
   ${media.tablet`
-    width: 100%;
+    display: inline-flex;
     word-break: break-all;
   `};
 

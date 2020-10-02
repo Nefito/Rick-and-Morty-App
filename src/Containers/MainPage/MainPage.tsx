@@ -33,7 +33,7 @@ const Main: React.FC<IMain> = (props) => {
   return (
     
    <div>
-      {/* <CharacterCardList characters={characters} /> */}
+      <CharacterCardList characters={characters} />
       {location ? <LocationCard location={location} /> : null}
       {location ? <LocationCard location={location1} /> : null}
    </div>

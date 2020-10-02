@@ -1,8 +1,8 @@
 import React from 'react';
 
 import { ILocation } from 'store';
-import { Button } from '../Button';
 
+import { Button } from '../Button';
 import { Card, CardBody, CardBodyElement } from '../styles';
 
 interface ILocationCard {
