@@ -1,5 +1,9 @@
 import { media, styled } from 'theme';
 
+export const OuterCard = styled.div`
+  display: inline-flex;
+`;
+
 export const Card = styled.div`
   background: ${({ theme }) => theme.colors.main};
   display: inline-flex;
