@@ -9,6 +9,8 @@ import {
   ILocationsInitialState 
 } from 'store';
 
+import { CharactersPage } from '../CharactersPage';
+
 interface IMain {
   characters: ICharactersInitialState;
   episodes: IEpisodesInitialState;
@@ -32,7 +34,7 @@ const Main: React.FC<IMain> = (props) => {
   return (
     
    <div>
-      <CharacterCardList characters={characters} />
+      <CharactersPage characters={characters} />
       <LocationCardList locations={locations} />
    </div>
   );
