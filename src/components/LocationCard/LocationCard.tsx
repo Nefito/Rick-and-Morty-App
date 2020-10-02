@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { ILocation } from 'store';
+import { Button } from '../Button';
 
 import { Card, CardBody, CardBodyElement } from '../styles';
 
@@ -26,6 +27,34 @@ const CardBodyText: React.FC<ICardBodyText> = (props) => {
   );
 };
 
+interface IResidentsList {
+  residents: string[];
+  margin: string;
+}
+
+const ResidentsList: React.FC<IResidentsList> = (props) => {
+
+  const residentsCropped = props.residents.slice(0, 6).map(resident => {
+    return (
+      <li key={resident}>
+        <a href={resident} className="link-no-style" >{resident}</a>
+      </li>
+    );
+  });
+
+  return (
+    <>
+      <CardBodyElement margin={props.margin}>
+        <span className="card-text__gray">Residents:  </span>
+        <ul className="list-no-style">
+          {residentsCropped}
+        </ul>
+      </CardBodyElement>
+      <Button btnText="More..." />
+    </>
+  );
+};
+
 const LocationCard: React.FC<ILocationCard> = (props) => {
 
   const { location } = props;
@@ -37,9 +66,10 @@ const LocationCard: React.FC<ILocationCard> = (props) => {
           <a href={location.url} className="card-text__name link-no-style">{location.name}</a>
         </div>
         <div>
-          <CardBodyText name={location.dimension} margin="16px 0 16px 0" spanText="Dimension:" />
           <CardBodyText name={location.type} margin="32px 0 10px 0" spanText="Type:" />
+          <CardBodyText name={location.dimension} margin="32px 0 10px 0" spanText="Dimension:" />
         </div>
+        <ResidentsList residents={location.residents} margin="16px 0 46px 0" />
       </CardBody>
     </Card>
   );

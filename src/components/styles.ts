@@ -1,12 +1,11 @@
 import { media, styled } from 'theme';
 
-export const Card = styled.article`
+export const Card = styled.div`
   background: ${({ theme }) => theme.colors.main};
-  display: flex;
+  display: inline-flex;
   border-radius: 8px;
   overflow: hidden;
   margin: 12px;
-  width: 740px;
   color: ${({ theme }) => theme.colors.text};
 
   .card-image {
@@ -46,10 +45,13 @@ export const CardBody = styled.div`
   .link-no-style {
     text-decoration: none;
     color: ${({ theme }) => theme.colors.text};
-
     :hover {
       color: ${({ theme }) => theme.colors.secondary};
     }
+  }
+
+  .list-no-style {
+    list-style-type:none;
   }
 `;
 
