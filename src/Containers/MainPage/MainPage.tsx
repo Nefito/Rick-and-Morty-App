@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import { CharacterCardList, LocationCard } from 'components';
+import { CharacterCardList, LocationCardList } from 'components';
 import { 
   HandleGetCharactersAction, 
   HandleGetLocationsAction, 
@@ -27,15 +27,13 @@ const Main: React.FC<IMain> = (props) => {
   
   const characters = props.characters.characters.results;
 
-  const location = props.locations.locations.results[0];
-  const location1 = props.locations.locations.results[1];
+  const locations = props.locations.locations.results;
   
   return (
     
    <div>
       <CharacterCardList characters={characters} />
-      {location ? <LocationCard location={location} /> : null}
-      {location ? <LocationCard location={location1} /> : null}
+      <LocationCardList locations={locations} />
    </div>
   );
 };

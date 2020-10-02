@@ -47,7 +47,7 @@ const ResidentsList: React.FC<IResidentsList> = (props) => {
       <CardBodyElement margin={props.margin}>
         <span className="card-text__gray">Residents:  </span>
         <ul className="list-no-style">
-          {residentsCropped}
+          {residentsCropped.length > 0 ? residentsCropped : <span>No Residents</span>}
         </ul>
       </CardBodyElement>
       <Button btnText="More..." />
