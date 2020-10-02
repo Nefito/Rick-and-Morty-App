@@ -12,6 +12,6 @@ const CharactersPage: React.FC<ILocationsPage> = (props) => {
   return (
     <LocationCardList locations={locations} />
   );
-}
+};
 
 export default CharactersPage;

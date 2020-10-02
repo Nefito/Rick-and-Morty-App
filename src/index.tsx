@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 
-import { App } from 'containers';
+import { Root } from 'containers';
 import store from 'store';
 import { GlobalStyle, theme, ThemeProvider } from 'theme';
 
@@ -13,7 +14,9 @@ ReactDOM.render(
     <Provider store={store}>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
-        <App />
+        <BrowserRouter>
+          <Root />
+        </BrowserRouter>
       </ThemeProvider>
     </Provider>
   </React.StrictMode>,

@@ -10,7 +10,7 @@ import {
          locationsSelector
          } from 'store';
 
-import Main from './MainPage';
+import Main from './Root';
 
 export const mapStateToProps = (state: IStoreState) => {
   return {
@@ -25,6 +25,6 @@ export const mapDispatchToProps = (dispatch: any) => bindActionCreators({
   handleGetLocationsAction 
 }, dispatch);
 
-const ConnectedMain = connect(mapStateToProps, mapDispatchToProps)(Main);
+const Root = connect(mapStateToProps, mapDispatchToProps)(Main);
 
-export default ConnectedMain;
+export default Root;
