@@ -33,6 +33,7 @@ export const CardBody = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
+  width: 100%;
 
   .card-text__name {
     font-weight: bold;

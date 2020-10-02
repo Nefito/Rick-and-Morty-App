@@ -1,9 +1,15 @@
 import React from 'react';
 
 import { ILocation } from 'store';
+import { styled } from 'theme';
 
 import { Button } from '../Button';
 import { Card, CardBody, CardBodyElement } from '../styles';
+
+const LocationCardStyled = styled(Card)`
+  min-height: 456px;
+  min-width: 400px;
+`;
 
 interface ILocationCard {
   location: ILocation;
@@ -60,7 +66,7 @@ const LocationCard: React.FC<ILocationCard> = (props) => {
   const { location } = props;
 
   return (
-    <Card>
+    <LocationCardStyled>
       <CardBody>
         <div>
           <a href={location.url} className="card-text__name link-no-style">{location.name}</a>
@@ -71,7 +77,7 @@ const LocationCard: React.FC<ILocationCard> = (props) => {
         </div>
         <ResidentsList residents={location.residents} margin="16px 0 46px 0" />
       </CardBody>
-    </Card>
+    </LocationCardStyled>
   );
 };
 
