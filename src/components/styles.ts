@@ -11,6 +11,7 @@ export const Card = styled.div`
   overflow: hidden;
   margin: 12px;
   color: ${({ theme }) => theme.colors.text};
+  text-align: left;
 
   .card-image {
     width: 100%;

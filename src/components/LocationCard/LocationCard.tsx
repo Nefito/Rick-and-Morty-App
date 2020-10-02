@@ -9,6 +9,7 @@ import { Card, CardBody, CardBodyElement } from '../styles';
 const LocationCardStyled = styled(Card)`
   min-height: 456px;
   min-width: 400px;
+  text-align: center;
 `;
 
 interface ILocationCard {
