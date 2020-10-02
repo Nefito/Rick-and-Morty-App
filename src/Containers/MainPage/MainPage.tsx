@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
+import { Redirect, Route, Switch } from 'react-router-dom';
 
+import { Navbar } from 'components';
 import { CharactersPage, LocationsPage  } from 'containers';
 import { 
   HandleGetCharactersAction, 
@@ -30,8 +32,12 @@ const Main: React.FC<IMain> = (props) => {
   return (
     
    <div>
-      <CharactersPage characters={characters} />
-      <LocationsPage locations={locations} />
+      <Navbar />
+      <Switch>
+        <Route path="/characters" component={() => <CharactersPage characters={characters} />} />
+        <Route path="/locations" component={() => <LocationsPage locations={locations} /> }/>
+        <Redirect to="/characters" />
+      </Switch>
    </div>
   );
 };
