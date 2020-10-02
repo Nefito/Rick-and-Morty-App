@@ -1,9 +1,9 @@
 import React from 'react';
 
+import { Button, Modal } from 'components';
 import { ILocation } from 'store';
 import { styled } from 'theme';
 
-import { Button } from '../Button';
 import { Card, CardBody, CardBodyElement } from '../styles';
 
 const LocationCardStyled = styled(Card)`
@@ -43,7 +43,7 @@ const ResidentsList: React.FC<IResidentsList> = (props) => {
   const residentsCropped = props.residents.slice(0, 6).map(resident => {
     return (
       <li key={resident}>
-        <a href={resident} className="link-no-style" >{resident}</a>
+        <Modal resident={resident} />
       </li>
     );
   });

@@ -50,6 +50,9 @@ export const CardBody = styled.div`
   .link-no-style {
     text-decoration: none;
     color: ${({ theme }) => theme.colors.text};
+    border: none;
+    background: none;
+    
     :hover {
       color: ${({ theme }) => theme.colors.secondary};
     }

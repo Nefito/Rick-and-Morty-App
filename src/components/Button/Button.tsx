@@ -30,7 +30,7 @@ const StyledButton = styled.button`
 
 const Button = (props: any) => {
   return (
-    <StyledButton>{props.btnText}</StyledButton>
+    <StyledButton onClick={props.onClick} >{props.btnText}</StyledButton>
   );
 };
 
