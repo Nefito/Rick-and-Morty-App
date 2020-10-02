@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import { CharacterCardList, LocationCardList } from 'components';
+import { CharactersPage, LocationsPage  } from 'containers';
 import { 
   HandleGetCharactersAction, 
   HandleGetLocationsAction, 
@@ -8,8 +8,6 @@ import {
   IEpisodesInitialState, 
   ILocationsInitialState 
 } from 'store';
-
-import { CharactersPage } from '../CharactersPage';
 
 interface IMain {
   characters: ICharactersInitialState;
@@ -25,17 +23,15 @@ const Main: React.FC<IMain> = (props) => {
     props.handleGetCharactersAction();
     props.handleGetLocationsAction();
   }, []);
-  console.log(props);
-  
-  const characters = props.characters.characters.results;
 
+  const characters = props.characters.characters.results;
   const locations = props.locations.locations.results;
   
   return (
     
    <div>
       <CharactersPage characters={characters} />
-      <LocationCardList locations={locations} />
+      <LocationsPage locations={locations} />
    </div>
   );
 };
