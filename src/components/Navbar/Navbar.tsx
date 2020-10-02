@@ -28,15 +28,15 @@ const Nav = styled.ul`
 const Navbar: React.FC = () => {
   return (
     <Nav>
-      <Link to={'/characters'} className="nav-item">
-        <a className="nav-item__link" href="/"> Characters </a>
-      </Link>
-      <Link to={'/locations'} className="nav-item">
-        <a className="nav-item__link" href="/"> Locations </a>
-      </Link>
-      <Link to={'/episodes'} className="nav-item">
-        <a className="nav-item__link" href="/"> Episodes </a>
-      </Link>
+      <li className="nav-item">
+        <Link to={'/characters'} className="nav-item__link" href="/"> Characters </Link>
+      </li>
+      <li className="nav-item">
+        <Link to={'/locations'} className="nav-item__link" href="/"> Locations </Link>
+      </li>
+      <li className="nav-item">
+        <Link to={'/episodes'} className="nav-item__link" href="/"> Episodes </Link>
+      </li>
     </Nav>
   );
 };
