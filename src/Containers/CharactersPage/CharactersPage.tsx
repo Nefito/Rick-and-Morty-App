@@ -19,6 +19,6 @@ const CharactersPage: React.FC<ICharactersPage> = (props) => {
       <CharacterCardList characters={characters} />
     </Container>
   );
-}
+};
 
 export default CharactersPage;
