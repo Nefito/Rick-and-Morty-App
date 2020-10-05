@@ -9,7 +9,7 @@ import ApiClientService from 'services/ApiClient';
 ReactModal.setAppElement('#root');
 
 interface IModal {
-  resident: string;
+  residentUrl: string;
 }
 
 const StyledModal = styled(ReactModal)`
@@ -29,16 +29,18 @@ const Modal: React.FC<IModal> = (props) => {
 
   const toggleModal = () => setIsModalOpen(!isModalOpen);
 
-  const { resident } = props;
+  const { residentUrl } = props;
 
-  const api = new ApiClientService(resident);
+  const api = new ApiClientService(residentUrl);
   const getResident = api.get('/'); 
 
-  const { data, status } = useQuery(resident, () => getResident);
+  const { data, status } = useQuery(residentUrl, () => getResident);
+
+  const residentName = status === 'loading' ? 'Loading...' : status === 'error' ? 'error' : data.name;
 
   return (
     <>
-      <button onClick={toggleModal} className="link-no-style">{resident}</button>
+      <button onClick={toggleModal} className="link-no-style">{residentName}</button>
       <StyledModal isOpen={isModalOpen} onRequestClose={toggleModal} >
         <div className="modal-content">
           { status === 'loading' ? <p>Loading...</p> :

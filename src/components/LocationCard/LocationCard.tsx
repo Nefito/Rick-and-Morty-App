@@ -44,7 +44,7 @@ const ResidentsList: React.FC<IResidentsList> = (props) => {
   const residentsCropped = props.residents.slice(0, 6).map(resident => {
     return (
       <li key={resident}>
-        <Modal resident={resident} />
+        <Modal residentUrl={resident} />
       </li>
     );
   });
