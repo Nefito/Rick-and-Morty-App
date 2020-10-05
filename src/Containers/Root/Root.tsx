@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
 import { Navbar } from 'components';
-import { CharactersPage, LocationsPage  } from 'containers';
+import { CharactersPage, LocationPage, LocationsPage } from 'containers';
 import { 
   HandleGetCharactersAction, 
   HandleGetLocationsAction, 
@@ -21,21 +21,23 @@ interface IMain {
 
 const Main: React.FC<IMain> = (props) => {
 
-  useEffect(() => {
-    props.handleGetCharactersAction();
-    props.handleGetLocationsAction();
-  }, []);
+  const { handleGetCharactersAction, handleGetLocationsAction, characters, locations } = props;
 
-  const characters = props.characters.characters.results;
-  const locations = props.locations.locations.results;
+  useEffect(() => {
+    handleGetCharactersAction();
+    handleGetLocationsAction();
+  }, []);
   
   return (
     
    <div>
       <Navbar />
       <Switch>
-        <Route path="/characters" component={() => <CharactersPage characters={characters} />} />
-        <Route path="/locations" component={() => <LocationsPage locations={locations} /> }/>
+        <Route path="/characters" component={() => <CharactersPage characters={characters.characters.results} />} />
+        <Route exact={true} path="/locations" component={() => 
+          <LocationsPage locations={locations.locations.results} /> }/>
+        <Route path="/locations/:locationId" component={() => 
+          <LocationPage locations={locations.locations.results} /> } />
         <Redirect to="/characters" />
       </Switch>
    </div>
