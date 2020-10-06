@@ -4,7 +4,7 @@ import { IErrorResponse } from '../types';
 import { IGetEpisodesResponse } from './types';
 
 export enum EpisodesActionTypeKeys { 
-  GET_EPISODES = 'episodes/ADD_EPISODES',
+  GET_EPISODES = 'episodes/GET_EPISODES',
   GET_EPISODES_FULFILLED = 'episodes/GET_EPISODES_FULFILLED',
   GET_EPISODES_REJECTED = 'episodes/GET_EPISODES_REJECTED',
 }

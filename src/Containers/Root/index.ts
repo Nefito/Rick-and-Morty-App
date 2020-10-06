@@ -4,7 +4,8 @@ import { bindActionCreators } from 'redux';
 import { 
          charactersSelector, 
          episodesSelector, 
-         handleGetCharactersAction, 
+         handleGetCharactersAction,
+         handleGetEpisodesAction, 
          handleGetLocationsAction, 
          IStoreState, 
          locationsSelector
@@ -21,7 +22,8 @@ export const mapStateToProps = (state: IStoreState) => {
 };
 
 export const mapDispatchToProps = (dispatch: any) => bindActionCreators({ 
-  handleGetCharactersAction, 
+  handleGetCharactersAction,
+  handleGetEpisodesAction, 
   handleGetLocationsAction 
 }, dispatch);
 

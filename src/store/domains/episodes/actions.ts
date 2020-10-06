@@ -1,10 +1,7 @@
-import  { EpisodesActionTypeKeys, IGetEpisodesActionType } from './actionTypes';
-import * as api from './api';
+import { IThunk } from 'types';
 
-// export const episodesFailed = (errMess: string): IAction => ({
-//   type: EpisodesActionTypeKeys.EPISODES_FAILED,
-//   payload: errMess
-// });
+import { EpisodesActionTypeKeys, IGetEpisodesActionType } from './actionTypes';
+import * as api from './api';
 
 type GetEpisodesAction = () =>  IGetEpisodesActionType;
 
@@ -13,15 +10,8 @@ export const getEpisodesAction: GetEpisodesAction = () => ({
   payload: api.getEpisodes()
 });
 
-// export const fetchEpisodes = () => (dispatch: DispatchAction) => {
-//   dispatch(episodesLoading());
+export type HandleGetEpisodesAction = () => IThunk<void>;
 
-//   return apiClientService.get('episode')
-//     .then(response =>  response,
-//     error => {
-//       const errMess = new Error(error.message);
-//       throw errMess;
-//     })
-//     .then(episodes => dispatch(addEpisodes(episodes)))
-//     .catch(error => dispatch(episodesFailed(error.message)));
-// };
+export const handleGetEpisodesAction: HandleGetEpisodesAction = () => (dispatch, getState) => {
+  dispatch(getEpisodesAction());
+};

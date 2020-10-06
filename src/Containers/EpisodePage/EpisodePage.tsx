@@ -3,10 +3,10 @@ import React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom'; 
 
 import { Character } from 'components';
-import { ILocation } from 'store';
+import { IEpisode } from 'store';
 import { styled } from 'theme';
 
-const Location = styled.div`
+const Episode = styled.div`
   width: 100%;
   height: 100%;
   text-align: center;
@@ -16,13 +16,13 @@ const Location = styled.div`
   padding: 20px;
   margin: 10px 0;
 
-  .location-text__name {
+  .episode-text__name {
     font-size: 40px;
     margin-top: 20px;
     margin-bottom: 50px;
   }
 
-  .location-resident {
+  .episode-character {
     display: inline;
     position: relative;
 
@@ -36,7 +36,7 @@ const Location = styled.div`
     }
   }
 
-  .location-resident__img {
+  .episode-character__img {
     width: 150px;
     border-radius: 8px;
     border: 2px solid ${({ theme }) => theme.colors.text};
@@ -70,15 +70,15 @@ const Location = styled.div`
     }
   }
 `;
-const LocationInfoStyle = styled.div`
-   
 
-  .location-text__secondary {
+const EpisodeInfoStyle = styled.div`
+  
+  .episode-text__secondary {
     font-size: 20px;
     color: ${({ theme }) => theme.colors.textSecondary};
   }
 
-  .location-text__info {
+  .episode-text__info {
     font-size: 26px;
     margin-bottom: 30px;
   }
@@ -86,66 +86,66 @@ const LocationInfoStyle = styled.div`
 `;
 
 interface IRouteInfo  {
-  locationId: string;
+  episodeId: string;
 }
 
-interface ILocationPage extends RouteComponentProps<IRouteInfo> {
-  locations: ILocation[];
+interface IEpisodePage extends RouteComponentProps<IRouteInfo> {
+  episodes: IEpisode[];
   history: any;
   location: any;
   match: any;
 }
 
-interface ILocationInfo {
+interface IEpisodeInfo {
   text: string;
   info: string;
 }
 
-const LocationInfo: React.FC<ILocationInfo> = ({ text, info }) => {
+const EpisodeInfo: React.FC<IEpisodeInfo> = ({ text, info }) => {
   return (
-    <LocationInfoStyle>
-      <span className="location-text__secondary" >{text}</span>
-      <h2 className="location-text__info">{info}</h2>
-    </LocationInfoStyle>
+    <EpisodeInfoStyle>
+      <span className="episode-text__secondary" >{text}</span>
+      <h2 className="episode-text__info">{info}</h2>
+    </EpisodeInfoStyle>
   );
 };
 
-const LocationPage: React.FC<ILocationPage> = (props) => {
+const EpisodePage: React.FC<IEpisodePage> = (props) => {
 
-  const { locations, match } = props;
+  const { episodes, match } = props;
 
-  const { locationId } = match.params;
+  const { episodeId } = match.params;
 
-  const location = locations.find(loc => loc.id === Number(locationId));
+  const episode = episodes.find(ep => ep.id === Number(episodeId));
 
-  const residents = location ? location.residents.map(resident => {
+  const characters = episode ? episode.characters.map(character => {
     return (
-      <li className="list-item" key={resident}>
-        <Character url={resident} divClass="location-resident" imgClass="location-resident__img" />
+      <li className="list-item" key={character}>
+        <Character url={character} divClass="location-resident" imgClass="location-resident__img" />
       </li>
     );
   }) : null;
 
-  if (!location) {
+  if (!episode) {
     return (
-      <h1>No location found</h1>
+      <h1>No episode found</h1>
     );
   }
   return (
-    <Location>
+    <Episode>
       <div>
-        <h1 className="location-text__name">{location.name}</h1>
+        <h1 className="location-text__name">{episode.name}</h1>
       </div>
-      <LocationInfo text="Type: " info={location.type} />
-      <LocationInfo text="Dimension: " info={location.dimension} />
+      <EpisodeInfo text="Episode: " info={episode.episode} />
+      <EpisodeInfo text="Air Date: " info={episode.air_date} />
       <div>
-        <span className="location-text__secondary" >Residents: </span>
+        <span className="location-text__secondary" >Characters: </span>
         <ul className="list-no-style location-text__info">
-          {residents}
+          {characters}
         </ul>
       </div>
-    </Location>
+    </Episode>
   );
 };
 
-export default withRouter(LocationPage);
+export default withRouter(EpisodePage);

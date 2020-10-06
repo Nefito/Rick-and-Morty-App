@@ -17,8 +17,12 @@ const locationsReducer = (state = locationsInitialState, action: LocationsAction
       return { ...state, isLoading: false, errMess: null, locations: action.payload };
     
     case LocationsActionTypeKeys.GET_LOCATIONS_REJECTED:
-      // tslint:disable-next-line: max-line-length
-      return { ...state, isLoading: false, errMess: `Error:${action.payload.statusCode} ${action.payload.text}`, locations: { info: null, results: [] } };
+      return { 
+        ...state, 
+        isLoading: false, 
+        errMess: `Error:${action.payload.statusCode} ${action.payload.text}`, 
+        locations: { info: null, results: [] } 
+      };
       
     default:
       return state;
