@@ -12,6 +12,7 @@ export const Card = styled.div`
   margin: 12px;
   color: ${({ theme }) => theme.colors.text};
   text-align: left;
+  max-width: 620px;
 
   .card-image {
     width: 100%;
@@ -19,7 +20,7 @@ export const Card = styled.div`
 
   ${media.tablet`
     display: inline-flex;
-    word-break: break-all;
+    word-break: break-word;
   `};
 
   ${media.tabletS`
@@ -35,6 +36,7 @@ export const CardBody = styled.div`
   flex-direction: column;
   position: relative;
   width: 100%;
+  height: 95%;
 
   .card-text__name {
     font-weight: bold;
