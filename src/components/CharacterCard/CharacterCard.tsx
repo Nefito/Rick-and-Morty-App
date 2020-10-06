@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { ICharacter, LifeStatusConst } from 'store';
 import { styled, theme as mainTheme } from 'theme';
@@ -37,10 +38,15 @@ const CardBodyText: React.FC<ICardBodyText> = (props) => {
 
   const { url, name, margin, spanText } = props;
 
+  let link = url.split(/(\/)/g);
+  link = link.slice(Math.max(link.length - 4, 0));
+  link[1] += 's';
+  const linkStr = link.join('');
+  
   return (
     <CardBodyElement margin={margin}>
       <span className="card-text__gray">{spanText} </span>
-      <a href={url} className="link-no-style">{name}</a>
+      <Link to={linkStr} className="link-no-style" href="/"> {name} </Link>
     </CardBodyElement>
   );
 };
