@@ -14,7 +14,7 @@ interface IModal {
 
 const StyledModal = styled(ReactModal)`
   position: relative;
-
+  
   .modal-content {
     position: absolute;
     top: 50%;

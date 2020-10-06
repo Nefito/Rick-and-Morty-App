@@ -53,6 +53,7 @@ export const CardBody = styled.div`
     color: ${({ theme }) => theme.colors.text};
     border: none;
     background: none;
+    font-size: 20px;
     
     :hover {
       color: ${({ theme }) => theme.colors.secondary};

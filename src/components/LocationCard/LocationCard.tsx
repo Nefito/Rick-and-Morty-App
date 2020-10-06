@@ -1,10 +1,38 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-import { Button, Modal } from 'components';
+import { Modal } from 'components';
 import { ILocation } from 'store';
 import { styled } from 'theme';
 
 import { Card, CardBody, CardBodyElement } from '../styles';
+
+const LinkButton = styled(Link)`
+  border: 2px solid ${({ theme }) => theme.colors.secondary};
+  background: ${({ theme }) => theme.colors.text};
+  color: ${({ theme }) => theme.colors.secondary};
+  border-radius: 8px; 
+  cursor: pointer;
+  padding: 12px 8px;
+  font-size: 16px;
+  font-weight: bold;
+  max-width: 90px;
+  display: flex;
+  position: absolute;
+  right: 20px;
+  bottom: 0;
+  margin-bottom: 10px;
+  
+  &:hover {
+    color: ${({ theme }) => theme.colors.text};
+    background: ${({ theme }) => theme.colors.secondary};
+    border-color: ${({ theme }) => theme.colors.text};
+  }
+
+  &:focus {
+    outline: none;
+  }
+`;
 
 const LocationCardStyled = styled(Card)`
   min-height: 456px;
@@ -57,7 +85,6 @@ const ResidentsList: React.FC<IResidentsList> = (props) => {
           {residentsCropped.length > 0 ? residentsCropped : <span>No Residents</span>}
         </ul>
       </CardBodyElement>
-      <Button btnText="More..." />
     </>
   );
 };
@@ -77,6 +104,7 @@ const LocationCard: React.FC<ILocationCard> = (props) => {
           <CardBodyText name={location.dimension} margin="32px 0 10px 0" spanText="Dimension:" />
         </div>
         <ResidentsList residents={location.residents} margin="16px 0 46px 0" />
+        <LinkButton to={`/locations/${location.id}/`} href="/">More...</LinkButton>
       </CardBody>
     </LocationCardStyled>
   );
