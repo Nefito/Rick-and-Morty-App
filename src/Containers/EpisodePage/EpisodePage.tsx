@@ -121,7 +121,7 @@ const EpisodePage: React.FC<IEpisodePage> = (props) => {
   const characters = episode ? episode.characters.map(character => {
     return (
       <li className="list-item" key={character}>
-        <Character url={character} divClass="location-resident" imgClass="location-resident__img" />
+        <Character url={character} divClass="episode-character" imgClass="episode-character__img" />
       </li>
     );
   }) : null;
@@ -134,13 +134,13 @@ const EpisodePage: React.FC<IEpisodePage> = (props) => {
   return (
     <Episode>
       <div>
-        <h1 className="location-text__name">{episode.name}</h1>
+        <h1 className="episode-text__name">{episode.name}</h1>
       </div>
       <EpisodeInfo text="Episode: " info={episode.episode} />
       <EpisodeInfo text="Air Date: " info={episode.air_date} />
       <div>
-        <span className="location-text__secondary" >Characters: </span>
-        <ul className="list-no-style location-text__info">
+        <span className="episode-text__secondary" >Characters: </span>
+        <ul className="list-no-style episode-text__info">
           {characters}
         </ul>
       </div>
