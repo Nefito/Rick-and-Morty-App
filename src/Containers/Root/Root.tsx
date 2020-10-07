@@ -22,7 +22,6 @@ interface IMain {
 }
 
 const Main: React.FC<IMain> = (props) => {
-
   const { 
     handleGetCharactersAction, 
     handleGetEpisodesAction, 
@@ -32,22 +31,24 @@ const Main: React.FC<IMain> = (props) => {
     episodes 
   } = props;
 
-  useEffect(() => {
+  useEffect(() => { // use effect on separate containers
     handleGetCharactersAction();
     handleGetEpisodesAction();
     handleGetLocationsAction();
   }, []);
   
   return (
-    
    <div>
       <Navbar />
       <Switch>
         <Route path="/characters" component={() => <CharactersPage characters={characters.characters.results} />} />
+        {/* <Route path="/characters" component={CharactersPage} /> <-- example */} 
         <Route exact={true} path="/locations" component={() => 
           <LocationsPage locations={locations.locations.results} /> }/>
         <Route path="/locations/:locationId" component={() => 
           <LocationPage locations={locations.locations.results} /> } />
+        {/* <Route exact={true} path="/episodes" component={() => 
+          <EpisodesPage episodes={episodes.episodes.results} /> }/> */}
         <Route path="/episodes/:episodeId" component={() => 
           <EpisodePage episodes={episodes.episodes.results} /> } />
         <Redirect to="/characters" />

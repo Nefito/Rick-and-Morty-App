@@ -4,19 +4,14 @@ export const OuterCard = styled.div`
   display: inline-flex;
 `;
 
-export const Card = styled.div`
+export const CardWrapper = styled.div`
   background: ${({ theme }) => theme.colors.main};
   display: inline-flex;
   border-radius: 8px;
   overflow: hidden;
   margin: 12px;
   color: ${({ theme }) => theme.colors.text};
-  text-align: left;
   max-width: 620px;
-
-  .card-image {
-    width: 100%;
-  }
 
   ${media.tablet`
     display: inline-flex;
@@ -30,7 +25,7 @@ export const Card = styled.div`
   `};
 `;
 
-export const CardBody = styled.div`
+export const CardBodyWrapper = styled.div`
   padding: 16px;
   display: flex;
   flex-direction: column;
@@ -38,16 +33,11 @@ export const CardBody = styled.div`
   width: 100%;
   height: 95%;
 
-  .card-text__name {
+  .card-text-name {
     font-weight: bold;
     font-size: 32px;
     text-align: center;
     margin: 0;
-  }
-
-  .card-text__species-status {
-    font-size: 24px;
-    margin: 0 0 18px 8px;
   }
 
   .link-no-style {
@@ -61,20 +51,7 @@ export const CardBody = styled.div`
       color: ${({ theme }) => theme.colors.secondary};
     }
   }
-
   .list-no-style {
     list-style-type:none;
-  }
-`;
-
-export const CardBodyElement = styled.div<{ margin: string }>`
-  display: flex;
-  flex-direction: column;
-  margin: ${({ margin }) => margin};
-  font-size: 20px;
-
-  .card-text__gray {
-    font-size: 16px;
-    color: ${({ theme }) => theme.colors.textSecondary};
   }
 `;

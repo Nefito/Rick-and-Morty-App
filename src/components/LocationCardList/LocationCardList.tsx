@@ -2,8 +2,7 @@ import React from 'react';
 
 import { ILocation } from 'store';
 
-import { LocationCard } from '../LocationCard';
-import { OuterCard } from '../styles';
+import { LocationCard, OuterCard } from '../Card';
 
 interface ILocationCardList {
   locations: ILocation[];

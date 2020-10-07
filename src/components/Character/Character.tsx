@@ -30,7 +30,7 @@ export const Character: React.FC<ICharacter> = ({ url, divClass, imgClass }) => 
   return (
     <div className={divClass}>
       <img className={imgClass} src={data.image} alt={data.name} />
-      <Modal residentUrl={data.url} />
+      <Modal url={data.url} />
    </div>
   );
 };

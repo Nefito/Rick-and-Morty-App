@@ -3,13 +3,13 @@ import ReactModal from 'react-modal';
 import { useQuery } from 'react-query';
 import styled from 'styled-components';
 
-import { CharacterCard } from 'components';
 import ApiClientService from 'services/ApiClient';
+import { CharacterCard } from '../Card';
 
 ReactModal.setAppElement('#root');
 
 interface IModal {
-  residentUrl: string;
+  url: string;
 }
 
 const StyledModal = styled(ReactModal)`
@@ -29,12 +29,12 @@ const Modal: React.FC<IModal> = (props) => {
 
   const toggleModal = () => setIsModalOpen(!isModalOpen);
 
-  const { residentUrl } = props;
+  const { url } = props;
 
-  const api = new ApiClientService(residentUrl);
+  const api = new ApiClientService(url);
   const getResident = api.get('/'); 
 
-  const { data, status } = useQuery(residentUrl, () => getResident);
+  const { data, status } = useQuery(url, () => getResident);
 
   const residentName = status === 'loading' ? 'Loading...' : status === 'error' ? 'error' : data.name;
 
