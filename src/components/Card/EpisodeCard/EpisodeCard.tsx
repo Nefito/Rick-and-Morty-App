@@ -9,15 +9,7 @@ import { CardBodyWrapper } from '../Card/Card';
 import { CardBodyItem } from '../CardBodyItem/CardBodyItem';
 import { CharacterList, EpisodeLocationCardWrapper } from '../EpisodeLocationCard/EpisodeLocationCard';
 
-const EpisodeCardStyled = styled(EpisodeLocationCardWrapper)`
-  min-height: 456px;
-  min-width: 400px;
-  text-align: center;
-
-  .episode-characters {
-    margin: 16px 0 46px 0
-  }
-`;
+const EpisodeCardStyled = styled(EpisodeLocationCardWrapper)``;
 
 interface IEpisodeCard {
   episode: IEpisode;
@@ -33,10 +25,10 @@ export const EpisodeCard: React.FC<IEpisodeCard> = (props) => {
           <a href={episode.url} className="card-text-name link-no-style">{episode.name}</a>
         </div>
         <div>
-          <CardBodyItem value={episode.episode} title="Episode:" />
-          <CardBodyItem value={episode.air_date} title="Air Date:" />
+          <CardBodyItem value={episode.episode} title="Episode:" className="card-info" />
+          <CardBodyItem value={episode.air_date} title="Air Date:" className="card-info" />
         </div>
-        <CharacterList characters={episode.characters} className="episode-characters" title="Characters" />
+        <CharacterList characters={episode.characters} className="card-characters" title="Characters" />
         <LinkButton to={`/episodes/${episode.id}/`} href="/">More...</LinkButton>
       </CardBodyWrapper>
     </EpisodeCardStyled>

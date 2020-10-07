@@ -8,14 +8,7 @@ import { CardBodyWrapper } from '../Card/Card';
 import { CardBodyItem } from '../CardBodyItem/CardBodyItem';
 import { CharacterList, EpisodeLocationCardWrapper } from '../EpisodeLocationCard/EpisodeLocationCard';
 
-const LocationCardWrapper = styled(EpisodeLocationCardWrapper)`
-  .location-info {
-    margin: 32px 0 10px 0;
-  }
-  .location-residents {
-    margin: 16px 0 46px 0;
-  }
-`;
+const LocationCardWrapper = styled(EpisodeLocationCardWrapper)``;
 
 interface ILocationCard {
   location: ILocation;
@@ -31,10 +24,10 @@ export const LocationCard: React.FC<ILocationCard> = (props) => {
           <a href={location.url} className="card-text-name link-no-style">{location.name}</a>
         </div>
         <div>
-          <CardBodyItem value={location.type} className="location-info" title="Type:" />
-          <CardBodyItem value={location.dimension} className="location-info" title="Dimension:" />
+          <CardBodyItem value={location.type} className="card-info" title="Type:" />
+          <CardBodyItem value={location.dimension} className="card-info" title="Dimension:" />
         </div>
-        <CharacterList characters={location.residents} className="location-residents" title="Residents" />
+        <CharacterList characters={location.residents} className="card-characters" title="Residents" />
         <LinkButton to={`/locations/${location.id}/`} href="/">More...</LinkButton>
       </CardBodyWrapper>
     </LocationCardWrapper>

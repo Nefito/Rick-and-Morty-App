@@ -10,6 +10,13 @@ export const EpisodeLocationCardWrapper = styled(CardWrapper)`
   min-height: 456px;
   min-width: 400px;
   text-align: center;
+
+  .card-info {
+    margin: 32px 0 10px 0;
+  }
+  .card-characters {
+    margin: 16px 0 46px 0;
+  }
 `;
 
 interface ICharactersList {
