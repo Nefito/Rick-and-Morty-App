@@ -1,4 +1,5 @@
 export { CharacterCardList } from './CharacterCardList';
+export { EpisodeCardList } from './EpisodeCardList/EpisodeCardList';
 export { LocationCardList } from './LocationCardList';
 export { Navbar } from './Navbar';
 export { Character } from './Character/Character';

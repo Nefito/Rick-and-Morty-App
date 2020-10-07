@@ -9,7 +9,6 @@ interface ILocationCardList {
 }
 
 const LocationCardList: React.FC<ILocationCardList> = (props) => {
-
   const { locations } = props;
 
   const cardList = locations.map(location => {
