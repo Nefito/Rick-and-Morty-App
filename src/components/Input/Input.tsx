@@ -16,10 +16,8 @@ const StyledInput = styled.input`
   }
 `;
 
-const Input = (props: any) => {
+export const Input = (props: any) => {
   return (
     <StyledInput placeholder={ props.placeholder }/>
   );
 };
-
-export default Input;

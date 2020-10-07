@@ -25,7 +25,7 @@ const Nav = styled.ul`
   }
 `;
 
-const Navbar: React.FC = () => {
+export const Navbar: React.FC = () => {
   return (
     <Nav>
       <li className="nav-item">
@@ -40,5 +40,3 @@ const Navbar: React.FC = () => {
     </Nav>
   );
 };
-
-export default Navbar;

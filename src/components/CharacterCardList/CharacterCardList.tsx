@@ -8,7 +8,7 @@ interface ICharacterCardList {
   characters: ICharacter[];
 }
 
-const CharacterCardList: React.FC<ICharacterCardList> = (props) => {
+export const CharacterCardList: React.FC<ICharacterCardList> = (props) => {
 
   const { characters } = props;
 
@@ -27,4 +27,3 @@ const CharacterCardList: React.FC<ICharacterCardList> = (props) => {
   );
 };
 
-export default CharacterCardList;

@@ -8,7 +8,7 @@ interface ILocationCardList {
   locations: ILocation[];
 }
 
-const LocationCardList: React.FC<ILocationCardList> = (props) => {
+export const LocationCardList: React.FC<ILocationCardList> = (props) => {
   const { locations } = props;
 
   const cardList = locations.map(location => {
@@ -25,5 +25,3 @@ const LocationCardList: React.FC<ILocationCardList> = (props) => {
     </div>
   );
 };
-
-export default LocationCardList;

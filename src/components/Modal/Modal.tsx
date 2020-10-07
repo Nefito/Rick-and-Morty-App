@@ -23,7 +23,7 @@ const StyledModal = styled(ReactModal)`
   }
 `;
 
-const Modal: React.FC<IModal> = (props) => {
+export const Modal: React.FC<IModal> = (props) => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -51,5 +51,3 @@ const Modal: React.FC<IModal> = (props) => {
     </>
   );
 };
-
-export default Modal;
