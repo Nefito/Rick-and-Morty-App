@@ -12,12 +12,10 @@ const Main: React.FC<IMain> = (props) => {
       <Navbar />
       <Switch>
         <Route path="/characters" component={CharactersPage} />
-        <Route path="/locations" component={LocationsPage} />
+        <Route exact={true} path="/locations" component={LocationsPage} />
         <Route path="/episodes" component={EpisodesPage} />
-        {/* <Route path="/locations/:locationId" component={() => 
-          <LocationPage locations={locations.locations.results} /> } /> */}
-        {/* <Route path="/episodes/:episodeId" component={() => 
-          <EpisodePage episodes={episodes.episodes.results} /> } /> */}
+        <Route path="/locations/:locationId" component={LocationPage} />
+        <Route path="/episodes/:episodeId" component={EpisodePage} />
         <Redirect to="/characters" />
       </Switch>
    </div>

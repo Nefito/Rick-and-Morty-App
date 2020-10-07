@@ -1,8 +1,9 @@
 import React from 'react';
-
+import { useQuery } from 'react-query';
 import { RouteComponentProps, withRouter } from 'react-router-dom'; 
 
 import { Character } from 'components';
+import { apiClientService } from 'services';
 import { ILocation } from 'store';
 import { styled } from 'theme';
 
@@ -16,7 +17,7 @@ const Location = styled.div`
   padding: 20px;
   margin: 10px 0;
 
-  .location-text__name {
+  .location-text-name {
     font-size: 40px;
     margin-top: 20px;
     margin-bottom: 50px;
@@ -36,7 +37,7 @@ const Location = styled.div`
     }
   }
 
-  .location-resident__img {
+  .location-resident-img {
     width: 150px;
     border-radius: 8px;
     border: 2px solid ${({ theme }) => theme.colors.text};
@@ -90,7 +91,6 @@ interface IRouteInfo  {
 }
 
 interface ILocationPage extends RouteComponentProps<IRouteInfo> {
-  locations: ILocation[];
   history: any;
   location: any;
   match: any;
@@ -104,33 +104,42 @@ interface ILocationInfo {
 const LocationInfo: React.FC<ILocationInfo> = ({ text, info }) => {
   return (
     <LocationInfoStyle>
-      <span className="location-text__secondary" >{text}</span>
-      <h2 className="location-text__info">{info}</h2>
+      <span className="location-text-secondary" >{text}</span>
+      <h2 className="location-text-info">{info}</h2>
     </LocationInfoStyle>
   );
 };
 
 const LocationPage: React.FC<ILocationPage> = (props) => {
-
-  const { locations, match } = props;
+  const { match } = props;
 
   const { locationId } = match.params;
 
-  const location = locations.find(loc => loc.id === Number(locationId));
+  const getLocation = apiClientService.get(`location/${locationId}`);
+
+  const { data, status } = useQuery(`https://rickandmortyapi.com/api/location/${locationId}` , () => getLocation);
+
+  if (status === 'loading') {
+    return (
+      <h1>Loading...</h1>
+    );
+  }
+  if (status === 'error') {
+    return (
+      <h1>Some error has ocurred</h1>
+    );
+  }
+
+  const location: ILocation = data;
 
   const residents = location ? location.residents.map(resident => {
     return (
       <li className="list-item" key={resident}>
-        <Character url={resident} divClass="location-resident" imgClass="location-resident__img" />
+        <Character url={resident} divClass="location-resident" imgClass="location-resident-img" />
       </li>
     );
   }) : null;
 
-  if (!location) {
-    return (
-      <h1>No location found</h1>
-    );
-  }
   return (
     <Location>
       <div>
