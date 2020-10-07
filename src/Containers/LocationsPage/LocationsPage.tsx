@@ -1,24 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { LocationCardList } from 'components';
-import { ILocation } from 'store';
+import { HandleGetLocationsAction, ILocationsInitialState  } from 'store';
 import { styled } from 'theme';
-
-interface ILocationsPage {
-  locations: ILocation[];
-}
 
 const Container = styled.div`
   text-align: center;
 `;
 
-const CharactersPage: React.FC<ILocationsPage> = (props) => {
-  const { locations } = props;
+interface ILocationsPage {
+  locations: ILocationsInitialState;
+  handleGetLocationsAction: HandleGetLocationsAction;
+}
+
+const LocationsPage: React.FC<ILocationsPage> = (props) => {
+  const { locations, handleGetLocationsAction } = props;
+
+  useEffect(() => { 
+    handleGetLocationsAction();
+  }, []);
+
   return (
     <Container>
-      <LocationCardList locations={locations} />
+      <LocationCardList locations={locations.locations.results} />
     </Container>
   );
 };
 
-export default CharactersPage;
+export default LocationsPage;
