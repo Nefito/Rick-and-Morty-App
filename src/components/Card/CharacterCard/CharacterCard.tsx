@@ -22,7 +22,7 @@ const getStatusColor = (status: LifeStatusConst) => {
   }
 };
 
-const urlToLink = (url: string, str: string) => {
+const urlToLink = (url: string, str: string) => { //move to commonUtil
   let link = url.split(/(\/)/g);
 
   link = link.slice(Math.max(link.length - 4, 0));

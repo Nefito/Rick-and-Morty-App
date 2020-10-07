@@ -13,7 +13,6 @@ const Location = styled.div`
   text-align: center;
   background: ${({ theme }) => theme.colors.main};
   color: ${({ theme }) => theme.colors.text};
-
   padding: 20px;
   margin: 10px 0;
 
@@ -23,30 +22,6 @@ const Location = styled.div`
     margin-bottom: 50px;
   }
 
-  .location-resident {
-    display: inline;
-    position: relative;
-
-    padding: 0;
-    margin: 10px;
-
-    transition: all .2s ease-in-out;
-
-    &:hover {
-      transform: scale(1.05);
-    }
-  }
-
-  .location-resident-img {
-    width: 150px;
-    border-radius: 8px;
-    border: 2px solid ${({ theme }) => theme.colors.text};
-
-    &:hover {
-      border-color: ${({ theme }) => theme.colors.secondary}
-    }
-  }
-
   .list-no-style {
     list-style-type: none;
     margin-top: 20px;
@@ -54,26 +29,8 @@ const Location = styled.div`
   .list-item {
     display: inline;
   }
-
-  .link-no-style {
-    position: absolute;
-    display: block;
-    bottom: 100%;
-    left: 2px;
-    right: 2px;
-    background: ${({ theme }) => theme.colors.main};
-    color: ${({ theme }) => theme.colors.text};
-    width: 97%;
-    border: none;
-    
-    :hover {
-      color: ${({ theme }) => theme.colors.secondary};
-    }
-  }
 `;
 const LocationInfoStyle = styled.div`
-   
-
   .location-text__secondary {
     font-size: 20px;
     color: ${({ theme }) => theme.colors.textSecondary};
@@ -83,7 +40,6 @@ const LocationInfoStyle = styled.div`
     font-size: 26px;
     margin-bottom: 30px;
   }
-
 `;
 
 interface IRouteInfo  {
@@ -117,7 +73,7 @@ const LocationPage: React.FC<ILocationPage> = (props) => {
 
   const getLocation = apiClientService.get(`location/${locationId}`);
 
-  const { data, status } = useQuery(`https://rickandmortyapi.com/api/location/${locationId}` , () => getLocation);
+  const { data, status } = useQuery(`https://rickandmortyapi.com/api/location/${locationId}`, () => getLocation);
 
   if (status === 'loading') {
     return (

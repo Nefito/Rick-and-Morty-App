@@ -8,10 +8,6 @@ import { CharacterCard } from '../Card';
 
 ReactModal.setAppElement('#root');
 
-interface IModal {
-  url: string;
-}
-
 const StyledModal = styled(ReactModal)`
   position: relative;
   
@@ -23,6 +19,10 @@ const StyledModal = styled(ReactModal)`
   }
 `;
 
+interface IModal {
+  url: string;
+}
+
 export const Modal: React.FC<IModal> = (props) => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -32,15 +32,15 @@ export const Modal: React.FC<IModal> = (props) => {
   const { url } = props;
 
   const api = new ApiClientService(url);
-  const getResident = api.get('/'); 
+  const getCharacter = api.get('/'); 
 
-  const { data, status } = useQuery(url, () => getResident);
+  const { data, status } = useQuery(url, () => getCharacter);
 
-  const residentName = status === 'loading' ? 'Loading...' : status === 'error' ? 'error' : data.name;
+  const characterName = status === 'loading' ? 'Loading...' : status === 'error' ? 'error' : data.name;
 
   return (
     <>
-      <button onClick={toggleModal} className="link-no-style">{residentName}</button>
+      <button onClick={toggleModal} className="link-no-style">{characterName}</button>
       <StyledModal isOpen={isModalOpen} onRequestClose={toggleModal} >
         <div className="modal-content">
           { status === 'loading' ? <p>Loading...</p> :

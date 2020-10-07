@@ -23,52 +23,12 @@ const Episode = styled.div`
     margin-bottom: 50px;
   }
 
-  .episode-character {
-    display: inline;
-    position: relative;
-
-    padding: 0;
-    margin: 10px;
-
-    transition: all .2s ease-in-out;
-
-    &:hover {
-      transform: scale(1.05);
-    }
-  }
-
-  .episode-character-img {
-    width: 150px;
-    border-radius: 8px;
-    border: 2px solid ${({ theme }) => theme.colors.text};
-
-    &:hover {
-      border-color: ${({ theme }) => theme.colors.secondary}
-    }
-  }
-
   .list-no-style {
     list-style-type: none;
     margin-top: 20px;
   }
   .list-item {
     display: inline;
-  }
-
-  .link-no-style {
-    position: absolute;
-    display: block;
-    bottom: 100%;
-    left: 2px;
-    right: 2px;
-    background: ${({ theme }) => theme.colors.main};
-    color: ${({ theme }) => theme.colors.text};
-    width: 97%;
-    border: none;
-    
-    :hover {
-      color: ${({ theme }) => theme.colors.secondary};
-    }
   }
 `;
 
@@ -83,7 +43,6 @@ const EpisodeInfoStyle = styled.div`
     font-size: 26px;
     margin-bottom: 30px;
   }
-
 `;
 
 interface IRouteInfo  {
