@@ -13,7 +13,7 @@ const Main: React.FC<IMain> = (props) => {
       <Switch>
         <Route path="/characters" component={CharactersPage} />
         <Route exact={true} path="/locations" component={LocationsPage} />
-        <Route path="/episodes" component={EpisodesPage} />
+        <Route exact={true} path="/episodes" component={EpisodesPage} />
         <Route path="/locations/:locationId" component={LocationPage} />
         <Route path="/episodes/:episodeId" component={EpisodePage} />
         <Redirect to="/characters" />

@@ -1,8 +1,9 @@
 import React from 'react';
-
+import { useQuery } from 'react-query';
 import { RouteComponentProps, withRouter } from 'react-router-dom'; 
 
 import { Character } from 'components';
+import { apiClientService } from 'services';
 import { IEpisode } from 'store';
 import { styled } from 'theme';
 
@@ -90,7 +91,6 @@ interface IRouteInfo  {
 }
 
 interface IEpisodePage extends RouteComponentProps<IRouteInfo> {
-  episodes: IEpisode[];
   history: any;
   location: any;
   match: any;
@@ -104,18 +104,33 @@ interface IEpisodeInfo {
 const EpisodeInfo: React.FC<IEpisodeInfo> = ({ text, info }) => {
   return (
     <EpisodeInfoStyle>
-      <span className="episode-text__secondary" >{text}</span>
-      <h2 className="episode-text__info">{info}</h2>
+      <span className="episode-text-secondary" >{text}</span>
+      <h2 className="episode-text-info">{info}</h2>
     </EpisodeInfoStyle>
   );
 };
 
 const EpisodePage: React.FC<IEpisodePage> = (props) => {
-  const { episodes, match } = props;
+  const { match } = props;
 
   const { episodeId } = match.params;
 
-  const episode = episodes.find(ep => ep.id === Number(episodeId));
+  const getEpisode = apiClientService.get(`episode/${episodeId}`);
+
+  const { data, status } = useQuery(`https://rickandmortyapi.com/api/episode/${episodeId}` , () => getEpisode);
+
+  if (status === 'loading') {
+    return (
+      <h1>Loading...</h1>
+    );
+  }
+  if (status === 'error') {
+    return (
+      <h1>Some error has ocurred</h1>
+    );
+  }
+
+  const episode: IEpisode = data; 
 
   const characters = episode ? episode.characters.map(character => {
     return (
@@ -125,11 +140,6 @@ const EpisodePage: React.FC<IEpisodePage> = (props) => {
     );
   }) : null;
 
-  if (!episode) {
-    return (
-      <h1>No episode found</h1>
-    );
-  }
   return (
     <Episode>
       <div>
