@@ -1,22 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { CharacterCardList } from 'components';
-import { ICharacter } from 'store';
+import { HandleGetCharactersAction, ICharactersInitialState, } from 'store';
 import { styled } from 'theme';
-
-interface ICharactersPage {
-  characters: ICharacter[];
-}
 
 const Container = styled.div`
   text-align: center;
 `;
 
+interface ICharactersPage {
+  characters: ICharactersInitialState;
+  handleGetCharactersAction: HandleGetCharactersAction;
+}
+
 const CharactersPage: React.FC<ICharactersPage> = (props) => {
-  const { characters } = props;
+  const { characters, handleGetCharactersAction } = props;
+
+  useEffect(() => {
+    handleGetCharactersAction();
+  }, []);
+
   return (
     <Container>
-      <CharacterCardList characters={characters} />
+      <CharacterCardList characters={characters.characters.results} />
     </Container>
   );
 };

@@ -16,7 +16,7 @@ const Episode = styled.div`
   padding: 20px;
   margin: 10px 0;
 
-  .episode-text__name {
+  .episode-text-name {
     font-size: 40px;
     margin-top: 20px;
     margin-bottom: 50px;
@@ -36,7 +36,7 @@ const Episode = styled.div`
     }
   }
 
-  .episode-character__img {
+  .episode-character-img {
     width: 150px;
     border-radius: 8px;
     border: 2px solid ${({ theme }) => theme.colors.text};
@@ -73,12 +73,12 @@ const Episode = styled.div`
 
 const EpisodeInfoStyle = styled.div`
   
-  .episode-text__secondary {
+  .episode-text-secondary {
     font-size: 20px;
     color: ${({ theme }) => theme.colors.textSecondary};
   }
 
-  .episode-text__info {
+  .episode-text-info {
     font-size: 26px;
     margin-bottom: 30px;
   }
@@ -111,7 +111,6 @@ const EpisodeInfo: React.FC<IEpisodeInfo> = ({ text, info }) => {
 };
 
 const EpisodePage: React.FC<IEpisodePage> = (props) => {
-
   const { episodes, match } = props;
 
   const { episodeId } = match.params;
@@ -121,7 +120,7 @@ const EpisodePage: React.FC<IEpisodePage> = (props) => {
   const characters = episode ? episode.characters.map(character => {
     return (
       <li className="list-item" key={character}>
-        <Character url={character} divClass="episode-character" imgClass="episode-character__img" />
+        <Character url={character} divClass="episode-character" imgClass="episode-character-img" />
       </li>
     );
   }) : null;
@@ -134,13 +133,13 @@ const EpisodePage: React.FC<IEpisodePage> = (props) => {
   return (
     <Episode>
       <div>
-        <h1 className="episode-text__name">{episode.name}</h1>
+        <h1 className="episode-text-name">{episode.name}</h1>
       </div>
       <EpisodeInfo text="Episode: " info={episode.episode} />
       <EpisodeInfo text="Air Date: " info={episode.air_date} />
       <div>
-        <span className="episode-text__secondary" >Characters: </span>
-        <ul className="list-no-style episode-text__info">
+        <span className="episode-text-secondary" >Characters: </span>
+        <ul className="list-no-style episode-text-info">
           {characters}
         </ul>
       </div>

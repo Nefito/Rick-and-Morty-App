@@ -4,35 +4,28 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import { Navbar } from 'components';
 import { CharactersPage, EpisodePage, LocationPage, LocationsPage } from 'containers';
 import { 
-  HandleGetCharactersAction,
   HandleGetEpisodesAction, 
   HandleGetLocationsAction, 
-  ICharactersInitialState, 
   IEpisodesInitialState, 
   ILocationsInitialState 
 } from 'store';
 
 interface IMain {
-  characters: ICharactersInitialState;
   episodes: IEpisodesInitialState;
   locations: ILocationsInitialState;
-  handleGetCharactersAction: HandleGetCharactersAction;
   handleGetEpisodesAction: HandleGetEpisodesAction;
   handleGetLocationsAction: HandleGetLocationsAction;
 }
 
 const Main: React.FC<IMain> = (props) => {
-  const { 
-    handleGetCharactersAction, 
+  const {  
     handleGetEpisodesAction, 
     handleGetLocationsAction,
-    characters, 
     locations, 
     episodes 
   } = props;
 
   useEffect(() => { // use effect on separate containers
-    handleGetCharactersAction();
     handleGetEpisodesAction();
     handleGetLocationsAction();
   }, []);
@@ -41,8 +34,7 @@ const Main: React.FC<IMain> = (props) => {
    <div>
       <Navbar />
       <Switch>
-        <Route path="/characters" component={() => <CharactersPage characters={characters.characters.results} />} />
-        {/* <Route path="/characters" component={CharactersPage} /> <-- example */} 
+        <Route path="/characters" component={CharactersPage} />
         <Route exact={true} path="/locations" component={() => 
           <LocationsPage locations={locations.locations.results} /> }/>
         <Route path="/locations/:locationId" component={() => 
