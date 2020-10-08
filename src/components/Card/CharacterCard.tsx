@@ -2,6 +2,7 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 
+import { urlToLink } from 'commonUtil';
 import { apiClientService } from 'services';
 import { ICharacter, IEpisode, LifeStatusConst } from 'store';
 import { styled, theme as mainTheme } from 'theme';
@@ -20,16 +21,6 @@ const getStatusColor = (status: LifeStatusConst) => {
     default:
       return mainTheme.colors.textSecondary;
   }
-};
-
-const urlToLink = (url: string, str: string) => { //move to commonUtil
-  let link = url.split(/(\/)/g);
-
-  link = link.slice(Math.max(link.length - 4, 0));
-  link[1] += str;
-  const linkStr = link.join('');
-
-  return linkStr;
 };
 
 const CharacterCardWrapper = styled(CardWrapper)`

@@ -1,0 +1,1 @@
+export { urlToLink } from './urlToLink';
