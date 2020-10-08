@@ -4,7 +4,7 @@ import { useQuery } from 'react-query';
 import styled from 'styled-components';
 
 import ApiClientService from 'services/ApiClient';
-import { CharacterCard } from '../Card';
+import { CharacterCard } from './Card';
 
 ReactModal.setAppElement('#root');
 

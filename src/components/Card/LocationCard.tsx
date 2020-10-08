@@ -4,9 +4,9 @@ import { LinkButton } from 'components';
 import { ILocation } from 'store';
 import { styled } from 'theme';
 
-import { CardBodyWrapper } from '../Card/Card'; 
-import { CardBodyItem } from '../CardBodyItem/CardBodyItem';
-import { CharacterList, EpisodeLocationCardWrapper } from '../EpisodeLocationCard/EpisodeLocationCard';
+import { CardBodyWrapper } from './Card'; 
+import { CardBodyItem } from './CardBodyItem';
+import { CharacterList, EpisodeLocationCardWrapper } from './EpisodeLocationCard';
 
 const LocationCardWrapper = styled(EpisodeLocationCardWrapper)``;
 

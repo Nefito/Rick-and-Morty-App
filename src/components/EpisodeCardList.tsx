@@ -2,7 +2,7 @@ import React from 'react';
 
 import { IEpisode } from 'store';
 
-import { EpisodeCard, OuterCard } from '../Card';
+import { EpisodeCard, OuterCard } from './Card';
 
 interface IEpisodeCardList {
   episodes: IEpisode[];

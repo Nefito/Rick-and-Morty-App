@@ -3,8 +3,8 @@ import React from 'react';
 import { Modal } from 'components';
 import { styled } from 'theme';
 
-import { CardWrapper } from '../Card/Card';
-import { CardBodyItemWrapper } from '../CardBodyItem/CardBodyItem';
+import { CardWrapper } from './Card';
+import { CardBodyItemWrapper } from './CardBodyItem';
 
 export const EpisodeLocationCardWrapper = styled(CardWrapper)`
   min-height: 456px;

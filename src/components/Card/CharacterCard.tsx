@@ -6,8 +6,8 @@ import { apiClientService } from 'services';
 import { ICharacter, IEpisode, LifeStatusConst } from 'store';
 import { styled, theme as mainTheme } from 'theme';
 
-import { CardBodyWrapper, CardWrapper } from '../Card/Card';
-import { CardBodyItemWrapper } from '../CardBodyItem/CardBodyItem';
+import { CardBodyWrapper, CardWrapper } from './Card';
+import { CardBodyItemWrapper } from './CardBodyItem';
 
 const getStatusColor = (status: LifeStatusConst) => {
   switch (status) {

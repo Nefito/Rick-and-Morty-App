@@ -2,7 +2,7 @@ import React from 'react';
 
 import { ICharacter } from 'store';
 
-import { CharacterCard, OuterCard } from '../Card';
+import { CharacterCard, OuterCard } from './Card';
 
 interface ICharacterCardList {
   characters: ICharacter[];
