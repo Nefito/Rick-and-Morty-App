@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 
-import { EpisodeCardList } from 'components';
 import { HandleGetEpisodesAction, IEpisodesInitialState  } from 'store';
 import { styled } from 'theme';
+
+import { EpisodeCardList } from './EpisodeCardList';
 
 const Container = styled.div`
   text-align: center;

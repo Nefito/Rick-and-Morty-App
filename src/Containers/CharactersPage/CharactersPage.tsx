@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 
-import { CharacterCardList } from 'components';
 import { HandleGetCharactersAction, ICharactersInitialState, } from 'store';
 import { styled } from 'theme';
+
+import { CharacterCardList } from './CharacterCardList';
 
 const Container = styled.div`
   text-align: center;

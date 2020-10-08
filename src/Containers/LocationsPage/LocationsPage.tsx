@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 
-import { LocationCardList } from 'components';
 import { HandleGetLocationsAction, ILocationsInitialState  } from 'store';
 import { styled } from 'theme';
+
+import { LocationCardList } from './LocationCardList';
 
 const Container = styled.div`
   text-align: center;
