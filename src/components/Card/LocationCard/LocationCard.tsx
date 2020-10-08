@@ -20,13 +20,9 @@ export const LocationCard: React.FC<ILocationCard> = (props) => {
   return (
     <LocationCardWrapper>
       <CardBodyWrapper>
-        <div>
-          <a href={location.url} className="card-text-name link-no-style">{location.name}</a>
-        </div>
-        <div>
-          <CardBodyItem value={location.type} className="card-info" title="Type:" />
-          <CardBodyItem value={location.dimension} className="card-info" title="Dimension:" />
-        </div>
+        <a href={location.url} className="card-text-name link-no-style">{location.name}</a>
+        <CardBodyItem value={location.type} className="card-info" title="Type:" />
+        <CardBodyItem value={location.dimension} className="card-info" title="Dimension:" />
         <CharacterList characters={location.residents} className="card-characters" title="Residents" />
         <LinkButton to={`/locations/${location.id}/`} href="/">More...</LinkButton>
       </CardBodyWrapper>
