@@ -7,11 +7,8 @@ import { styled } from 'theme';
 import ApiClientService from 'services/ApiClient';
 
 const CharacterWrapper = styled.div`
-
   display: inline;
   position: relative;
-  padding: 0;
-  margin: 10px;
 
   .character-img {
     width: 150px;
@@ -42,12 +39,10 @@ const CharacterWrapper = styled.div`
 
 interface ICharacter {
   url: string;
-  divClass: string;
-  imgClass: string;
+  className?: string;
 }
 
-export const Character: React.FC<ICharacter> = ({ url, divClass, imgClass }) => {
-
+export const Character: React.FC<ICharacter> = ({ url, className }) => {
   const getCharacter = new ApiClientService(url).get('/');
 
   const { data, status } = useQuery(url, () => getCharacter);
@@ -59,7 +54,7 @@ export const Character: React.FC<ICharacter> = ({ url, divClass, imgClass }) => 
     return <span>Some error has ocurred</span>;
   }
   return (
-    <CharacterWrapper>
+    <CharacterWrapper className={className}>
       <img className="character-img" src={data.image} alt={data.name} />
       <Modal url={data.url} />
    </CharacterWrapper>

@@ -30,6 +30,11 @@ const Episode = styled.div`
   .list-item {
     display: inline;
   }
+  
+  .episode-character {
+    padding: 0;
+    margin: 10px;
+  }
 `;
 
 const EpisodeInfoStyle = styled.div`
@@ -94,7 +99,7 @@ const EpisodePage: React.FC<IEpisodePage> = (props) => {
   const characters = episode ? episode.characters.map(character => {
     return (
       <li className="list-item" key={character}>
-        <Character url={character} divClass="episode-character" imgClass="episode-character-img" />
+        <Character url={character} className="episode-character"/>
       </li>
     );
   }) : null;

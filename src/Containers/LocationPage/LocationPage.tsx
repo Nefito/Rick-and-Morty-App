@@ -29,14 +29,18 @@ const Location = styled.div`
   .list-item {
     display: inline;
   }
+  .location-character {
+    padding: 0;
+    margin: 10px;
+  }
 `;
 const LocationInfoStyle = styled.div`
-  .location-text__secondary {
+  .location-text-secondary {
     font-size: 20px;
     color: ${({ theme }) => theme.colors.textSecondary};
   }
 
-  .location-text__info {
+  .location-text-info {
     font-size: 26px;
     margin-bottom: 30px;
   }
@@ -91,7 +95,7 @@ const LocationPage: React.FC<ILocationPage> = (props) => {
   const residents = location ? location.residents.map(resident => {
     return (
       <li className="list-item" key={resident}>
-        <Character url={resident} divClass="location-resident" imgClass="location-resident-img" />
+        <Character url={resident} className="location-character" />
       </li>
     );
   }) : null;
