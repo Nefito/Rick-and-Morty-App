@@ -2,6 +2,7 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import { RouteComponentProps, withRouter } from 'react-router-dom'; 
 
+import { errorOrLoadingStatusMsg } from 'commonUtil';
 import { Character } from 'components';
 import { apiClientService } from 'services';
 import { ILocation } from 'store';
@@ -79,42 +80,33 @@ const LocationPage: React.FC<ILocationPage> = (props) => {
 
   const { data, status } = useQuery(`https://rickandmortyapi.com/api/location/${locationId}`, () => getLocation);
 
-  if (status === 'loading') {
+  if (!errorOrLoadingStatusMsg(status)) {
+    const location: ILocation = data;
+    const residents = location ? location.residents.map(resident => {
+      return (
+        <li className="list-item" key={resident}>
+          <Character url={resident} className="location-character" />
+        </li>
+      );
+    }) : null;
+
     return (
-      <h1>Loading...</h1>
+      <Location>
+        <div>
+          <h1 className="location-text__name">{location.name}</h1>
+        </div>
+        <LocationInfo text="Type: " info={location.type} />
+        <LocationInfo text="Dimension: " info={location.dimension} />
+        <div>
+          <span className="location-text__secondary" >Residents: </span>
+          <ul className="list-no-style location-text__info">
+            {residents}
+          </ul>
+        </div>
+      </Location>
     );
   }
-  if (status === 'error') {
-    return (
-      <h1>Some error has ocurred</h1>
-    );
-  }
-
-  const location: ILocation = data;
-
-  const residents = location ? location.residents.map(resident => {
-    return (
-      <li className="list-item" key={resident}>
-        <Character url={resident} className="location-character" />
-      </li>
-    );
-  }) : null;
-
-  return (
-    <Location>
-      <div>
-        <h1 className="location-text__name">{location.name}</h1>
-      </div>
-      <LocationInfo text="Type: " info={location.type} />
-      <LocationInfo text="Dimension: " info={location.dimension} />
-      <div>
-        <span className="location-text__secondary" >Residents: </span>
-        <ul className="list-no-style location-text__info">
-          {residents}
-        </ul>
-      </div>
-    </Location>
-  );
+  return (errorOrLoadingStatusMsg(status));
 };
 
 export default withRouter(LocationPage);

@@ -26,4 +26,3 @@ export const CharacterCardList: React.FC<ICharacterCardList> = (props) => {
     </div>
   );
 };
-

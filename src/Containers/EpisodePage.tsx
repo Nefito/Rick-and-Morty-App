@@ -2,6 +2,7 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import { RouteComponentProps, withRouter } from 'react-router-dom'; 
 
+import { errorOrLoadingStatusMsg } from 'commonUtil';
 import { Character } from 'components';
 import { apiClientService } from 'services';
 import { IEpisode } from 'store';
@@ -83,42 +84,33 @@ const EpisodePage: React.FC<IEpisodePage> = (props) => {
 
   const { data, status } = useQuery(`https://rickandmortyapi.com/api/episode/${episodeId}` , () => getEpisode);
 
-  if (status === 'loading') {
+  if (!errorOrLoadingStatusMsg(status)) {
+    const episode: IEpisode = data; 
+    const characters = episode ? episode.characters.map(character => {
+      return (
+        <li className="list-item" key={character}>
+          <Character url={character} className="episode-character"/>
+        </li>
+      );
+    }) : null;
+
     return (
-      <h1>Loading...</h1>
+      <Episode>
+        <div>
+          <h1 className="episode-text-name">{episode.name}</h1>
+        </div>
+        <EpisodeInfo text="Episode: " info={episode.episode} />
+        <EpisodeInfo text="Air Date: " info={episode.air_date} />
+        <div>
+          <span className="episode-text-secondary" >Characters: </span>
+          <ul className="list-no-style episode-text-info">
+            {characters}
+          </ul>
+        </div>
+      </Episode>
     );
   }
-  if (status === 'error') {
-    return (
-      <h1>Some error has ocurred</h1>
-    );
-  }
-
-  const episode: IEpisode = data; 
-
-  const characters = episode ? episode.characters.map(character => {
-    return (
-      <li className="list-item" key={character}>
-        <Character url={character} className="episode-character"/>
-      </li>
-    );
-  }) : null;
-
-  return (
-    <Episode>
-      <div>
-        <h1 className="episode-text-name">{episode.name}</h1>
-      </div>
-      <EpisodeInfo text="Episode: " info={episode.episode} />
-      <EpisodeInfo text="Air Date: " info={episode.air_date} />
-      <div>
-        <span className="episode-text-secondary" >Characters: </span>
-        <ul className="list-no-style episode-text-info">
-          {characters}
-        </ul>
-      </div>
-    </Episode>
-  );
+  return errorOrLoadingStatusMsg(status); 
 };
 
 export default withRouter(EpisodePage);

@@ -1,6 +1,7 @@
 import React from 'react';
-import { useQuery } from 'react-query';
+import { QueryStatus, useQuery } from 'react-query';
 
+import { errorOrLoadingStatusMsg } from 'commonUtil';
 import { Modal } from 'components';
 import { styled } from 'theme';
 
@@ -47,16 +48,13 @@ export const Character: React.FC<ICharacter> = ({ url, className }) => {
 
   const { data, status } = useQuery(url, () => getCharacter);
 
-  if (status === 'loading') {
-    return <span>Loading...</span>;
+  if (!errorOrLoadingStatusMsg(status)) {
+    return (
+      <CharacterWrapper className={className}>
+        <img className="character-img" src={data.image} alt={data.name} />
+        <Modal url={data.url} />
+    </CharacterWrapper>
+    );
   }
-  if (status === 'error') {
-    return <span>Some error has ocurred</span>;
-  }
-  return (
-    <CharacterWrapper className={className}>
-      <img className="character-img" src={data.image} alt={data.name} />
-      <Modal url={data.url} />
-   </CharacterWrapper>
-  );
+  return errorOrLoadingStatusMsg(status);
 };
