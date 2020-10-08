@@ -1,6 +1,7 @@
-export { CharacterCardList } from './CharacterCardList';
-export { EpisodeCardList } from './EpisodeCardList';
-export { LocationCardList } from './LocationCardList';
+export { OuterCard } from './Card/Card';
+export { EpisodeCard } from './Card/EpisodeCard';
+export { CharacterCard } from './Card/CharacterCard';
+export { LocationCard } from './Card/LocationCard';
 export { Navbar } from './Navbar';
 export { Character } from './Character';
 export { Modal } from './Modal';
