@@ -1,30 +1,57 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { HandleGetEpisodesAction, IEpisodesInitialState  } from 'store';
+import { iconsProps, itemRender, Pages, Search } from 'components';
+import { IEpisodesInitialState, IGetEpisodesActionType  } from 'store';
 import { styled } from 'theme';
 
 import { EpisodeCardList } from './EpisodeCardList';
 
-const Container = styled.div`
+const EpisodeCardListWrapper = styled.div`
   text-align: center;
 `;
 
 interface IEpisodesPage {
   episodes: IEpisodesInitialState;
-  handleGetEpisodesAction: HandleGetEpisodesAction;
+  getEpisodes: (page?: number) => IGetEpisodesActionType;
 }
 
-const EpisodesPage: React.FC<IEpisodesPage> = (props) => {
-  const { episodes, handleGetEpisodesAction } = props;
+const itemsPerPage = 20;
 
-  useEffect(() => { 
-    handleGetEpisodesAction();
+const EpisodesPage: React.FC<IEpisodesPage> = (props) => {
+  const { episodes, getEpisodes } = props;
+
+  const [searchItem, setSearchItem] = useState('');
+
+  const handlePageChange = (page: number) => {
+    getEpisodes(page);
+  };
+
+  const episodesResults = episodes.episodes.results;
+  const totalItems = episodes.episodes.info ? episodes.episodes.info.count : itemsPerPage;
+
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchItem(event.target.value);
+  };
+
+  useEffect(() => {
+    getEpisodes();
   }, []);
 
   return (
-    <Container>
-      <EpisodeCardList episodes={episodes.episodes.results} />
-    </Container>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <Search placeholder="Search episodes.." handleChange={handleSearch} /> 
+      <EpisodeCardListWrapper>
+        <EpisodeCardList episodes={episodesResults.filter(episode => 
+          episode.name.toLowerCase().includes(searchItem.toLowerCase()))} />
+      </EpisodeCardListWrapper>
+      <Pages 
+        itemRender={itemRender}
+        total={totalItems}
+        pageSize={itemsPerPage}
+        onChange={handlePageChange} 
+        {...iconsProps}
+    />
+    </div>
   );
 };
 

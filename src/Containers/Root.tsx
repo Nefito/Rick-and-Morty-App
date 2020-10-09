@@ -6,7 +6,7 @@ import { CharactersPage, EpisodePage, EpisodesPage, LocationPage, LocationsPage 
 
 interface IMain {}
 
-const Main: React.FC<IMain> = (props) => {  
+const Root: React.FC<IMain> = (props) => {  
   return (
    <div>
       <Navbar />
@@ -22,4 +22,4 @@ const Main: React.FC<IMain> = (props) => {
   );
 };
 
-export default Main;
+export default Root;

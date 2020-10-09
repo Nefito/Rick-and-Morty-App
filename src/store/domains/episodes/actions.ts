@@ -1,17 +1,9 @@
-import { IThunk } from 'types';
-
 import { EpisodesActionTypeKeys, IGetEpisodesActionType } from './actionTypes';
 import * as api from './api';
 
-type GetEpisodesAction = () =>  IGetEpisodesActionType;
+export type GetEpisodesAction = (page?: number) =>  IGetEpisodesActionType;
 
-export const getEpisodesAction: GetEpisodesAction = () => ({
+export const getEpisodesAction: GetEpisodesAction = (page?: number) => ({
   type: EpisodesActionTypeKeys.GET_EPISODES,
-  payload: api.getEpisodes()
+  payload: api.getEpisodes(page)
 });
-
-export type HandleGetEpisodesAction = () => IThunk<void>;
-
-export const handleGetEpisodesAction: HandleGetEpisodesAction = () => (dispatch, getState) => {
-  dispatch(getEpisodesAction());
-};

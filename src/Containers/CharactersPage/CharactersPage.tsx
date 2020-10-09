@@ -20,14 +20,13 @@ const itemsPerPage = 20;
 const CharactersPage: React.FC<ICharactersPage> = (props) => {
   const { characters, getCharacters } = props;
 
-  const charactersResults = characters.characters.results;
-
   const [searchItem, setSearchItem] = useState('');
 
   const handlePageChange = (page: number) => {
     getCharacters(page);
   };
-
+  
+  const charactersResults = characters.characters.results;
   const totalItems = characters.characters.info ? characters.characters.info.count : itemsPerPage;
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {

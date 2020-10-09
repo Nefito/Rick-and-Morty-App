@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
-import { Root } from 'containers';
+import Root from 'containers';
 import store from 'store';
 import { GlobalStyle, theme, ThemeProvider } from 'theme';
 

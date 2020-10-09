@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { Dispatch } from 'redux';
 
-import { episodesSelector, handleGetEpisodesAction, IStoreState } from 'store';
+import { episodesSelector, getEpisodesAction, IStoreState } from 'store';
 
 import EpisodesPage from './EpisodesPage';
 
@@ -11,6 +11,10 @@ export const mapStateToProps = (state: IStoreState) => {
   };
 };
 
-export const mapDispatchToProps = (dispatch: any) => bindActionCreators({ handleGetEpisodesAction }, dispatch);
+export const mapDispatchToProps = (dispatch: Dispatch) => {
+  return {
+    getEpisodes: (page?: number) => dispatch(getEpisodesAction(page))
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(EpisodesPage);
