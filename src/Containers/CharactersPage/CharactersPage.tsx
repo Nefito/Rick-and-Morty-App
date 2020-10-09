@@ -5,7 +5,6 @@ import { HandleGetCharactersPageExactAction, ICharactersInitialState, } from 'st
 import { styled } from 'theme';
 
 import { CharacterCardList } from './CharacterCardList';
-import { relative } from 'path';
 
 const CharacterCardListWrapper = styled.div`
   text-align: center;
