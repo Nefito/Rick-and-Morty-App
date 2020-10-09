@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 
 export const Input = styled.input`
@@ -11,6 +10,10 @@ export const Input = styled.input`
   padding: 6px 4px 0 4px;
 
   &:focus {
+    outline: none;
+    border-bottom-color: ${props => props.theme.colors.secondary};
+  }
+  &:hover {
     outline: none;
     border-bottom-color: ${props => props.theme.colors.secondary};
   }

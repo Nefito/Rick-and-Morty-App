@@ -1,5 +1,5 @@
 import React from 'react';
-import { QueryStatus, useQuery } from 'react-query';
+import { useQuery } from 'react-query';
 
 import { errorOrLoadingStatusMsg } from 'commonUtil';
 import { Modal } from 'components';

@@ -6,7 +6,8 @@ import { IGetCharactersResponse } from './types';
 export enum CharactersActionTypeKeys {
   GET_CHARACTERS = 'characters/GET_CHARACTERS',
   GET_CHARACTERS_FULFILLED = 'characters/GET_CHARACTERS_FULFILLED',
-  GET_CHARACTERS_REJECTED  = 'characters/GET_CHARACTERS_REJECTED'
+  GET_CHARACTERS_REJECTED  = 'characters/GET_CHARACTERS_REJECTED',
+  GET_CHARACTERS_PAGE_EXACT = 'characters/GET_CHARACTERS_PAGE_EXACT'
 }
 
 export interface IGetCharactersActionType extends 

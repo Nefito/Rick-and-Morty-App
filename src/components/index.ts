@@ -9,3 +9,4 @@ export { Button } from './Button';
 export { LinkButton } from './LinkButton';
 export { Input } from './Input';
 export { Search } from './Search';
+export  { Pages, iconsProps } from './Pagination';
