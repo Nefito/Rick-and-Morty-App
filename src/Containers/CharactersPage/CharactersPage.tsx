@@ -1,7 +1,7 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { Button, iconsProps, Pages, Search } from 'components';
-import { HandleGetCharactersPageExactAction, ICharactersInitialState, } from 'store';
+import { iconsProps, itemRender, Pages, Search } from 'components';
+import { ICharactersInitialState, IGetCharactersActionType, } from 'store';
 import { styled } from 'theme';
 
 import { CharacterCardList } from './CharacterCardList';
@@ -12,40 +12,30 @@ const CharacterCardListWrapper = styled.div`
 
 interface ICharactersPage {
   characters: ICharactersInitialState;
-  handleGetCharactersPageExactAction: HandleGetCharactersPageExactAction;
+  getCharacters: (page?: number) => IGetCharactersActionType;
 }
 
-const itemRender = (current: any, type: string, element: ReactNode | undefined) => {
-  if (type === 'prev') {
-    return <Button type="button">Prev</Button>;
-  }
-  if (type === 'next') {
-    return <Button type="button">Next</Button>;
-  }
-  return element;
-};
+const itemsPerPage = 20;
 
 const CharactersPage: React.FC<ICharactersPage> = (props) => {
-  const { characters, handleGetCharactersPageExactAction } = props;
+  const { characters, getCharacters } = props;
 
   const charactersResults = characters.characters.results;
 
   const [searchItem, setSearchItem] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
 
   const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-    handleGetCharactersPageExactAction(page.toString());
+    getCharacters(page);
   };
 
-  const totalItems = characters.characters.info ? characters.characters.info.count / 2 : 10;
+  const totalItems = characters.characters.info ? characters.characters.info.count : itemsPerPage;
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchItem(event.target.value);
   };
 
   useEffect(() => {
-    handleGetCharactersPageExactAction(currentPage.toString());
+    getCharacters();
   }, []);
 
   return (
@@ -57,7 +47,8 @@ const CharactersPage: React.FC<ICharactersPage> = (props) => {
       </CharacterCardListWrapper>
         <Pages
           itemRender={itemRender}
-          total={totalItems} 
+          total={totalItems}
+          pageSize={itemsPerPage}
           onChange={handlePageChange} 
           {...iconsProps}
         />

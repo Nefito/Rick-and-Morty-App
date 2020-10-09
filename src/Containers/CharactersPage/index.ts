@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { Dispatch } from 'redux';
 
-import { charactersSelector, handleGetCharactersAction, handleGetCharactersPageExactAction, IStoreState } from 'store';
+import { charactersSelector, getCharactersAction, IStoreState } from 'store';
 
 import CharactersPage from './CharactersPage';
 
@@ -11,9 +11,10 @@ export const mapStateToProps = (state: IStoreState) => {
   };
 };
 
-export const mapDispatchToProps = (dispatch: any) => bindActionCreators({ 
-  handleGetCharactersAction, 
-  handleGetCharactersPageExactAction 
-}, dispatch);
+export const mapDispatchToProps = (dispatch: Dispatch) => {
+  return {
+    getCharacters: (page?: number) => dispatch(getCharactersAction(page))
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(CharactersPage);

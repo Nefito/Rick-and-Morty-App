@@ -1,6 +1,7 @@
 import Pagination from 'rc-pagination';
 import React from 'react';
 
+import { Button } from 'components';
 import { styled } from 'theme';
 
 import { arrowPath, doublePath } from 'commonUtil/svgs';
@@ -84,3 +85,13 @@ const jumpNextIcon = () => getSvgIcon(doublePath, false, 'jump-next');
 const jumpPrevIcon = () => getSvgIcon(doublePath, true, 'jump-prev');
 
 export const iconsProps = { prevIcon, nextIcon, jumpPrevIcon, jumpNextIcon };
+
+export const itemRender = (current: any, type: string, element: React.ReactNode | undefined) => {
+  if (type === 'prev') {
+    return <Button type="button">Prev</Button>;
+  }
+  if (type === 'next') {
+    return <Button type="button">Next</Button>;
+  }
+  return element;
+};
