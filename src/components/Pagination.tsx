@@ -5,43 +5,9 @@ import { styled } from 'theme';
 
 import { arrowPath, doublePath } from 'commonUtil/svgs';
 
-const getSvgIcon = (path: any, reverse: any, type: any) => {
-  const paths = Array.isArray(path) ? path : [path];
-  const renderPaths = paths.map((p, i) => {
-    return <path key={i} d={p} />;
-  });
-  return (
-    <i
-      className={`custom-icon-${type}`}
-      style={{
-        fontSize: '16px',
-      }}
-    >
-      <svg
-        viewBox="0 0 1024 1024"
-        width="1em"
-        height="1em"
-        fill="currentColor"
-        style={{
-          verticalAlign: '-.125em',
-          transform: `rotate(${(reverse && 180) || 0}deg)`,
-        }}
-      >
-        {renderPaths}
-      </svg>
-    </i>
-  );
-};
-
-const nextIcon = getSvgIcon(arrowPath, false, 'next');
-const prevIcon = getSvgIcon(arrowPath, true, 'prev');
-const jumpNextIcon = () => getSvgIcon(doublePath, false, 'jump-next');
-const jumpPrevIcon = () => getSvgIcon(doublePath, true, 'jump-prev');
-
-export const iconsProps = { prevIcon, nextIcon, jumpPrevIcon, jumpNextIcon };
-
 export const Pages = styled(Pagination)`
   position: relative;
+  margin-top: auto;
   list-style-type: none;
   overflow: hidden;
   background-color: ${({ theme }) => theme.colors.main};
@@ -83,3 +49,38 @@ export const Pages = styled(Pagination)`
     }
   }
 `;
+
+const getSvgIcon = (path: any, reverse: any, type: any) => {
+  const paths = Array.isArray(path) ? path : [path];
+  const renderPaths = paths.map((p, i) => {
+    return <path key={i} d={p} />;
+  });
+  return (
+    <i
+      className={`custom-icon-${type}`}
+      style={{
+        fontSize: '16px',
+      }}
+    >
+      <svg
+        viewBox="0 0 1024 1024"
+        width="1em"
+        height="1em"
+        fill="currentColor"
+        style={{
+          verticalAlign: '-.125em',
+          transform: `rotate(${(reverse && 180) || 0}deg)`,
+        }}
+      >
+        {renderPaths}
+      </svg>
+    </i>
+  );
+};
+
+const nextIcon = getSvgIcon(arrowPath, false, 'next');
+const prevIcon = getSvgIcon(arrowPath, true, 'prev');
+const jumpNextIcon = () => getSvgIcon(doublePath, false, 'jump-next');
+const jumpPrevIcon = () => getSvgIcon(doublePath, true, 'jump-prev');
+
+export const iconsProps = { prevIcon, nextIcon, jumpPrevIcon, jumpNextIcon };

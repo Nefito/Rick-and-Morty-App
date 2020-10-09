@@ -5,6 +5,7 @@ import { HandleGetCharactersPageExactAction, ICharactersInitialState, } from 'st
 import { styled } from 'theme';
 
 import { CharacterCardList } from './CharacterCardList';
+import { relative } from 'path';
 
 const CharacterCardListWrapper = styled.div`
   text-align: center;
@@ -49,7 +50,7 @@ const CharactersPage: React.FC<ICharactersPage> = (props) => {
   }, []);
 
   return (
-    <>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <Search placeholder="Search characters.." handleChange={handleSearch} /> 
       <CharacterCardListWrapper>
         <CharacterCardList characters={charactersResults.filter(character => 
@@ -61,7 +62,7 @@ const CharactersPage: React.FC<ICharactersPage> = (props) => {
           onChange={handlePageChange} 
           {...iconsProps}
         />
-    </>
+    </div>
   );
 };
 
