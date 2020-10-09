@@ -1,30 +1,57 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { HandleGetLocationsAction, ILocationsInitialState  } from 'store';
+import { iconsProps, itemRender, Pages, Search } from 'components';
+import { IGetLocationsActionType, ILocationsInitialState  } from 'store';
 import { styled } from 'theme';
 
 import { LocationCardList } from './LocationCardList';
 
-const Container = styled.div`
+const LocationCardListWrapper = styled.div`
   text-align: center;
 `;
 
 interface ILocationsPage {
   locations: ILocationsInitialState;
-  handleGetLocationsAction: HandleGetLocationsAction;
+  getLocations: (page?: number) => IGetLocationsActionType;
 }
 
+const itemsPerPage = 20;
+
 const LocationsPage: React.FC<ILocationsPage> = (props) => {
-  const { locations, handleGetLocationsAction } = props;
+  const { locations, getLocations } = props;
+
+  const [searchItem, setSearchItem] = useState('');
+
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchItem(event.target.value);
+  };
+
+  const handlePageChange = (page: number) => {
+    getLocations(page);
+  };
 
   useEffect(() => { 
-    handleGetLocationsAction();
+    getLocations();
   }, []);
 
+  const locationsResults = locations.locations.results;
+  const totalItems = locations.locations.info ? locations.locations.info.count : itemsPerPage;
+
   return (
-    <Container>
-      <LocationCardList locations={locations.locations.results} />
-    </Container>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <Search placeholder="Search locations.." handleChange={handleSearch} /> 
+      <LocationCardListWrapper>
+        <LocationCardList locations={locationsResults.filter(location => 
+          location.name.toLowerCase().includes(searchItem.toLowerCase()))} />
+      </LocationCardListWrapper>
+      <Pages 
+        itemRender={itemRender}
+        total={totalItems}
+        pageSize={itemsPerPage}
+        onChange={handlePageChange} 
+        {...iconsProps}
+      />
+    </div>
   );
 };
 

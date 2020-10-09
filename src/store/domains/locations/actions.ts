@@ -1,17 +1,9 @@
-import { IThunk } from 'types';
-
 import { IGetLocationsActionType, LocationsActionTypeKeys } from './actionTypes';
 import * as api from './api';
 
-type GetLocationsAction = () =>  IGetLocationsActionType;
+type GetLocationsAction = (page?: number) =>  IGetLocationsActionType;
 
-export const getLocationsAction: GetLocationsAction = () => ({
+export const getLocationsAction: GetLocationsAction = (page?: number) => ({
   type: LocationsActionTypeKeys.GET_LOCATIONS,
-  payload: api.getLocations()
+  payload: api.getLocations(page)
 });
-
-export type HandleGetLocationsAction = () => IThunk<void>;
-
-export const handleGetLocationsAction: HandleGetLocationsAction = () => (dispatch, getState) => {
-  dispatch(getLocationsAction());
-};

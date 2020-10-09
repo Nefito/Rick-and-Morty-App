@@ -26,12 +26,12 @@ const EpisodesPage: React.FC<IEpisodesPage> = (props) => {
     getEpisodes(page);
   };
 
-  const episodesResults = episodes.episodes.results;
-  const totalItems = episodes.episodes.info ? episodes.episodes.info.count : itemsPerPage;
-
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchItem(event.target.value);
   };
+
+  const episodesResults = episodes.episodes.results;
+  const totalItems = episodes.episodes.info ? episodes.episodes.info.count : itemsPerPage;
 
   useEffect(() => {
     getEpisodes();
