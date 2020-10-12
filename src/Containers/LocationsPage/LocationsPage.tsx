@@ -26,7 +26,7 @@ const SearchWrapper = styled.div`
 
 interface ILocationsPage {
   locations: ILocationsInitialState;
-  getLocations: (page?: number) => IGetLocationsActionType;
+  getLocations: (page?: number, name?: string) => IGetLocationsActionType;
 }
 
 const itemsPerPage = 20;
@@ -35,13 +35,16 @@ const LocationsPage: React.FC<ILocationsPage> = (props) => {
   const { locations, getLocations } = props;
 
   const [searchItem, setSearchItem] = useState('');
+  const [currPage, setCurrPage] = useState(1);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchItem(event.target.value);
+    searchItem.length > 1 ? getLocations(currPage, event.target.value) : getLocations(currPage);
   };
 
   const handlePageChange = (page: number) => {
-    getLocations(page);
+    getLocations(page, searchItem);
+    setCurrPage(page);
   };
 
   useEffect(() => { 
@@ -57,8 +60,7 @@ const LocationsPage: React.FC<ILocationsPage> = (props) => {
         <Search className="search" placeholder="Search locations.." handleChange={handleSearch} /> 
       </SearchWrapper>
       <LocationCardListWrapper>
-        <LocationCardList locations={locationsResults.filter(location => 
-          location.name.toLowerCase().includes(searchItem.toLowerCase()))} />
+        <LocationCardList locations={locationsResults} />
       </LocationCardListWrapper>
       <Pages 
         itemRender={itemRender}
