@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from 'react';
 
-import { iconsProps, itemRender, Pages, PageWrapper, Search } from 'components';
+import { iconsProps, itemRender, Pages, Search } from 'components';
 import { IEpisodesInitialState, IGetEpisodesActionType  } from 'store';
 import { styled } from 'theme';
 
 import { EpisodeCardList } from './EpisodeCardList';
+
+const PageWrapper = styled.div`
+  min-height: 100vh; 
+  display: flex;
+  flex-direction: column;
+`;
 
 const EpisodeCardListWrapper = styled.div`
   text-align: center;
@@ -68,6 +74,7 @@ const EpisodesPage: React.FC<IEpisodesPage> = (props) => {
         pageSize={itemsPerPage}
         onChange={handlePageChange} 
         {...iconsProps}
+        current={currPage}
     />
     </PageWrapper>
   );

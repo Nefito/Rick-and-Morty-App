@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from 'react';
 
-import { iconsProps, itemRender, Pages, PageWrapper, Search } from 'components';
+import { iconsProps, itemRender, Pages, Search } from 'components';
 import { IGetLocationsActionType, ILocationsInitialState  } from 'store';
 import { styled } from 'theme';
 
 import { LocationCardList } from './LocationCardList';
+
+const PageWrapper = styled.div`
+  min-height: 100vh; 
+  display: flex;
+  flex-direction: column;
+`;
 
 const LocationCardListWrapper = styled.div`
   text-align: center;
@@ -68,6 +74,7 @@ const LocationsPage: React.FC<ILocationsPage> = (props) => {
         pageSize={itemsPerPage}
         onChange={handlePageChange} 
         {...iconsProps}
+        current={currPage}
       />
     </PageWrapper>
   );
