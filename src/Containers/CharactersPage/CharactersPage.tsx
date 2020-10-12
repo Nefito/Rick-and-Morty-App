@@ -11,9 +11,26 @@ const PageWrapper = styled.div`
   display: flex;
   flex-direction: column;
 
-  .checkbox {
-    margin-top: 20px;
+  .checkbox-wrapper {
+    display: inline;
+    text-align: center;
+    border-radius: 8px;
+    border-color: white;
+    background: ${({ theme }) => theme.colors.main};
+    color: ${({ theme }) => theme.colors.text};
+    padding: 8px 10px;
+    margin: 20px;
+
+    .checkbox {
+      border: 1px solid ${({ theme }) => theme.colors.text};
+      margin-right: 2px;
+    }
   }
+`;
+
+const CheckboxGroup = styled.div`
+  text-align: right;
+  margin-top: 20px;
 `;
 
 const SearchWrapper = styled.div`
@@ -36,7 +53,7 @@ const CharacterCardListWrapper = styled.div`
 
 interface ICharactersPage {
   characters: ICharactersInitialState;
-  getCharacters: (page?: number, name?: string) => IGetCharactersActionType;
+  getCharacters: (page?: number, name?: string, status?: string) => IGetCharactersActionType;
 }
 
 const itemsPerPage = 20;
@@ -46,18 +63,69 @@ const CharactersPage: React.FC<ICharactersPage> = (props) => {
 
   const [searchItem, setSearchItem] = useState('');
   const [currPage, setCurrPage] = useState(1);
-  const [check, setCheck] = useState(false);
+  const [aliveFilter, setAliveFilter] = useState(false);
+  const [deadFilter, setDeadFilter] = useState(false);
+  const [unknownFilter, setUnknownFilter] = useState(false);
+  const [activeFilter, setActiveFilter] = useState('');
 
   const handlePageChange = (page: number) => {
-    getCharacters(page, searchItem);
+    getCharacters(page, searchItem, activeFilter);
     setCurrPage(page);
   };
   
-  const handleCheckboxChange = (event: any) => setCheck(!check);
+  const handleAlive = () => {
+    if (!aliveFilter) {
+      setAliveFilter(true);
+      setDeadFilter(false);
+      setUnknownFilter(false);
+      setActiveFilter('alive');
+      getCharacters(1, searchItem, 'alive');
+      setCurrPage(1);
+    } else {
+      setAliveFilter(false);
+      setActiveFilter('');
+      getCharacters(currPage, searchItem);
+      setCurrPage(1);
+    }
+  };
+
+  const handleDead = () => {
+    if (!deadFilter) {
+      setDeadFilter(true);
+      setAliveFilter(false);
+      setUnknownFilter(false);
+      setActiveFilter('dead');
+      getCharacters(1, searchItem, 'dead');
+      setCurrPage(1);
+    } else {
+      setActiveFilter('');
+      setDeadFilter(false);
+      getCharacters(currPage, searchItem);
+      setCurrPage(1);
+    }
+  };
+
+  const handleUnknown = () => {
+    if (!unknownFilter) {
+      setUnknownFilter(true);
+      setAliveFilter(false);
+      setDeadFilter(false);
+      setActiveFilter('unknown');
+      getCharacters(1, searchItem, 'unknown');
+      setCurrPage(1);
+    } else {
+      setActiveFilter('');
+      setUnknownFilter(false);
+      getCharacters(currPage, searchItem);
+      setCurrPage(1);
+    }
+  };
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchItem(event.target.value);
-    searchItem.length > 1 ? getCharacters(1, event.target.value) : getCharacters(currPage);
+    searchItem.length > 1 
+    ? getCharacters(1, event.target.value, activeFilter)
+    : getCharacters(currPage, undefined, activeFilter);
     setCurrPage(1);
   };
   
@@ -70,7 +138,29 @@ const CharactersPage: React.FC<ICharactersPage> = (props) => {
   
   return (
     <PageWrapper>
-      <Checkbox checked={check} onChange={handleCheckboxChange} labelText="Label text" className="checkbox" />
+      <CheckboxGroup>
+        <Checkbox 
+          checked={aliveFilter} 
+          onChange={handleAlive} 
+          labelText="Alive" 
+          outerClassName="checkbox-wrapper" 
+          innerClassName="checkbox" 
+        />
+        <Checkbox 
+          checked={deadFilter} 
+          onChange={handleDead} 
+          labelText="Dead" 
+          outerClassName="checkbox-wrapper" 
+          innerClassName="checkbox" 
+        />
+        <Checkbox 
+          checked={unknownFilter} 
+          onChange={handleUnknown} 
+          labelText="Unknown" 
+          outerClassName="checkbox-wrapper" 
+          innerClassName="checkbox" 
+        />
+      </CheckboxGroup>
       <SearchWrapper>
         <Search className="search" placeholder="Search characters.." handleChange={handleSearch} /> 
       </SearchWrapper>

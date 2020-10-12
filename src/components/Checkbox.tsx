@@ -27,33 +27,39 @@ const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
   position: absolute;
   white-space: nowrap;
   width: 1px;
+  border-color: white;
 `;
 
-const StyledCheckbox = styled.div<CheckboxProps>`
+export const StyledCheckbox = styled.div<CheckboxProps>`
   display: inline-block;
   width: 16px;
   height: 16px;
   background: ${props => props.checked ? ({ theme }) => theme.colors.secondary : ({ theme }) => theme.colors.main};
   border-radius: 3px;
   transition: all 150ms;
-
+  
   ${Icon} {
     visibility: ${props => props.checked ? 'visible' : 'hidden'}
+  }
+
+  &:hover {
+    cursor: pointer;
   }
 `;
 
 interface ICheckbox {
-  className?: string;
+  outerClassName?: string;
+  innerClassName?: string;
   checked: boolean;
   onChange: any;
   labelText: string;
 }
 
-export const Checkbox: React.FC<ICheckbox> = ({ className, checked, onChange, labelText }) => (
-  <CheckboxWrapper className={className}>
+export const Checkbox: React.FC<ICheckbox> = ({ outerClassName, innerClassName, checked, onChange, labelText }) => (
+  <CheckboxWrapper className={outerClassName}>
     <label>
       <HiddenCheckbox checked={checked} onChange={onChange} />
-      <StyledCheckbox checked={checked}>
+      <StyledCheckbox checked={checked} className={innerClassName}>
         <Icon viewBox="0 0 24 24">
           <polyline points="20 6 9 17 4 12" />
         </Icon>

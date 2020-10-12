@@ -10,4 +10,4 @@ export { LinkButton } from './LinkButton';
 export { Input } from './Input';
 export { Search } from './Search';
 export  { Pages, iconsProps, itemRender } from './Pagination';
-export { Checkbox } from './Checkbox';
+export { Checkbox, StyledCheckbox } from './Checkbox';
