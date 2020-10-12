@@ -13,7 +13,7 @@ export const mapStateToProps = (state: IStoreState) => {
 
 export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    getCharacters: (page?: number) => dispatch(getCharactersAction(page))
+    getCharacters: (page?: number, name?: string) => dispatch(getCharactersAction(page, name))
   };
 };
 
