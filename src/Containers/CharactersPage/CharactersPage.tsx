@@ -45,7 +45,6 @@ const CharactersPage: React.FC<ICharactersPage> = (props) => {
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchItem(event.target.value);
     searchItem.length > 1 ? getCharacters(currPage, event.target.value) : getCharacters(currPage);
-    console.log(event.target.value);
   };
   
   useEffect(() => {

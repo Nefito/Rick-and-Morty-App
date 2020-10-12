@@ -26,7 +26,7 @@ const SearchWrapper = styled.div`
 
 interface IEpisodesPage {
   episodes: IEpisodesInitialState;
-  getEpisodes: (page?: number) => IGetEpisodesActionType;
+  getEpisodes: (page?: number, name?: string) => IGetEpisodesActionType;
 }
 
 const itemsPerPage = 20;
@@ -35,21 +35,24 @@ const EpisodesPage: React.FC<IEpisodesPage> = (props) => {
   const { episodes, getEpisodes } = props;
 
   const [searchItem, setSearchItem] = useState('');
+  const [currPage, setCurrPage] = useState(1);
 
   const handlePageChange = (page: number) => {
-    getEpisodes(page);
+    getEpisodes(page, searchItem);
+    setCurrPage(page);
   };
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchItem(event.target.value);
+    searchItem.length > 1 ? getEpisodes(currPage, event.target.value) : getEpisodes(currPage);
   };
-
-  const episodesResults = episodes.episodes.results;
-  const totalItems = episodes.episodes.info ? episodes.episodes.info.count : itemsPerPage;
 
   useEffect(() => {
     getEpisodes();
   }, []);
+
+  const episodesResults = episodes.episodes.results;
+  const totalItems = episodes.episodes.info ? episodes.episodes.info.count : itemsPerPage;
 
   return (
     <PageWrapper>
@@ -57,8 +60,7 @@ const EpisodesPage: React.FC<IEpisodesPage> = (props) => {
         <Search className="search" placeholder="Search episodes.." handleChange={handleSearch} /> 
       </SearchWrapper>
       <EpisodeCardListWrapper>
-        <EpisodeCardList episodes={episodesResults.filter(episode => 
-          episode.name.toLowerCase().includes(searchItem.toLowerCase()))} />
+        <EpisodeCardList episodes={episodesResults} />
       </EpisodeCardListWrapper>
       <Pages 
         itemRender={itemRender}
