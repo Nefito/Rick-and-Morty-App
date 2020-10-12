@@ -10,7 +10,7 @@ const SearchWrapper = styled(Input)`
 `;
 
 interface ISearch {
-  handleChange: any;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
 }
 export const Search: React.FC<ISearch> = ({ handleChange, placeholder }) => {

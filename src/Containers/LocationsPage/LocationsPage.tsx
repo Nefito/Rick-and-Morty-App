@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { iconsProps, itemRender, Pages, Search } from 'components';
+import { iconsProps, itemRender, Pages, PageWrapper, Search } from 'components';
 import { IGetLocationsActionType, ILocationsInitialState  } from 'store';
 import { styled } from 'theme';
 
@@ -38,7 +38,7 @@ const LocationsPage: React.FC<ILocationsPage> = (props) => {
   const totalItems = locations.locations.info ? locations.locations.info.count : itemsPerPage;
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <PageWrapper>
       <Search placeholder="Search locations.." handleChange={handleSearch} /> 
       <LocationCardListWrapper>
         <LocationCardList locations={locationsResults.filter(location => 
@@ -51,7 +51,7 @@ const LocationsPage: React.FC<ILocationsPage> = (props) => {
         onChange={handlePageChange} 
         {...iconsProps}
       />
-    </div>
+    </PageWrapper>
   );
 };
 

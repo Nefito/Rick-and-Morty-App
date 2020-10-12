@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { iconsProps, itemRender, Pages, Search } from 'components';
+import { iconsProps, itemRender, Pages, PageWrapper, Search } from 'components';
 import { IEpisodesInitialState, IGetEpisodesActionType  } from 'store';
 import { styled } from 'theme';
 
@@ -38,7 +38,7 @@ const EpisodesPage: React.FC<IEpisodesPage> = (props) => {
   }, []);
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <PageWrapper>
       <Search placeholder="Search episodes.." handleChange={handleSearch} /> 
       <EpisodeCardListWrapper>
         <EpisodeCardList episodes={episodesResults.filter(episode => 
@@ -51,7 +51,7 @@ const EpisodesPage: React.FC<IEpisodesPage> = (props) => {
         onChange={handlePageChange} 
         {...iconsProps}
     />
-    </div>
+    </PageWrapper>
   );
 };
 

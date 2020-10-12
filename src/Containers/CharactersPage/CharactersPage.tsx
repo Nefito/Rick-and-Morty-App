@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { iconsProps, itemRender, Pages, Search } from 'components';
+import { iconsProps, itemRender, Pages, PageWrapper, Search } from 'components';
 import { ICharactersInitialState, IGetCharactersActionType, } from 'store';
 import { styled } from 'theme';
 
@@ -38,7 +38,7 @@ const CharactersPage: React.FC<ICharactersPage> = (props) => {
   }, []);
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <PageWrapper>
       <Search placeholder="Search characters.." handleChange={handleSearch} /> 
       <CharacterCardListWrapper>
         <CharacterCardList characters={charactersResults.filter(character => 
@@ -51,7 +51,7 @@ const CharactersPage: React.FC<ICharactersPage> = (props) => {
           onChange={handlePageChange} 
           {...iconsProps}
         />
-    </div>
+    </PageWrapper>
   );
 };
 
