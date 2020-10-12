@@ -1,20 +1,27 @@
 import React from 'react';
 
 import { Input } from 'components';
-import { styled } from 'theme';
 
-const SearchWrapper = styled(Input)`
-  position: absolute;
-  top: 5px;
-  right: 30px;
-`;
+// const SearchWrapper = styled(Input)`
+//   position: absolute;
+//   top: 5px;
+//   right: 30px;
+// `;
 
 interface ISearch {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
+  className?: string;
 }
-export const Search: React.FC<ISearch> = ({ handleChange, placeholder }) => {
+export const Search: React.FC<ISearch> = ({ handleChange, placeholder, className }) => {
   return (
-    <SearchWrapper type="search" name="search" id="search" onChange={handleChange} placeholder={placeholder} />
+    <Input 
+      type="search" 
+      name="search" 
+      id="search" 
+      onChange={handleChange} 
+      placeholder={placeholder} 
+      className={className} 
+    />
   );
 };

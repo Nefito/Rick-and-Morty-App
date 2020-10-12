@@ -6,6 +6,20 @@ import { styled } from 'theme';
 
 import { CharacterCardList } from './CharacterCardList';
 
+const SearchWrapper = styled.div`
+  text-align: center;
+  margin: 10px;
+  padding: 5px;
+
+  .search {
+    background: ${({ theme }) => theme.colors.main};
+    font-size: 20px;
+    padding: 10px 0 3px 5px;
+    border-radius: 8px;
+    border-width: 4px;
+  }
+`;
+
 const CharacterCardListWrapper = styled.div`
   text-align: center;
 `;
@@ -39,7 +53,9 @@ const CharactersPage: React.FC<ICharactersPage> = (props) => {
 
   return (
     <PageWrapper>
-      <Search placeholder="Search characters.." handleChange={handleSearch} /> 
+      <SearchWrapper>
+        <Search className="search" placeholder="Search characters.." handleChange={handleSearch} /> 
+      </SearchWrapper>
       <CharacterCardListWrapper>
         <CharacterCardList characters={charactersResults.filter(character => 
           character.name.toLowerCase().includes(searchItem.toLowerCase()))} />

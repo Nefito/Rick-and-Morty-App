@@ -10,6 +10,20 @@ const LocationCardListWrapper = styled.div`
   text-align: center;
 `;
 
+const SearchWrapper = styled.div`
+  text-align: center;
+  margin: 10px;
+  padding: 5px;
+
+  .search {
+    background: ${({ theme }) => theme.colors.main};
+    font-size: 20px;
+    padding: 10px 0 3px 5px;
+    border-radius: 8px;
+    border-width: 4px;
+  }
+`;
+
 interface ILocationsPage {
   locations: ILocationsInitialState;
   getLocations: (page?: number) => IGetLocationsActionType;
@@ -39,7 +53,9 @@ const LocationsPage: React.FC<ILocationsPage> = (props) => {
 
   return (
     <PageWrapper>
-      <Search placeholder="Search locations.." handleChange={handleSearch} /> 
+      <SearchWrapper>
+        <Search className="search" placeholder="Search locations.." handleChange={handleSearch} /> 
+      </SearchWrapper>
       <LocationCardListWrapper>
         <LocationCardList locations={locationsResults.filter(location => 
           location.name.toLowerCase().includes(searchItem.toLowerCase()))} />

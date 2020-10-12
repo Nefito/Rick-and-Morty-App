@@ -10,6 +10,20 @@ const EpisodeCardListWrapper = styled.div`
   text-align: center;
 `;
 
+const SearchWrapper = styled.div`
+  text-align: center;
+  margin: 10px;
+  padding: 5px;
+
+  .search {
+    background: ${({ theme }) => theme.colors.main};
+    font-size: 20px;
+    padding: 10px 0 3px 5px;
+    border-radius: 8px;
+    border-width: 4px;
+  }
+`;
+
 interface IEpisodesPage {
   episodes: IEpisodesInitialState;
   getEpisodes: (page?: number) => IGetEpisodesActionType;
@@ -39,7 +53,9 @@ const EpisodesPage: React.FC<IEpisodesPage> = (props) => {
 
   return (
     <PageWrapper>
-      <Search placeholder="Search episodes.." handleChange={handleSearch} /> 
+      <SearchWrapper>
+        <Search className="search" placeholder="Search episodes.." handleChange={handleSearch} /> 
+      </SearchWrapper>
       <EpisodeCardListWrapper>
         <EpisodeCardList episodes={episodesResults.filter(episode => 
           episode.name.toLowerCase().includes(searchItem.toLowerCase()))} />
