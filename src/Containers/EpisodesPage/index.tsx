@@ -13,7 +13,7 @@ export const mapStateToProps = (state: IStoreState) => {
 
 export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    getEpisodes: (page?: number, name?: string) => dispatch(getEpisodesAction(page, name))
+    getEpisodes: (page?: number, name?: string, season?: number) => dispatch(getEpisodesAction(page, name, season))
   };
 };
 

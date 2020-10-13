@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { iconsProps, itemRender, Pages, Search } from 'components';
+import { Checkbox, iconsProps, itemRender, Pages, Search } from 'components';
 import { IEpisodesInitialState, IGetEpisodesActionType  } from 'store';
 import { styled } from 'theme';
 
@@ -10,6 +10,34 @@ const PageWrapper = styled.div`
   min-height: 100vh; 
   display: flex;
   flex-direction: column;
+
+  .checkbox-wrapper {
+    display: inline;
+    text-align: center;
+    border-radius: 8px;
+    border-color: white;
+    color: ${({ theme }) => theme.colors.text};
+    background: ${({ theme }) => theme.colors.main};
+    padding: 8px 10px;
+    margin: 20px;
+
+    .checkbox {
+      border: 1px solid ${({ theme }) => theme.colors.text};
+      margin-right: 2px;
+    }
+  }
+`;
+
+const CheckboxGroup = styled.div`
+  text-align: right;
+  margin-top: 20px;
+
+  .group {
+    background: ${({ theme }) => theme.colors.main};
+    color: ${({ theme }) => theme.colors.text};
+    border-radius: 8px;
+    padding: 10px;
+  }
 `;
 
 const EpisodeCardListWrapper = styled.div`
@@ -32,7 +60,7 @@ const SearchWrapper = styled.div`
 
 interface IEpisodesPage {
   episodes: IEpisodesInitialState;
-  getEpisodes: (page?: number, name?: string) => IGetEpisodesActionType;
+  getEpisodes: (page?: number, name?: string, season?: number) => IGetEpisodesActionType;
 }
 
 const itemsPerPage = 20;
@@ -42,6 +70,7 @@ const EpisodesPage: React.FC<IEpisodesPage> = (props) => {
 
   const [searchItem, setSearchItem] = useState('');
   const [currPage, setCurrPage] = useState(1);
+  const [activeSeasonFilter, setActiveSeasonFilter] = useState(0);
 
   const handlePageChange = (page: number) => {
     getEpisodes(page, searchItem);
@@ -50,8 +79,22 @@ const EpisodesPage: React.FC<IEpisodesPage> = (props) => {
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchItem(event.target.value);
-    searchItem.length > 1 ? getEpisodes(currPage, event.target.value) : getEpisodes(currPage);
+    searchItem.length > 1 
+    ? getEpisodes(1, event.target.value, activeSeasonFilter) 
+    : getEpisodes(1, undefined, activeSeasonFilter);
   };
+
+  const handleFilter = (season: number) => () => {
+    setCurrPage(1);
+    
+    if (season === activeSeasonFilter) {
+      setActiveSeasonFilter(0);
+      getEpisodes(1, searchItem);
+    } else {
+      setActiveSeasonFilter(season);
+      getEpisodes(1, searchItem, season);
+    }
+  }; 
 
   useEffect(() => {
     getEpisodes();
@@ -60,8 +103,45 @@ const EpisodesPage: React.FC<IEpisodesPage> = (props) => {
   const episodesResults = episodes.episodes.results;
   const totalItems = episodes.episodes.info ? episodes.episodes.info.count : itemsPerPage;
 
+  const handleSeason1 = handleFilter(1);
+  const handleSeason2 = handleFilter(2);
+  const handleSeason3 = handleFilter(3);
+  const handleSeason4 = handleFilter(4);
+
   return (
     <PageWrapper>
+      <CheckboxGroup >
+        <span className="group"> 
+          <Checkbox 
+            checked={activeSeasonFilter === 1} 
+            onChange={handleSeason1} 
+            labelText="Season 1" 
+            outerClassName="checkbox-wrapper" 
+            innerClassName="checkbox"
+          />
+          <Checkbox 
+            checked={activeSeasonFilter === 2} 
+            onChange={handleSeason2} 
+            labelText="Season 2" 
+            outerClassName="checkbox-wrapper" 
+            innerClassName="checkbox"
+          />
+          <Checkbox 
+            checked={activeSeasonFilter === 3} 
+            onChange={handleSeason3} 
+            labelText="Season 3" 
+            outerClassName="checkbox-wrapper" 
+            innerClassName="checkbox"
+          />
+          <Checkbox 
+            checked={activeSeasonFilter === 4} 
+            onChange={handleSeason4} 
+            labelText="Season 4" 
+            outerClassName="checkbox-wrapper" 
+            innerClassName="checkbox"
+          />
+        </span>
+      </CheckboxGroup>
       <SearchWrapper>
         <Search className="search" placeholder="Search episodes.." handleChange={handleSearch} /> 
       </SearchWrapper>
