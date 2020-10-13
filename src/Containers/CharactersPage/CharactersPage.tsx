@@ -17,7 +17,6 @@ const PageWrapper = styled.div`
     border-radius: 8px;
     border-color: white;
     background: ${({ theme }) => theme.colors.main};
-    color: ${({ theme }) => theme.colors.text};
     padding: 8px 10px;
     margin: 20px;
 
@@ -25,6 +24,16 @@ const PageWrapper = styled.div`
       border: 1px solid ${({ theme }) => theme.colors.text};
       margin-right: 2px;
     }
+  }
+
+  .alive {
+      color: ${({ theme }) => theme.colors.alive};
+    }
+  .dead {
+    color: ${({ theme }) => theme.colors.dead};
+  }
+  .unknown {
+    color: ${({ theme }) => theme.colors.textSecondary};
   }
 `;
 
@@ -143,21 +152,21 @@ const CharactersPage: React.FC<ICharactersPage> = (props) => {
           checked={aliveFilter} 
           onChange={handleAlive} 
           labelText="Alive" 
-          outerClassName="checkbox-wrapper" 
-          innerClassName="checkbox" 
+          outerClassName="checkbox-wrapper alive" 
+          innerClassName="checkbox"
         />
         <Checkbox 
           checked={deadFilter} 
           onChange={handleDead} 
           labelText="Dead" 
-          outerClassName="checkbox-wrapper" 
+          outerClassName="checkbox-wrapper dead" 
           innerClassName="checkbox" 
         />
         <Checkbox 
           checked={unknownFilter} 
           onChange={handleUnknown} 
           labelText="Unknown" 
-          outerClassName="checkbox-wrapper" 
+          outerClassName="checkbox-wrapper unknown" 
           innerClassName="checkbox" 
         />
       </CheckboxGroup>
