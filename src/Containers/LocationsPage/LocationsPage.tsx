@@ -33,7 +33,7 @@ const SearchWrapper = styled.div`
 
 interface ILocationsPage {
   locations: ILocationsInitialState;
-  getLocations: (page?: number, name?: string, type?: string) => IGetLocationsActionType;
+  getLocations: (page?: number, name?: string, type?: string, dimension?: string) => IGetLocationsActionType;
 }
 
 const itemsPerPage = 20;
@@ -41,28 +41,37 @@ const itemsPerPage = 20;
 const LocationsPage: React.FC<ILocationsPage> = (props) => {
   const { locations, getLocations } = props;
 
-  const [searchItem, setSearchItem] = useState('');
   const [currPage, setCurrPage] = useState(1);
+  const [activeNameFilter, setActiveNameFilter] = useState('');
   const [activeTypeFilter, setActiveTypeFilter] = useState('');
+  const [activeDimFilter, setActiveDimFilter] = useState('');
 
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchItem(event.target.value);
+  const handleNameFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setActiveNameFilter(event.target.value);
     setCurrPage(1);
-    searchItem.length > 1
-      ? getLocations(1, event.target.value, activeTypeFilter)
-      : getLocations(1, undefined, activeTypeFilter);
+    activeNameFilter.length > 1
+      ? getLocations(1, event.target.value, activeTypeFilter, activeDimFilter)
+      : getLocations(1, undefined, activeTypeFilter, activeDimFilter);
   };
 
   const handleTypeFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
     setActiveTypeFilter(event.target.value);
     setCurrPage(1);
     activeTypeFilter.length > 1
-      ? getLocations(1, searchItem, event.target.value)
-      : getLocations(1, searchItem);
+      ? getLocations(1, activeNameFilter, event.target.value, activeDimFilter)
+      : getLocations(1, activeNameFilter, undefined, activeDimFilter);
+  };
+
+  const handleDimFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setActiveDimFilter(event.target.value);
+    setCurrPage(1);
+    activeDimFilter.length > 1
+      ? getLocations(1, activeNameFilter, activeTypeFilter, event.target.value)
+      : getLocations(1, activeNameFilter, activeTypeFilter);
   };
 
   const handlePageChange = (page: number) => {
-    getLocations(page, searchItem);
+    getLocations(page, activeNameFilter, activeTypeFilter, activeDimFilter);
     setCurrPage(page);
   };
 
@@ -76,8 +85,9 @@ const LocationsPage: React.FC<ILocationsPage> = (props) => {
   return (
     <PageWrapper>
       <SearchWrapper>
-        <Search className="search" placeholder="Search location name.." handleChange={handleSearch} /> 
+        <Search className="search" placeholder="Search location name.." handleChange={handleNameFilter} /> 
         <Search className="search" placeholder="Search location type.." handleChange={handleTypeFilter} /> 
+        <Search className="search" placeholder="Search dimension.." handleChange={handleDimFilter} /> 
       </SearchWrapper>
       <LocationCardListWrapper>
         <LocationCardList locations={locationsResults} />

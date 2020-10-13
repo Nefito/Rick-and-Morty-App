@@ -13,7 +13,12 @@ export const mapStateToProps = (state: IStoreState) => {
 
 export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    getLocations: (page?: number, name?: string, type?: string) => dispatch(getLocationsAction(page, name, type))
+    getLocations: (
+      page?: number, 
+      name?: string, 
+      type?: string, 
+      dimension?: string
+    ) => dispatch(getLocationsAction(page, name, type, dimension))
   };
 };
 
