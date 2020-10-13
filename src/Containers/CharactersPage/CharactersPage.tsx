@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { Checkbox, iconsProps, itemRender, Pages, Search } from 'components';
-import { ICharactersInitialState, IGetCharactersActionType, } from 'store';
+import { ICharactersInitialState, IGetCharactersActionType, LifeStatusConst } from 'store';
 import { styled } from 'theme';
 
 import { CharacterCardList } from './CharacterCardList';
@@ -27,8 +27,8 @@ const PageWrapper = styled.div`
   }
 
   .alive {
-      color: ${({ theme }) => theme.colors.alive};
-    }
+    color: ${({ theme }) => theme.colors.alive};
+  }
   .dead {
     color: ${({ theme }) => theme.colors.dead};
   }
@@ -72,63 +72,21 @@ const CharactersPage: React.FC<ICharactersPage> = (props) => {
 
   const [searchItem, setSearchItem] = useState('');
   const [currPage, setCurrPage] = useState(1);
-  const [aliveFilter, setAliveFilter] = useState(false);
-  const [deadFilter, setDeadFilter] = useState(false);
-  const [unknownFilter, setUnknownFilter] = useState(false);
   const [activeFilter, setActiveFilter] = useState('');
 
   const handlePageChange = (page: number) => {
     getCharacters(page, searchItem, activeFilter);
     setCurrPage(page);
   };
-  
-  const handleAlive = () => {
-    if (!aliveFilter) {
-      setAliveFilter(true);
-      setDeadFilter(false);
-      setUnknownFilter(false);
-      setActiveFilter('alive');
-      getCharacters(1, searchItem, 'alive');
-      setCurrPage(1);
-    } else {
-      setAliveFilter(false);
-      setActiveFilter('');
-      getCharacters(currPage, searchItem);
-      setCurrPage(1);
-    }
+
+  const handleFilter = (status: LifeStatusConst) => () => {
+    status === activeFilter ? setActiveFilter('') : setActiveFilter(status); 
+    getCharacters(1, searchItem, status);
   };
 
-  const handleDead = () => {
-    if (!deadFilter) {
-      setDeadFilter(true);
-      setAliveFilter(false);
-      setUnknownFilter(false);
-      setActiveFilter('dead');
-      getCharacters(1, searchItem, 'dead');
-      setCurrPage(1);
-    } else {
-      setActiveFilter('');
-      setDeadFilter(false);
-      getCharacters(currPage, searchItem);
-      setCurrPage(1);
-    }
-  };
-
-  const handleUnknown = () => {
-    if (!unknownFilter) {
-      setUnknownFilter(true);
-      setAliveFilter(false);
-      setDeadFilter(false);
-      setActiveFilter('unknown');
-      getCharacters(1, searchItem, 'unknown');
-      setCurrPage(1);
-    } else {
-      setActiveFilter('');
-      setUnknownFilter(false);
-      getCharacters(currPage, searchItem);
-      setCurrPage(1);
-    }
-  };
+  const handleAlive = handleFilter(LifeStatusConst.Alive);
+  const handleDead = handleFilter(LifeStatusConst.Dead);
+  const handleUnknown = handleFilter(LifeStatusConst.Unknown);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchItem(event.target.value);
@@ -149,21 +107,21 @@ const CharactersPage: React.FC<ICharactersPage> = (props) => {
     <PageWrapper>
       <CheckboxGroup>
         <Checkbox 
-          checked={aliveFilter} 
+          checked={activeFilter === LifeStatusConst.Alive} 
           onChange={handleAlive} 
           labelText="Alive" 
           outerClassName="checkbox-wrapper alive" 
           innerClassName="checkbox"
         />
         <Checkbox 
-          checked={deadFilter} 
+          checked={activeFilter === LifeStatusConst.Dead} 
           onChange={handleDead} 
           labelText="Dead" 
           outerClassName="checkbox-wrapper dead" 
           innerClassName="checkbox" 
         />
         <Checkbox 
-          checked={unknownFilter} 
+          checked={activeFilter === LifeStatusConst.Unknown} 
           onChange={handleUnknown} 
           labelText="Unknown" 
           outerClassName="checkbox-wrapper unknown" 
