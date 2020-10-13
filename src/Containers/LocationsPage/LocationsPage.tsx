@@ -27,12 +27,13 @@ const SearchWrapper = styled.div`
     padding: 10px 0 3px 5px;
     border-radius: 8px;
     border-width: 4px;
+    margin: 0 50px;
   }
 `;
 
 interface ILocationsPage {
   locations: ILocationsInitialState;
-  getLocations: (page?: number, name?: string) => IGetLocationsActionType;
+  getLocations: (page?: number, name?: string, type?: string) => IGetLocationsActionType;
 }
 
 const itemsPerPage = 20;
@@ -42,10 +43,22 @@ const LocationsPage: React.FC<ILocationsPage> = (props) => {
 
   const [searchItem, setSearchItem] = useState('');
   const [currPage, setCurrPage] = useState(1);
+  const [activeTypeFilter, setActiveTypeFilter] = useState('');
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchItem(event.target.value);
-    searchItem.length > 1 ? getLocations(currPage, event.target.value) : getLocations(currPage);
+    setCurrPage(1);
+    searchItem.length > 1
+      ? getLocations(1, event.target.value, activeTypeFilter)
+      : getLocations(1, undefined, activeTypeFilter);
+  };
+
+  const handleTypeFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setActiveTypeFilter(event.target.value);
+    setCurrPage(1);
+    activeTypeFilter.length > 1
+      ? getLocations(1, searchItem, event.target.value)
+      : getLocations(1, searchItem);
   };
 
   const handlePageChange = (page: number) => {
@@ -63,7 +76,8 @@ const LocationsPage: React.FC<ILocationsPage> = (props) => {
   return (
     <PageWrapper>
       <SearchWrapper>
-        <Search className="search" placeholder="Search locations.." handleChange={handleSearch} /> 
+        <Search className="search" placeholder="Search location name.." handleChange={handleSearch} /> 
+        <Search className="search" placeholder="Search location type.." handleChange={handleTypeFilter} /> 
       </SearchWrapper>
       <LocationCardListWrapper>
         <LocationCardList locations={locationsResults} />
