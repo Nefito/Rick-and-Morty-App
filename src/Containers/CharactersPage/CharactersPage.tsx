@@ -72,16 +72,24 @@ const CharactersPage: React.FC<ICharactersPage> = (props) => {
 
   const [searchItem, setSearchItem] = useState('');
   const [currPage, setCurrPage] = useState(1);
-  const [activeFilter, setActiveFilter] = useState('');
+  const [activeStatusFilter, setActiveStatusFilter] = useState('');
+  const [activeGenderFilter, setActiveGenderFilter] = useState('');
 
   const handlePageChange = (page: number) => {
-    getCharacters(page, searchItem, activeFilter);
+    getCharacters(page, searchItem, activeStatusFilter);
     setCurrPage(page);
   };
 
-  const handleFilter = (status: LifeStatusConst) => () => {
-    status === activeFilter ? setActiveFilter('') : setActiveFilter(status); 
-    getCharacters(1, searchItem, status);
+  const handleFilter = (status: LifeStatusConst) => () => {    
+    setCurrPage(1);
+
+    if (status === activeStatusFilter) {
+      setActiveStatusFilter('');
+      getCharacters(1, searchItem);
+    } else {
+      setActiveStatusFilter(status);
+      getCharacters(1, searchItem, status);
+    }
   };
 
   const handleAlive = handleFilter(LifeStatusConst.Alive);
@@ -90,10 +98,10 @@ const CharactersPage: React.FC<ICharactersPage> = (props) => {
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchItem(event.target.value);
-    searchItem.length > 1 
-    ? getCharacters(1, event.target.value, activeFilter)
-    : getCharacters(currPage, undefined, activeFilter);
     setCurrPage(1);
+    searchItem.length > 1 
+    ? getCharacters(1, event.target.value, activeStatusFilter)
+    : getCharacters(1, undefined, activeStatusFilter);
   };
   
   useEffect(() => {
@@ -106,28 +114,59 @@ const CharactersPage: React.FC<ICharactersPage> = (props) => {
   return (
     <PageWrapper>
       <CheckboxGroup>
+        <span>Status: </span>
         <Checkbox 
-          checked={activeFilter === LifeStatusConst.Alive} 
+          checked={activeStatusFilter === LifeStatusConst.Alive} 
           onChange={handleAlive} 
           labelText="Alive" 
           outerClassName="checkbox-wrapper alive" 
           innerClassName="checkbox"
         />
         <Checkbox 
-          checked={activeFilter === LifeStatusConst.Dead} 
+          checked={activeStatusFilter === LifeStatusConst.Dead} 
           onChange={handleDead} 
           labelText="Dead" 
           outerClassName="checkbox-wrapper dead" 
           innerClassName="checkbox" 
         />
         <Checkbox 
-          checked={activeFilter === LifeStatusConst.Unknown} 
+          checked={activeStatusFilter === LifeStatusConst.Unknown} 
           onChange={handleUnknown} 
           labelText="Unknown" 
           outerClassName="checkbox-wrapper unknown" 
           innerClassName="checkbox" 
         />
       </CheckboxGroup>
+      {/* <CheckboxGroup >
+        <Checkbox 
+          checked={} 
+          onChange={} 
+          labelText="Male" 
+          outerClassName="checkbox-wrapper" 
+          innerClassName="checkbox"
+        />
+        <Checkbox 
+          checked={} 
+          onChange={} 
+          labelText="Female" 
+          outerClassName="checkbox-wrapper" 
+          innerClassName="checkbox"
+        />
+        <Checkbox 
+          checked={} 
+          onChange={} 
+          labelText="Genderless" 
+          outerClassName="checkbox-wrapper" 
+          innerClassName="checkbox"
+        />
+        <Checkbox 
+          checked={} 
+          onChange={} 
+          labelText="Unknown" 
+          outerClassName="checkbox-wrapper" 
+          innerClassName="checkbox"
+        />
+      </CheckboxGroup> */}
       <SearchWrapper>
         <Search className="search" placeholder="Search characters.." handleChange={handleSearch} /> 
       </SearchWrapper>
