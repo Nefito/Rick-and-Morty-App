@@ -13,7 +13,8 @@ export const mapStateToProps = (state: IStoreState) => {
 
 export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    getCharacters: (page?: number, name?: string, status?: string) => dispatch(getCharactersAction(page, name, status))
+    getCharacters: (page?: number, name?: string, status?: string, gender?: string) => 
+      dispatch(getCharactersAction(page, name, status, gender))
   };
 };
 
