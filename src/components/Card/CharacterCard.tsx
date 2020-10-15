@@ -2,7 +2,7 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 
-import { urlToLink } from 'commonUtil';
+import { errorOrLoadingStatusMsg, urlToLink } from 'commonUtil';
 import { apiClientService } from 'services';
 import { ICharacter, IEpisode, LifeStatusConst } from 'store';
 import { styled, theme as mainTheme } from 'theme';
@@ -58,7 +58,7 @@ interface ICharacterCardBodyItem {
 const CharacterCardBodyItem: React.FC<ICharacterCardBodyItem> = (props) => { 
   const { url, value, title } = props;
 
-  const link = urlToLink(url, 's');
+  const link = urlToLink(url, 's', 4);
   
   return (
     <CardBodyItemWrapper className="card-location-episode">
@@ -72,34 +72,37 @@ export const CharacterCard: React.FC<ICharacterCard> = (props) => {
   const { character } = props;
   
   const firstEpisodeUrl = character.episode[0];
-  const getEpisode = apiClientService.get(urlToLink(firstEpisodeUrl, ''));
+  const getEpisode = apiClientService.get(urlToLink(firstEpisodeUrl, '', 4));
 
   const { data, status } = useQuery<IEpisode>(firstEpisodeUrl, () => getEpisode);
 
-  return (
-    <CharacterCardWrapper>
-      <img className="card-image" src={character.image} alt={character.name} />
-      <CardBodyWrapper>
-        <div>
-          <Link to={`/characters/${character.id}/`} className="card-text-name link-no-style">{character.name}</Link>
-          <div className="card-text-species-status">
-            <CharacterStatus status={character.status}>{character.status}</CharacterStatus>
-            <span className="card-text-species">{` - ${character.species}`}</span>
+  if (!errorOrLoadingStatusMsg(status)) {
+    return (
+      <CharacterCardWrapper>
+        <img className="card-image" src={character.image} alt={character.name} />
+        <CardBodyWrapper>
+          <div>
+            <Link to={`/characters/${character.id}/`} className="card-text-name link-no-style">{character.name}</Link>
+            <div className="card-text-species-status">
+              <CharacterStatus status={character.status}>{character.status}</CharacterStatus>
+              <span className="card-text-species">{` - ${character.species}`}</span>
+            </div>
           </div>
-        </div>
-        <CharacterCardBodyItem 
-          url={character.location.url} 
-          value={character.location.name} 
-          title="Last known location:" 
-        />
-        {data && 
           <CharacterCardBodyItem 
-            url={firstEpisodeUrl}
-            value={status === 'loading' ? 'loading' : status === 'error' ? 'error' : `${data.episode} - ${data.name}`} 
-            title="First seen in:" 
+            url={character.location.url} 
+            value={character.location.name} 
+            title="Last known location:" 
           />
-        }
-      </CardBodyWrapper>
-    </CharacterCardWrapper>
-  );
+          {data && 
+            <CharacterCardBodyItem 
+              url={firstEpisodeUrl}
+              value={`${data.episode} - ${data.name}`} 
+              title="First seen in:" 
+            />
+          }
+        </CardBodyWrapper>
+      </CharacterCardWrapper>
+    );
+  }
+  return (errorOrLoadingStatusMsg(status));
 };

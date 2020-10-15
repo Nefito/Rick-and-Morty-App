@@ -51,7 +51,7 @@ interface ICheckbox {
   outerClassName?: string;
   innerClassName?: string;
   checked: boolean;
-  onChange: any;
+  onChange: () => void;
   labelText: string;
 }
 

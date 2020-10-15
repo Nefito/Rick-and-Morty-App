@@ -15,6 +15,6 @@ const composeEnhancers =
 
 const store = createStore(rootReducers, composeEnhancers(applyMiddleware(...middlewares)));
 
-export default store; // connect later
+export default store; 
 export * from './domains';
 export * from './types';

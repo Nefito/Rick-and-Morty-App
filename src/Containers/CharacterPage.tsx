@@ -12,12 +12,6 @@ interface IRouteInfo  {
   characterId: string;
 }
 
-interface ICharacterPage extends RouteComponentProps<IRouteInfo> {
-  history: any;
-  location: any;
-  match: any;
-}
-
 interface ICharacterEpisode {
   url: string;
   className?: string;
@@ -50,7 +44,7 @@ const CharacterItem: React.FC<ICharacterItem> = ({ title, value }) => {
   );
 };
 
-const CharacterPage: React.FC<ICharacterPage> = ({ match }) => {
+const CharacterPage = ({ match }: RouteComponentProps<IRouteInfo>) => {
   const { characterId } = match.params;
 
   const getCharacter = apiClientService.get(`character/${characterId}`);

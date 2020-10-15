@@ -55,12 +55,6 @@ interface IRouteInfo  {
   episodeId: string;
 }
 
-interface IEpisodePage extends RouteComponentProps<IRouteInfo> {
-  history: any;
-  location: any;
-  match: any;
-}
-
 interface IEpisodeInfo {
   text: string;
   info: string;
@@ -75,9 +69,8 @@ const EpisodeInfo: React.FC<IEpisodeInfo> = ({ text, info }) => {
   );
 };
 
-const EpisodePage: React.FC<IEpisodePage> = (props) => {
-  const { match } = props;
-
+const EpisodePage = ({ match }: RouteComponentProps<IRouteInfo>) => {
+  
   const { episodeId } = match.params;
 
   const getEpisode = apiClientService.get(`episode/${episodeId}`);

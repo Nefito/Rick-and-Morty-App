@@ -28,10 +28,10 @@ interface ICharactersList {
 export const CharacterList: React.FC<ICharactersList> = (props) => {
   const { characters, className, title } = props; 
 
-  const charactersCropped = characters.slice(0, 6).map(character => {
+  const charactersCropped = characters.slice(0, 6).map(characterUrl => {
     return (
-      <li key={character}>
-        <Modal url={character} />
+      <li key={characterUrl}>
+        <Modal url={characterUrl} />
       </li>
     );
   });

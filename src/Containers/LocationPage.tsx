@@ -51,12 +51,6 @@ interface IRouteInfo  {
   locationId: string;
 }
 
-interface ILocationPage extends RouteComponentProps<IRouteInfo> {
-  history: any;
-  location: any;
-  match: any;
-}
-
 interface ILocationInfo {
   text: string;
   info: string;
@@ -71,9 +65,7 @@ const LocationInfo: React.FC<ILocationInfo> = ({ text, info }) => {
   );
 };
 
-const LocationPage: React.FC<ILocationPage> = (props) => {
-  const { match } = props;
-
+const LocationPage = ({ match }: RouteComponentProps<IRouteInfo>) => {
   const { locationId } = match.params;
 
   const getLocation = apiClientService.get(`location/${locationId}`);

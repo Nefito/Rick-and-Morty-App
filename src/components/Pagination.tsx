@@ -26,7 +26,7 @@ export const Pages = styled(Pagination)`
   li {
     position: relative;
     display: inline;
-    margin: 0 30px;//adjust styles !!!!
+    margin: 0 30px;
     top: 6px;
     bottom: 10px;
 
@@ -51,7 +51,7 @@ export const Pages = styled(Pagination)`
   }
 `;
 
-const getSvgIcon = (path: any, reverse: any, type: any) => {
+const getSvgIcon = (path: string | string[], reverse: boolean, type: string) => {
   const paths = Array.isArray(path) ? path : [path];
   const renderPaths = paths.map((p, i) => {
     return <path key={i} d={p} />;
@@ -86,7 +86,7 @@ const jumpPrevIcon = () => getSvgIcon(doublePath, true, 'jump-prev');
 
 export const iconsProps = { prevIcon, nextIcon, jumpPrevIcon, jumpNextIcon };
 
-export const itemRender = (current: any, type: string, element: React.ReactNode | undefined) => {
+export const itemRender = (current: number, type: string, element: React.ReactNode | undefined) => {
   if (type === 'prev') {
     return <Button type="button">Prev</Button>;
   }

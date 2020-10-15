@@ -3,9 +3,8 @@ import { useQuery } from 'react-query';
 
 import { errorOrLoadingStatusMsg } from 'commonUtil';
 import { Modal } from 'components';
+import { apiClientService } from 'services';
 import { styled } from 'theme';
-
-import ApiClientService from 'services/ApiClient';
 
 const CharacterWrapper = styled.div`
   display: inline;
@@ -44,7 +43,9 @@ interface ICharacter {
 }
 
 export const Character: React.FC<ICharacter> = ({ url, className }) => {
-  const getCharacter = new ApiClientService(url).get('/');
+  const characterId =  url.split(/(\/)/g).slice(-1).pop();
+  
+  const getCharacter = apiClientService.get(`character/${characterId}`);
 
   const { data, status } = useQuery(url, () => getCharacter);
 
