@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { LinkButton } from 'components';
 import { IEpisode } from 'store';
@@ -20,7 +21,7 @@ export const EpisodeCard: React.FC<IEpisodeCard> = (props) => {
   return (
     <EpisodeCardStyled>
       <CardBodyWrapper>
-        <a href={episode.url} className="card-text-name link-no-style">{episode.name}</a>
+        <Link to={`/episodes/${episode.id}/`} className="card-text-name link-no-style">{episode.name}</Link>
         <CardBodyItem value={episode.episode} title="Episode:" className="card-info" />
         <CardBodyItem value={episode.air_date} title="Air Date:" className="card-info" />
         <CharacterList characters={episode.characters} className="card-characters" title="Characters" />

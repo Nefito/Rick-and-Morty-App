@@ -86,13 +86,13 @@ const EpisodePage: React.FC<IEpisodePage> = (props) => {
 
   if (!errorOrLoadingStatusMsg(status)) {
     const episode: IEpisode = data; 
-    const characters = episode ? episode.characters.map(character => {
+    const characters = episode.characters.map(character => {
       return (
         <li className="list-item" key={character}>
           <Character url={character} className="episode-character"/>
         </li>
       );
-    }) : null;
+    });
 
     return (
       <Episode>

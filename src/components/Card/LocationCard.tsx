@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { LinkButton } from 'components';
 import { ILocation } from 'store';
@@ -20,7 +21,7 @@ export const LocationCard: React.FC<ILocationCard> = (props) => {
   return (
     <LocationCardWrapper>
       <CardBodyWrapper>
-        <a href={location.url} className="card-text-name link-no-style">{location.name}</a>
+        <Link to={`/locations/${location.id}/`} className="card-text-name link-no-style">{location.name}</Link>
         <CardBodyItem value={location.type} className="card-info" title="Type:" />
         <CardBodyItem value={location.dimension} className="card-info" title="Dimension:" />
         <CharacterList characters={location.residents} className="card-characters" title="Residents" />

@@ -81,7 +81,7 @@ export const CharacterCard: React.FC<ICharacterCard> = (props) => {
       <img className="card-image" src={character.image} alt={character.name} />
       <CardBodyWrapper>
         <div>
-          <a href={character.url} className="card-text-name link-no-style">{character.name}</a>
+          <Link to={`/characters/${character.id}/`} className="card-text-name link-no-style">{character.name}</Link>
           <div className="card-text-species-status">
             <CharacterStatus status={character.status}>{character.status}</CharacterStatus>
             <span className="card-text-species">{` - ${character.species}`}</span>
@@ -94,7 +94,7 @@ export const CharacterCard: React.FC<ICharacterCard> = (props) => {
         />
         {data && 
           <CharacterCardBodyItem 
-            url={firstEpisodeUrl} // make a util later
+            url={firstEpisodeUrl}
             value={status === 'loading' ? 'loading' : status === 'error' ? 'error' : `${data.episode} - ${data.name}`} 
             title="First seen in:" 
           />
