@@ -1,4 +1,3 @@
-import { isNamedExports } from 'typescript';
 import  { CharactersActionTypeKeys, IGetCharactersActionType } from './actionTypes';
 import * as api from './api';
 

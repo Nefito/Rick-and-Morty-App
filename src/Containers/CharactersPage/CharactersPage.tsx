@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import { Checkbox, iconsProps, itemRender, Pages, Search } from 'components';
 import { GenderConst, ICharactersInitialState, IGetCharactersActionType, LifeStatusConst } from 'store';
-import { styled } from 'theme';
+import { media, styled } from 'theme';
 
 import { CharacterCardList } from './CharacterCardList';
 
@@ -25,6 +25,12 @@ const PageWrapper = styled.div`
       border: 1px solid ${({ theme }) => theme.colors.text};
       margin-right: 2px;
     }
+
+    ${media.tabletS`
+      display: block;
+      margin: 0;
+      text-align: left;
+  `};
   }
 
   .alive {
@@ -47,7 +53,16 @@ const CheckboxGroup = styled.div`
     color: ${({ theme }) => theme.colors.text};
     border-radius: 8px;
     padding: 10px;
+
+    ${media.tabletS`
+      display: block;
+    `};
   }
+
+  ${media.tablet`
+    text-align: center;
+    display: block;
+  `};
 `;
 
 const SearchWrapper = styled.div`
