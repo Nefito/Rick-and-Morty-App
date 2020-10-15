@@ -2,32 +2,24 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 
-import { errorOrLoadingStatusMsg, urlToLink } from 'commonUtil';
+import { errorOrLoadingStatusMsg, getStatusColor, urlToLink } from 'commonUtil';
 import { apiClientService } from 'services';
 import { ICharacter, IEpisode, LifeStatusConst } from 'store';
-import { styled, theme as mainTheme } from 'theme';
+import { styled } from 'theme';
 
 import { CardBodyWrapper, CardWrapper } from './Card';
 import { CardBodyItemWrapper } from './CardBodyItem';
-
-const getStatusColor = (status: LifeStatusConst) => {
-  switch (status) {
-    case LifeStatusConst.Alive:
-      return mainTheme.colors.alive;
-
-    case LifeStatusConst.Dead:
-      return mainTheme.colors.dead;
-
-    default:
-      return mainTheme.colors.textSecondary;
-  }
-};
 
 const CharacterCardWrapper = styled(CardWrapper)`
   text-align: left;
  
   .card-image {
     width: 100%;
+  }
+
+  .card-text-name {
+    font-size: 32px;
+    font-weight: bold;
   }
 
   .card-text-species-status {
