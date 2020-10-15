@@ -1,10 +1,8 @@
 import Pagination from 'rc-pagination';
 import React from 'react';
 
-import { Button } from 'components';
+import { arrowPath, Button, doublePath } from 'components';
 import { styled } from 'theme';
-
-import { arrowPath, doublePath } from 'commonUtil/svgs';
 
 export const Pages = styled(Pagination)`
   position: relative;

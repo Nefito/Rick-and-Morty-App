@@ -11,3 +11,4 @@ export { Input } from './Input';
 export { Search } from './Search';
 export  { Pages, iconsProps, itemRender } from './Pagination';
 export { Checkbox, StyledCheckbox } from './Checkbox';
+export { arrowPath, doublePath } from './Icons';
