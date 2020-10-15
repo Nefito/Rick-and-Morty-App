@@ -15,7 +15,7 @@ const Nav = styled.ul`
     font-weight: bold;
   }
 
-  .nav-item__link {
+  .nav-item-link {
     color: ${({ theme }) => theme.colors.text};
     text-decoration: none;
 
@@ -29,13 +29,13 @@ export const Navbar: React.FC = () => {
   return (
     <Nav>
       <li className="nav-item">
-        <Link to={'/characters'} className="nav-item__link" href="/"> Characters </Link>
+        <Link to={'/characters'} className="nav-item-link" href="/"> Characters </Link>
       </li>
       <li className="nav-item">
-        <Link to={'/locations'} className="nav-item__link" href="/"> Locations </Link>
+        <Link to={'/locations'} className="nav-item-link" href="/"> Locations </Link>
       </li>
       <li className="nav-item">
-        <Link to={'/episodes'} className="nav-item__link" href="/"> Episodes </Link>
+        <Link to={'/episodes'} className="nav-item-link" href="/"> Episodes </Link>
       </li>
     </Nav>
   );

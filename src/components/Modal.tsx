@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ReactModal from 'react-modal';
-import { QueryStatus, useQuery } from 'react-query';
+import { useQuery } from 'react-query';
 
 import { errorOrLoadingStatusMsg, urlToLink } from 'commonUtil';
 import { apiClientService } from 'services';

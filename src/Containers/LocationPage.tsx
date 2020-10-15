@@ -85,13 +85,13 @@ const LocationPage = ({ match }: RouteComponentProps<IRouteInfo>) => {
     return (
       <Location>
         <div>
-          <h1 className="location-text__name">{location.name}</h1>
+          <h1 className="location-text-name">{location.name}</h1>
         </div>
         <LocationInfo text="Type: " info={location.type} />
         <LocationInfo text="Dimension: " info={location.dimension} />
         <div>
-          <span className="location-text__secondary" >Residents: </span>
-          <ul className="list-no-style location-text__info">
+          <span className="location-text-secondary" >Residents: </span>
+          <ul className="list-no-style location-text-info">
             {residents}
           </ul>
         </div>
