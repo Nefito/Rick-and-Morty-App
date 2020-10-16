@@ -12,11 +12,6 @@ export const LinkButton = styled(Link)`
   font-size: 16px;
   font-weight: bold;
   max-width: 90px;
-  display: flex;
-  position: absolute;
-  right: 20px;
-  bottom: 0;
-  margin-bottom: 10px;
   
   &:hover {
     color: ${({ theme }) => theme.colors.text};

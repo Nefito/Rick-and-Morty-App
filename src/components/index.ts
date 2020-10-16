@@ -1,12 +1,10 @@
 export { OuterCard } from './Card/Card';
-export { EpisodeCard } from './Card/EpisodeCard';
-export { CharacterCard } from './Card/CharacterCard';
-export { LocationCard } from './Card/LocationCard';
 export { Navbar } from './Navbar';
 export { Character } from './Character';
 export { Modal, CharacterCardModal } from './Modal';
 export { Button } from './Button';
 export { LinkButton } from './LinkButton';
+export { CardButton, CardLinkButton, EpisodeCard, CharacterCard, LocationCard } from './Card';
 export { Input } from './Input';
 export { Search } from './Search';
 export  { Pages, iconsProps, itemRender } from './Pagination';
