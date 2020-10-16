@@ -4,7 +4,7 @@ export { CharacterCard } from './Card/CharacterCard';
 export { LocationCard } from './Card/LocationCard';
 export { Navbar } from './Navbar';
 export { Character } from './Character';
-export { Modal } from './Modal';
+export { Modal, CharacterCardModal } from './Modal';
 export { Button } from './Button';
 export { LinkButton } from './LinkButton';
 export { Input } from './Input';

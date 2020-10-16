@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 
 import { errorOrLoadingStatusMsg } from 'commonUtil';
-import { Modal } from 'components';
+import { CharacterCardModal, Modal } from 'components';
 import { apiClientService } from 'services';
 import { styled } from 'theme';
 
@@ -43,6 +43,10 @@ interface ICharacter {
 }
 
 export const Character: React.FC<ICharacter> = ({ url, className }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const toggleModal = () => setIsModalOpen(!isModalOpen);
+
   const characterId =  url.split(/(\/)/g).slice(-1).pop();
   
   const getCharacter = apiClientService.get(`character/${characterId}`);
@@ -53,8 +57,9 @@ export const Character: React.FC<ICharacter> = ({ url, className }) => {
     return (
       <CharacterWrapper className={className}>
         <img className="character-img" src={data.image} alt={data.name} />
-        <Modal url={data.url} />
-    </CharacterWrapper>
+        <button onClick={toggleModal} className="link-no-style">{data.name}</button>
+        <Modal modalContent={<CharacterCardModal url={data.url} />} isOpen={isModalOpen} toggleModal={toggleModal}  />
+      </CharacterWrapper>
     );
   }
   return errorOrLoadingStatusMsg(status);

@@ -1,6 +1,9 @@
+import { errorOrLoadingStatusMsg } from 'commonUtil';
 import React from 'react';
+import { useQuery } from 'react-query';
+import { Link } from 'react-router-dom';
 
-import { Modal } from 'components';
+import { apiClientService } from 'services';
 import { styled } from 'theme';
 
 import { CardWrapper } from './Card';
@@ -25,13 +28,30 @@ interface ICharactersList {
   title: string;
 }
 
-export const CharacterList: React.FC<ICharactersList> = (props) => {
-  const { characters, className, title } = props; 
+interface ICharacterNameLink {
+  url: string;
+}
+
+const CharacterNameLink: React.FC<ICharacterNameLink> = ({ url }) => {
+  const characterId =  url.split(/(\/)/g).slice(-1).pop();
+  
+  const getCharacter = apiClientService.get(`character/${characterId}`);
+  const { data, status } = useQuery(url, () => getCharacter);
+
+  if (!errorOrLoadingStatusMsg(status)) {
+    return (
+      <Link to={`/characters/${characterId}/`} className="card-text-name link-no-style">{data.name}</Link>
+    );
+  }
+  return errorOrLoadingStatusMsg(status);
+};
+
+export const CharacterList: React.FC<ICharactersList> = ({ characters, className, title }) => {
 
   const charactersCropped = characters.slice(0, 6).map(characterUrl => {
     return (
       <li key={characterUrl}>
-        <Modal url={characterUrl} />
+        <CharacterNameLink url={characterUrl} />
       </li>
     );
   });
