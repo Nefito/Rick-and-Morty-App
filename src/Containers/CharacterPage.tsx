@@ -96,10 +96,11 @@ interface ICharacterStatus {
   className?: string;
 }
 
-interface ICharacterOrigin {
-  originName: string;
-  originUrl: string;
-  className: string;
+interface ICharacterLocationInfo {
+  locationName: string;
+  locationUrl: string;
+  title: string;
+  className?: string;
 }
 
 interface ICharacterEpisodeList {
@@ -146,15 +147,15 @@ const CharacterInfo: React.FC<ICharacterInfo> = ({ title, value, className }) =>
   );
 };
 
-const CharacterOrigin: React.FC<ICharacterOrigin> = ({ originName, originUrl, className }) => {
-  const getLocation = apiClientService.get(urlToLink(originUrl, '', 4));
-  const { data, status } = useQuery(originUrl, () => getLocation);
+const CharacterLocationInfo: React.FC<ICharacterLocationInfo> = ({ locationName, locationUrl, title, className }) => {
+  const getLocation = apiClientService.get(urlToLink(locationUrl, '', 4));
+  const { data, status } = useQuery(locationUrl, () => getLocation);
 
   if (!errorOrLoadingStatusMsg(status)) {
     return (
       <div className={className}>
-        <span className="character-text-gray">{'Origin: '}</span>
-        <Link to={`/locations/${data.id}/`} className="link-no-style">{originName}</Link>
+        <span className="character-text-gray">{title}</span>
+        <Link to={`/locations/${data.id}/`} className="link-no-style">{locationName}</Link>
       </div>
     );
   }
@@ -188,12 +189,18 @@ const CharacterPage = ({ match }: RouteComponentProps<IRouteInfo>) => {
           <CharacterInfo className="character-item" title="Species: " value={character.species} />
           {<CharacterInfo className="character-item" title="Type: " value={character.type} /> && character.type}
           <CharacterInfo className="character-item" title="Gender: " value={character.gender} />
-          <CharacterOrigin 
+          <CharacterLocationInfo 
             className="character-item" 
-            originName={character.origin.name} 
-            originUrl={character.origin.url} 
+            title="Origin: "
+            locationName={character.origin.name} 
+            locationUrl={character.origin.url} 
           />
-          <CharacterInfo title="Last known location: " value={character.location.name} />
+          <CharacterLocationInfo 
+            className="character-item" 
+            title="Last known location: "
+            locationName={character.location.name} 
+            locationUrl={character.location.url} 
+          />
         </CharacterBody>
         <CharacterEpisodeList className="character-item" episodes={character.episode} />
       </CharacterWrapper>
