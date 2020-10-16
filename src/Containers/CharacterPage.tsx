@@ -5,7 +5,7 @@ import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 import { errorOrLoadingStatusMsg, getStatusColor, urlToLink } from 'commonUtil';
 import { apiClientService } from 'services';
 import { ICharacter, LifeStatusConst } from 'store';
-import { styled } from 'theme';
+import { media, styled } from 'theme';
 
 const CharacterWrapper = styled.div`
   display: inline-flex;
@@ -50,6 +50,13 @@ const CharacterWrapper = styled.div`
     font-size: 20px;
     margin: 15px;
     word-break: normal;
+
+    ${media.tablet`
+      display: block;
+      margin: 30px 0;
+      font-size: 26px;
+      text-align: left;
+    `};
   }
 `;
 
@@ -124,7 +131,7 @@ const CharacterEpisodeList: React.FC<ICharacterEpisodeList> = ({ episodes, class
   const renderedEps =  episodes.map(ep => {
     return (
       <li className="list-item episode" key={ep}>
-        <CharacterEpisode url={ep} className="episode-character" />
+        <CharacterEpisode url={ep} />
       </li>
     );
   });

@@ -85,6 +85,17 @@ const CharacterCardListWrapper = styled.div`
   text-align: center;
 `;
 
+const SubmitButton = styled(Button)`
+  background: ${({ theme }) => theme.colors.main};
+  color: ${({ theme }) => theme.colors.text};
+  border-color: ${({ theme }) => theme.colors.main};
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.secondary};
+    color: ${({ theme }) => theme.colors.main};
+  }
+`;
+
 interface ICharactersPage {
   characters: ICharactersInitialState;
   getCharacters: (page?: number, name?: string, status?: string, gender?: string) => IGetCharactersActionType;
@@ -133,14 +144,6 @@ const CharactersPage: React.FC<ICharactersPage> = (props) => {
       }
     }
   };
-
-  // const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   setSearchItem(event.target.value);
-  //   setCurrPage(1);
-  //   searchItem.length > 1 
-  //   ? getCharacters(1, event.target.value, activeStatusFilter, activeGenderFilter)
-  //   : getCharacters(1, undefined, activeStatusFilter, activeGenderFilter);
-  // };
   
   useEffect(() => {
     getCharacters();
@@ -224,7 +227,7 @@ const CharactersPage: React.FC<ICharactersPage> = (props) => {
           name="searchItem" 
           handleChange={formik.handleChange} 
         />
-        <Button type="submit">Submit</Button> 
+        <SubmitButton type="submit">Submit</SubmitButton> 
       </SearchWrapper>
       <CharacterCardListWrapper>
         <CharacterCardList characters={charactersResults} />

@@ -75,6 +75,17 @@ const SearchWrapper = styled.form`
   }
 `;
 
+const SubmitButton = styled(Button)`
+  background: ${({ theme }) => theme.colors.main};
+  color: ${({ theme }) => theme.colors.text};
+  border-color: ${({ theme }) => theme.colors.main};
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.secondary};
+    color: ${({ theme }) => theme.colors.main};
+  }
+`;
+
 interface IEpisodesPage {
   episodes: IEpisodesInitialState;
   getEpisodes: (page?: number, name?: string, season?: number) => IGetEpisodesActionType;
@@ -101,13 +112,6 @@ const EpisodesPage: React.FC<IEpisodesPage> = (props) => {
     getEpisodes(page, formik.values.searchItem);
     setCurrPage(page);
   };
-
-  // const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   setSearchItem(event.target.value);
-  //   searchItem.length > 1 
-  //   ? getEpisodes(1, event.target.value, activeSeasonFilter) 
-  //   : getEpisodes(1, undefined, activeSeasonFilter);
-  // };
 
   const handleFilter = (season: number) => () => {
     setCurrPage(1);
@@ -174,7 +178,7 @@ const EpisodesPage: React.FC<IEpisodesPage> = (props) => {
           name="searchItem" 
           handleChange={formik.handleChange} 
         />
-        <Button type="submit">Submit</Button> 
+        <SubmitButton type="submit">Submit</SubmitButton> 
       </SearchWrapper>
       <EpisodeCardListWrapper>
         <EpisodeCardList episodes={episodesResults} />

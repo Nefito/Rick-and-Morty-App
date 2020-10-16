@@ -32,6 +32,17 @@ const SearchWrapper = styled.form`
   }
 `;
 
+const SubmitButton = styled(Button)`
+  background: ${({ theme }) => theme.colors.main};
+  color: ${({ theme }) => theme.colors.text};
+  border-color: ${({ theme }) => theme.colors.main};
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.secondary};
+    color: ${({ theme }) => theme.colors.main};
+  }
+`;
+
 interface ILocationsPage {
   locations: ILocationsInitialState;
   getLocations: (page?: number, name?: string, type?: string, dimension?: string) => IGetLocationsActionType;
@@ -41,6 +52,8 @@ const itemsPerPage = 20;
 
 const LocationsPage: React.FC<ILocationsPage> = (props) => {
   const { locations, getLocations } = props;
+
+  const [currPage, setCurrPage] = useState(1);
 
   const formik = useFormik({
     initialValues: {
@@ -52,35 +65,6 @@ const LocationsPage: React.FC<ILocationsPage> = (props) => {
       getLocations(1, formik.values.activeNameFilter, formik.values.activeTypeFilter, formik.values.activeDimFilter);
     }
   });
-
-  const [currPage, setCurrPage] = useState(1);
-  // const [activeNameFilter, setActiveNameFilter] = useState('');
-  // const [activeTypeFilter, setActiveTypeFilter] = useState('');
-  // const [activeDimFilter, setActiveDimFilter] = useState('');
-
-  // const handleNameFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   setActiveNameFilter(event.target.value);
-  //   setCurrPage(1);
-  //   activeNameFilter.length > 1
-  //     ? getLocations(1, event.target.value, activeTypeFilter, activeDimFilter)
-  //     : getLocations(1, undefined, activeTypeFilter, activeDimFilter);
-  // };
-
-  // const handleTypeFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   setActiveTypeFilter(event.target.value);
-  //   setCurrPage(1);
-  //   activeTypeFilter.length > 1
-  //     ? getLocations(1, activeNameFilter, event.target.value, activeDimFilter)
-  //     : getLocations(1, activeNameFilter, undefined, activeDimFilter);
-  // };
-
-  // const handleDimFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   setActiveDimFilter(event.target.value);
-  //   setCurrPage(1);
-  //   activeDimFilter.length > 1
-  //     ? getLocations(1, activeNameFilter, activeTypeFilter, event.target.value)
-  //     : getLocations(1, activeNameFilter, activeTypeFilter);
-  // };
 
   const handlePageChange = (page: number) => {
     getLocations(page, formik.values.activeNameFilter, formik.values.activeTypeFilter, formik.values.activeDimFilter);
@@ -115,7 +99,7 @@ const LocationsPage: React.FC<ILocationsPage> = (props) => {
           name="activeDimFilter" 
           handleChange={formik.handleChange} 
         />
-        <Button type="submit">Submit</Button> 
+        <SubmitButton type="submit">Submit</SubmitButton> 
       </SearchWrapper>
       <LocationCardListWrapper>
         <LocationCardList locations={locationsResults} />
