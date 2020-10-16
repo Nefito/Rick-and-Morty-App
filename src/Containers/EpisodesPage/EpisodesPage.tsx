@@ -1,6 +1,7 @@
+import { useFormik } from 'formik';
 import React, { useEffect, useState } from 'react';
 
-import { Checkbox, iconsProps, itemRender, Pages, Search } from 'components';
+import { Button, Checkbox, iconsProps, itemRender, Pages, Search } from 'components';
 import { IEpisodesInitialState, IGetEpisodesActionType  } from 'store';
 import { media, styled } from 'theme';
 
@@ -59,7 +60,7 @@ const EpisodeCardListWrapper = styled.div`
   text-align: center;
 `;
 
-const SearchWrapper = styled.div`
+const SearchWrapper = styled.form`
   text-align: center;
   margin: 10px;
   padding: 5px;
@@ -70,6 +71,7 @@ const SearchWrapper = styled.div`
     padding: 10px 0 3px 5px;
     border-radius: 8px;
     border-width: 4px;
+    margin: 0 20px;
   }
 `;
 
@@ -83,31 +85,39 @@ const itemsPerPage = 20;
 const EpisodesPage: React.FC<IEpisodesPage> = (props) => {
   const { episodes, getEpisodes } = props;
 
-  const [searchItem, setSearchItem] = useState('');
   const [currPage, setCurrPage] = useState(1);
   const [activeSeasonFilter, setActiveSeasonFilter] = useState(0);
 
+  const formik = useFormik({
+    initialValues: {
+      searchItem: ''
+    },
+    onSubmit: values => {
+      getEpisodes(1, formik.values.searchItem, activeSeasonFilter);
+    }
+  });
+
   const handlePageChange = (page: number) => {
-    getEpisodes(page, searchItem);
+    getEpisodes(page, formik.values.searchItem);
     setCurrPage(page);
   };
 
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchItem(event.target.value);
-    searchItem.length > 1 
-    ? getEpisodes(1, event.target.value, activeSeasonFilter) 
-    : getEpisodes(1, undefined, activeSeasonFilter);
-  };
+  // const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   setSearchItem(event.target.value);
+  //   searchItem.length > 1 
+  //   ? getEpisodes(1, event.target.value, activeSeasonFilter) 
+  //   : getEpisodes(1, undefined, activeSeasonFilter);
+  // };
 
   const handleFilter = (season: number) => () => {
     setCurrPage(1);
     
     if (season === activeSeasonFilter) {
       setActiveSeasonFilter(0);
-      getEpisodes(1, searchItem);
+      getEpisodes(1, formik.values.searchItem);
     } else {
       setActiveSeasonFilter(season);
-      getEpisodes(1, searchItem, season);
+      getEpisodes(1, formik.values.searchItem, season);
     }
   }; 
 
@@ -157,8 +167,14 @@ const EpisodesPage: React.FC<IEpisodesPage> = (props) => {
           />
         </span>
       </CheckboxGroup>
-      <SearchWrapper>
-        <Search className="search" placeholder="Search episodes.." handleChange={handleSearch} /> 
+      <SearchWrapper onSubmit={formik.handleSubmit}>
+        <Search 
+          className="search" 
+          placeholder="Episode title.." 
+          name="searchItem" 
+          handleChange={formik.handleChange} 
+        />
+        <Button type="submit">Submit</Button> 
       </SearchWrapper>
       <EpisodeCardListWrapper>
         <EpisodeCardList episodes={episodesResults} />

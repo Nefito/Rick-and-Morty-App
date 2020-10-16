@@ -1,6 +1,7 @@
+import { useFormik } from 'formik';
 import React, { useEffect, useState } from 'react';
 
-import { iconsProps, itemRender, Pages, Search } from 'components';
+import { Button, iconsProps, itemRender, Pages, Search } from 'components';
 import { IGetLocationsActionType, ILocationsInitialState  } from 'store';
 import { styled } from 'theme';
 
@@ -16,7 +17,7 @@ const LocationCardListWrapper = styled.div`
   text-align: center;
 `;
 
-const SearchWrapper = styled.div`
+const SearchWrapper = styled.form`
   text-align: center;
   margin: 10px;
   padding: 5px;
@@ -41,37 +42,48 @@ const itemsPerPage = 20;
 const LocationsPage: React.FC<ILocationsPage> = (props) => {
   const { locations, getLocations } = props;
 
+  const formik = useFormik({
+    initialValues: {
+      activeNameFilter: '',
+      activeTypeFilter: '',
+      activeDimFilter: ''
+    },
+    onSubmit: values => {
+      getLocations(1, formik.values.activeNameFilter, formik.values.activeTypeFilter, formik.values.activeDimFilter);
+    }
+  });
+
   const [currPage, setCurrPage] = useState(1);
-  const [activeNameFilter, setActiveNameFilter] = useState('');
-  const [activeTypeFilter, setActiveTypeFilter] = useState('');
-  const [activeDimFilter, setActiveDimFilter] = useState('');
+  // const [activeNameFilter, setActiveNameFilter] = useState('');
+  // const [activeTypeFilter, setActiveTypeFilter] = useState('');
+  // const [activeDimFilter, setActiveDimFilter] = useState('');
 
-  const handleNameFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setActiveNameFilter(event.target.value);
-    setCurrPage(1);
-    activeNameFilter.length > 1
-      ? getLocations(1, event.target.value, activeTypeFilter, activeDimFilter)
-      : getLocations(1, undefined, activeTypeFilter, activeDimFilter);
-  };
+  // const handleNameFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   setActiveNameFilter(event.target.value);
+  //   setCurrPage(1);
+  //   activeNameFilter.length > 1
+  //     ? getLocations(1, event.target.value, activeTypeFilter, activeDimFilter)
+  //     : getLocations(1, undefined, activeTypeFilter, activeDimFilter);
+  // };
 
-  const handleTypeFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setActiveTypeFilter(event.target.value);
-    setCurrPage(1);
-    activeTypeFilter.length > 1
-      ? getLocations(1, activeNameFilter, event.target.value, activeDimFilter)
-      : getLocations(1, activeNameFilter, undefined, activeDimFilter);
-  };
+  // const handleTypeFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   setActiveTypeFilter(event.target.value);
+  //   setCurrPage(1);
+  //   activeTypeFilter.length > 1
+  //     ? getLocations(1, activeNameFilter, event.target.value, activeDimFilter)
+  //     : getLocations(1, activeNameFilter, undefined, activeDimFilter);
+  // };
 
-  const handleDimFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setActiveDimFilter(event.target.value);
-    setCurrPage(1);
-    activeDimFilter.length > 1
-      ? getLocations(1, activeNameFilter, activeTypeFilter, event.target.value)
-      : getLocations(1, activeNameFilter, activeTypeFilter);
-  };
+  // const handleDimFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   setActiveDimFilter(event.target.value);
+  //   setCurrPage(1);
+  //   activeDimFilter.length > 1
+  //     ? getLocations(1, activeNameFilter, activeTypeFilter, event.target.value)
+  //     : getLocations(1, activeNameFilter, activeTypeFilter);
+  // };
 
   const handlePageChange = (page: number) => {
-    getLocations(page, activeNameFilter, activeTypeFilter, activeDimFilter);
+    getLocations(page, formik.values.activeNameFilter, formik.values.activeTypeFilter, formik.values.activeDimFilter);
     setCurrPage(page);
   };
 
@@ -84,10 +96,26 @@ const LocationsPage: React.FC<ILocationsPage> = (props) => {
 
   return (
     <PageWrapper>
-      <SearchWrapper>
-        <Search className="search" placeholder="Search location name.." handleChange={handleNameFilter} /> 
-        <Search className="search" placeholder="Search location type.." handleChange={handleTypeFilter} /> 
-        <Search className="search" placeholder="Search dimension.." handleChange={handleDimFilter} /> 
+      <SearchWrapper onSubmit={formik.handleSubmit}>
+        <Search 
+          className="search" 
+          placeholder="Location name.."
+          name="activeNameFilter" 
+          handleChange={formik.handleChange} 
+        /> 
+        <Search 
+          className="search" 
+          placeholder="Location type.." 
+          name="activeTypeFilter" 
+          handleChange={formik.handleChange} 
+        /> 
+        <Search 
+          className="search" 
+          placeholder="Dimension.." 
+          name="activeDimFilter" 
+          handleChange={formik.handleChange} 
+        />
+        <Button type="submit">Submit</Button> 
       </SearchWrapper>
       <LocationCardListWrapper>
         <LocationCardList locations={locationsResults} />

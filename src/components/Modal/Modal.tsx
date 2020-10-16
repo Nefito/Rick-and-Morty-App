@@ -23,7 +23,6 @@ interface IModal {
 }
 
 export const Modal: React.FC<IModal> = ({ modalContent, isOpen, toggleModal }) => {
-
   return (
     <StyledModal isOpen={isOpen} onRequestClose={toggleModal} >
       <div className="modal-content">

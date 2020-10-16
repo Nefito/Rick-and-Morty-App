@@ -1,6 +1,7 @@
+import { useFormik } from 'formik';
 import React, { useEffect, useState } from 'react';
 
-import { Checkbox, iconsProps, itemRender, Pages, Search } from 'components';
+import { Button, Checkbox, iconsProps, itemRender, Pages, Search } from 'components';
 import { GenderConst, ICharactersInitialState, IGetCharactersActionType, LifeStatusConst } from 'store';
 import { media, styled } from 'theme';
 
@@ -65,7 +66,7 @@ const CheckboxGroup = styled.div`
   `};
 `;
 
-const SearchWrapper = styled.div`
+const SearchWrapper = styled.form`
   text-align: center;
   margin: 10px;
   padding: 5px;
@@ -76,6 +77,7 @@ const SearchWrapper = styled.div`
     padding: 10px 0 3px 5px;
     border-radius: 8px;
     border-width: 4px;
+    margin: 0 20px;
   }
 `;
 
@@ -93,13 +95,21 @@ const itemsPerPage = 20;
 const CharactersPage: React.FC<ICharactersPage> = (props) => {
   const { characters, getCharacters } = props;
 
-  const [searchItem, setSearchItem] = useState('');
   const [currPage, setCurrPage] = useState(1);
   const [activeStatusFilter, setActiveStatusFilter] = useState('');
   const [activeGenderFilter, setActiveGenderFilter] = useState('');
 
+  const formik = useFormik({
+    initialValues: {
+      searchItem: ''
+    },
+    onSubmit: values => {
+      getCharacters(1, formik.values.searchItem, activeStatusFilter, activeGenderFilter);
+    }
+  });
+
   const handlePageChange = (page: number) => {
-    getCharacters(page, searchItem, activeStatusFilter, activeGenderFilter);
+    getCharacters(page, formik.values.searchItem, activeStatusFilter, activeGenderFilter);
     setCurrPage(page);
   };
 
@@ -108,29 +118,29 @@ const CharactersPage: React.FC<ICharactersPage> = (props) => {
     if (status) {
       if (status === activeStatusFilter) {
         setActiveStatusFilter('');
-        getCharacters(1, searchItem, undefined, activeGenderFilter);
+        getCharacters(1, formik.values.searchItem, undefined, activeGenderFilter);
       } else {
         setActiveStatusFilter(status);
-        getCharacters(1, searchItem, status, activeGenderFilter);
+        getCharacters(1, formik.values.searchItem, status, activeGenderFilter);
       }
     } else if (gender) {
       if (gender === activeGenderFilter) {
         setActiveGenderFilter('');
-        getCharacters(1, searchItem, activeStatusFilter);
+        getCharacters(1, formik.values.searchItem, activeStatusFilter);
       } else {
         setActiveGenderFilter(gender);
-        getCharacters(1, searchItem, activeStatusFilter, gender);
+        getCharacters(1, formik.values.searchItem, activeStatusFilter, gender);
       }
     }
   };
 
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchItem(event.target.value);
-    setCurrPage(1);
-    searchItem.length > 1 
-    ? getCharacters(1, event.target.value, activeStatusFilter, activeGenderFilter)
-    : getCharacters(1, undefined, activeStatusFilter, activeGenderFilter);
-  };
+  // const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   setSearchItem(event.target.value);
+  //   setCurrPage(1);
+  //   searchItem.length > 1 
+  //   ? getCharacters(1, event.target.value, activeStatusFilter, activeGenderFilter)
+  //   : getCharacters(1, undefined, activeStatusFilter, activeGenderFilter);
+  // };
   
   useEffect(() => {
     getCharacters();
@@ -207,8 +217,14 @@ const CharactersPage: React.FC<ICharactersPage> = (props) => {
           />
         </span>
       </CheckboxGroup>
-      <SearchWrapper>
-        <Search className="search" placeholder="Search characters.." handleChange={handleSearch} /> 
+      <SearchWrapper onSubmit={formik.handleSubmit}>
+        <Search 
+          className="search" 
+          placeholder="Search characters.." 
+          name="searchItem" 
+          handleChange={formik.handleChange} 
+        />
+        <Button type="submit">Submit</Button> 
       </SearchWrapper>
       <CharacterCardListWrapper>
         <CharacterCardList characters={charactersResults} />
