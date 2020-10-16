@@ -77,7 +77,7 @@ const SearchWrapper = styled.form`
     padding: 10px 0 3px 5px;
     border-radius: 8px;
     border-width: 4px;
-    margin: 0 20px;
+    margin: 10px 20px;
   }
 `;
 

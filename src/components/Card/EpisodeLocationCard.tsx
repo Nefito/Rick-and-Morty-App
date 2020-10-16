@@ -4,7 +4,7 @@ import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 
 import { apiClientService } from 'services';
-import { styled } from 'theme';
+import { media, styled } from 'theme';
 
 import { CardWrapper } from './Card';
 import { CardBodyItemWrapper } from './CardBodyItem';
@@ -20,6 +20,10 @@ export const EpisodeLocationCardWrapper = styled(CardWrapper)`
   .card-characters {
     margin: 16px 0 46px 0;
   }
+
+  ${media.tabletS`
+    min-width: 200px;
+  `};
 `;
 
 interface ICharactersList {

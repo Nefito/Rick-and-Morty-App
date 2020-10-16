@@ -6,7 +6,7 @@ import { errorOrLoadingStatusMsg } from 'commonUtil';
 import { Character } from 'components';
 import { apiClientService } from 'services';
 import { IEpisode } from 'store';
-import { styled } from 'theme';
+import { media, styled } from 'theme';
 
 const Episode = styled.div`
   width: 100%;
@@ -30,6 +30,10 @@ const Episode = styled.div`
   }
   .list-item {
     display: inline;
+
+    ${media.tabletS`
+      display: block;
+    `};
   }
   
   .episode-character {

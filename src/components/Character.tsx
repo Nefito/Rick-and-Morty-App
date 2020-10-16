@@ -4,7 +4,7 @@ import { useQuery } from 'react-query';
 import { errorOrLoadingStatusMsg } from 'commonUtil';
 import { CharacterCardModal, Modal } from 'components';
 import { apiClientService } from 'services';
-import { styled } from 'theme';
+import { media, styled } from 'theme';
 
 const CharacterWrapper = styled.div`
   display: inline;
@@ -18,6 +18,10 @@ const CharacterWrapper = styled.div`
     &:hover {
       border-color: ${({ theme }) => theme.colors.secondary}
     }
+
+    ${media.tablet`
+      width: 200px;
+    `};
   }
 
   .link-no-style {
@@ -25,15 +29,20 @@ const CharacterWrapper = styled.div`
     display: block;
     bottom: 100%;
     left: 2px;
-    right: 2px;
+    
     background: ${({ theme }) => theme.colors.main};
     color: ${({ theme }) => theme.colors.text};
-    width: 97%;
+    width: 98%;
     border: none;
     
     :hover {
       color: ${({ theme }) => theme.colors.secondary};
     }
+
+    ${media.tablet`
+      font-weight: bold;
+      font-size: 20px;
+    `};
   }
 `;
 
