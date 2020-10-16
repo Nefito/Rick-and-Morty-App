@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { LinkButton } from 'components';
+import { CardLinkButton } from 'components';
 import { IEpisode } from 'store';
 import { styled } from 'theme';
 
@@ -25,7 +25,7 @@ export const EpisodeCard: React.FC<IEpisodeCard> = (props) => {
         <CardBodyItem value={episode.episode} title="Episode:" className="card-info" />
         <CardBodyItem value={episode.air_date} title="Air Date:" className="card-info" />
         <CharacterList characters={episode.characters} className="card-characters" title="Characters" />
-        <LinkButton to={`/episodes/${episode.id}/`} href="/">More...</LinkButton>
+        <CardLinkButton to={`/episodes/${episode.id}/`}>More...</CardLinkButton>
       </CardBodyWrapper>
     </EpisodeCardStyled>
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { LinkButton } from 'components';
+import { CardLinkButton } from 'components';
 import { ILocation } from 'store';
 import { styled } from 'theme';
 
@@ -25,7 +25,7 @@ export const LocationCard: React.FC<ILocationCard> = (props) => {
         <CardBodyItem value={location.type} className="card-info" title="Type:" />
         <CardBodyItem value={location.dimension} className="card-info" title="Dimension:" />
         <CharacterList characters={location.residents} className="card-characters" title="Residents" />
-        <LinkButton to={`/locations/${location.id}/`} href="/">More...</LinkButton>
+        <CardLinkButton to={`/locations/${location.id}/`}>More...</CardLinkButton>
       </CardBodyWrapper>
     </LocationCardWrapper>
   );
